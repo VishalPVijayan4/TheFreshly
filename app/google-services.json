@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "146631159844",
+    "project_id": "thefreshly-cb588",
+    "storage_bucket": "thefreshly-cb588.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146631159844:android:3f75855b6a1c7ba6fb28b1",
+        "android_client_info": {
+          "package_name": "com.vishalpvijayan.thefreshly"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHlQ6GT7zngs94gktBtEAH6F8BLqd7OMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">TheFreshly</string>
+    <string name="applications_name">The Freshly\'s</string>
+    <string name="applications_quote">Your order, we deliver</string>
+    <string name="powered_by">Powered by Github\n © Copyright reserved 2025</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="Email">Email</string>
+    <string name="resetText">Reset</string>
+    <string name="phone">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="reset_password">Reset Password</string>
+
+    <string name="login">Login</string>
+    <string name="create_account">Create Account</string>
+    <string name="forgot_password">Forgot Password</string>">
+    <string name="stay_signed">Stay Signed In</string>
+    <string name="or">OR</string>
+    <string name="google_sign">Google Sign In</string>
+
+    <string name="profile">Your Profile</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="welcome_msg">Welcome, Vishal..</string>
+    <string name="address">Plot No.1, Rajiv Gandhi Infotech Park, Hinjawadi, Phase-I, Pune, Maharashtra-411057.</string>
+
+    <string name="username">Username</string>
+    <string name="category_image_desc">Username</string>
+    <string name="category_name">Category Name</string>
+    <string name="category">Shop by Category</string>
+    <string name="title">title</string>
+    <string name="sub_title">subtitle</string>
+    <string name="proceed_to_payment">Proceed to Payment</string>
+    <string name="default_address">John Doe #42, 5th Cross, Maple Residency Indiranagar, Bengaluru - 560038 Karnataka, India Phone: +91 98765 43210</string>
+    <string name="change_address">Change Address</string>
+
+    <string-array name="sample_data">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+        <item>Item 5</item>
+        <item>Item 6</item>
+    </string-array>
+</resources>

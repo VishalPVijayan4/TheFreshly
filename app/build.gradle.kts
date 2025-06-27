@@ -130,6 +130,10 @@ dependencies {
     implementation("com.google.android.material:material:$material")
     implementation("androidx.constraintlayout:constraintlayout:$constraintlayout")
 
+    implementation ("androidx.datastore:datastore:1.1.7")
+    implementation("androidx.datastore:datastore-preferences:1.1.0")
+    implementation ("androidx.datastore:datastore-core:1.1.7")
+
 //    implementation("com.github.Romancha:android-material-play-pause-view-button:2.3")
 
     testImplementation("junit:junit:4.13.2")

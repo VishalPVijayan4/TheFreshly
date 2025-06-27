@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/wheat"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.fragment.SplashFragment">
 
@@ -25,8 +25,19 @@
         android:fontFamily="@font/bubblegum_sans_regular"
         android:gravity="center"
         android:text="@string/applications_name"
-        android:textColor="@color/sienna"
+        android:textColor="@color/gray"
         android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/ivLogo" />
+
+    <TextView
+        android:id="@+id/tvAppName1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bubblegum_sans_regular"
+        android:gravity="center"
+        android:text="@string/applications_name"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/ivLogo" />
 
     <TextView

@@ -1,14 +1,13 @@
 package com.vishalpvijayan.thefreshly.di
 
 import com.vishalpvijayan.thefreshly.data.remote.ApiServices
+import com.vishalpvijayan.thefreshly.utils.ConstantStrings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -16,7 +15,7 @@ import javax.inject.Singleton
 object ApiModule {
 
     @Provides
-    fun provideBaseUrl() = "https://dummyjson.com"
+    fun provideBaseUrl() = ConstantStrings.PROD_BASEURL
 
     @Provides
     @Singleton

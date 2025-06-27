@@ -5,7 +5,10 @@ import com.vishalpvijayan.thefreshly.domain.repository.addUser.AddUserRepository
 import com.vishalpvijayan.thefreshly.domain.repository.addUser.AddUserRepositoryImpl
 import com.vishalpvijayan.thefreshly.domain.repository.login.UserRepository
 import com.vishalpvijayan.thefreshly.domain.repository.login.UserRepositoryImpl
+import com.vishalpvijayan.thefreshly.domain.repository.productCategory.ProductCategoryRepository
+import com.vishalpvijayan.thefreshly.domain.repository.productCategory.ProductCategoryRepositoryImpl
 import com.vishalpvijayan.thefreshly.domain.usecase.AddUserUsecase
+import com.vishalpvijayan.thefreshly.domain.usecase.GetProductCategoriesUseCase
 import com.vishalpvijayan.thefreshly.domain.usecase.UserLoginUsecase
 import dagger.Module
 import dagger.Provides
@@ -17,8 +20,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
-    //user login
-
+    /*                USER LOGIN               */
     @Provides
     @Singleton
     fun provideUserRepository(api: ApiServices): UserRepository {
@@ -30,9 +32,9 @@ object RepositoryModule {
         return UserLoginUsecase(repository)
     }
 
-    //add user
 
 
+    /*                   ADD USERS                */
     @Provides
     @Singleton
     fun provideAddUserRepository(api: ApiServices): AddUserRepository {
@@ -42,5 +44,19 @@ object RepositoryModule {
     @Provides
     fun provideAddUserUsecase(repository: AddUserRepository): AddUserUsecase {
         return AddUserUsecase(repository)
+    }
+
+
+    /*            GET PRODUCT CATEGORY            */
+    @Provides
+    @Singleton
+    fun provideProductCategoryRepository(apiService: ApiServices): ProductCategoryRepository {
+        return ProductCategoryRepositoryImpl(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductCategoryUseCase(repository: ProductCategoryRepository): GetProductCategoriesUseCase {
+        return GetProductCategoriesUseCase(repository)
     }
 }

@@ -1,176 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/wheat"
     tools:context=".presentation.ui.fragment.DashboardFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="6dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_margin="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/ivLogo"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bubblegum_sans_regular"
-                android:gravity="start"
-                android:text="@string/welcome_msg"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_margin="10dp"
-                android:layout_height="0.9dp"
-                android:background="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/category_image"
-                app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+                <TextView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bubblegum_sans_regular"
+                    android:gravity="start"
+                    android:text="@string/welcome_msg"
+                    android:textColor="@color/black"
+                    android:textSize="26sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/category_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:background="@drawable/bg_rounded_image"
-                android:backgroundTintMode="src_in"
-                android:clipToOutline="true"
-                android:contentDescription="@string/category_image_desc"
-                android:elevation="4dp"
-                android:layoutDirection="ltr"
-                android:scaleType="centerCrop"
-                android:shape="ring"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_margin="10dp"
+                    android:layout_height="0.9dp"
+                    android:background="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/category_image"
+                    app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
-            <TextView
-                android:id="@+id/tvUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/open_sans_light"
-                android:gravity="start"
-                android:text="@string/address"
-                android:textColor="@color/gray"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/category_image"
-                app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+                <ImageView
+                    android:id="@+id/category_image"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_rounded_image"
+                    android:backgroundTintMode="src_in"
+                    android:clipToOutline="true"
+                    android:contentDescription="@string/category_image_desc"
+                    android:elevation="4dp"
+                    android:layoutDirection="ltr"
+                    android:scaleType="centerCrop"
+                    android:shape="ring"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="20dp"
-                android:background="@drawable/rounded_bg_sienna"
-                android:src="@drawable/ic_expand_right"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:gravity="start"
+                    android:text="@string/address"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/category_image"
+                    app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/rounded_bg_sienna"
+                    android:src="@drawable/ic_expand_right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/txtDelievry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:letterSpacing="0.17"
-        android:layout_margin="5dp"
-        android:textColor="@color/sienna"
-        android:textSize="22sp"
-        android:text="Delivering in 10 Mins"
-        android:fontFamily="@font/bubblegum_sans_regular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputSearchLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:background="@drawable/rounded_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDelievry">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/inputSearch"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtDelievry"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_bg_white"
-            android:fontFamily="@font/open_sans_medium"
-            android:hint="Search"
-            android:importantForAccessibility="yes"
-            android:inputType="text"
             android:letterSpacing="0.17"
-            android:maxLines="1"
-            android:textSize="14sp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_margin="5dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:text="Delivering in 10 Mins"
+            android:fontFamily="@font/bubblegum_sans_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputSearchLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="25dp"
+            android:background="@drawable/rounded_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtDelievry">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_bg_white"
+                android:fontFamily="@font/open_sans_medium"
+                android:hint="Search"
+                android:importantForAccessibility="yes"
+                android:inputType="text"
+                android:letterSpacing="0.17"
+                android:maxLines="1"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
 
 
 
 
-    <TextView
-        android:id="@+id/txtShopByCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:letterSpacing="0.17"
-        android:layout_margin="5dp"
-        android:textSize="22sp"
-        android:textColor="@color/sienna"
-        android:text="@string/category"
-        android:fontFamily="@font/bubblegum_sans_regular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputSearchLayout" />
+        <TextView
+            android:id="@+id/txtShopByCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.17"
+            android:layout_margin="5dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:text="@string/category"
+            android:fontFamily="@font/bubblegum_sans_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputSearchLayout" />
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="120dp"
-        android:background="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtShopByCategory" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="120dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtShopByCategory" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCategory"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
-        app:layout_constraintTop_toBottomOf="@id/view3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:itemCount="6"
-        tools:listitem="@layout/item_raw_category" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategory"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            app:layout_constraintTop_toBottomOf="@id/view3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_raw_category" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -59,4 +59,5 @@ object RepositoryModule {
     fun provideProductCategoryUseCase(repository: ProductCategoryRepository): GetProductCategoriesUseCase {
         return GetProductCategoriesUseCase(repository)
     }
+
 }

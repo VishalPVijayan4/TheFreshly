@@ -6,16 +6,15 @@
     android:layout_height="150sp"
     android:orientation="vertical"
     android:padding="5sp"
-    android:background="@drawable/rounded_bg_sienna"
+    android:background="@color/white"
     android:layout_margin="5sp">
 
 
     <!-- Category Image -->
     <ImageView
-        android:id="@+id/category_image"
-        android:layout_width="90sp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:id="@+id/bannerImage"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:backgroundTintMode="src_in"
         android:clipToOutline="true"
@@ -25,7 +24,6 @@
         android:layoutDirection="ltr"
         android:scaleType="centerCrop"
         android:shape="rectangle"
-        app:layout_constraintBottom_toTopOf="@+id/category_title"
         app:layout_constraintEnd_toStartOf="@+id/view"
         app:layout_constraintStart_toEndOf="@+id/view2"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,13 +42,13 @@
         android:layout_width="3sp"
         android:layout_height="30sp"
         android:background="@color/sienna"
-        app:layout_constraintBottom_toBottomOf="@+id/category_image"
+        app:layout_constraintBottom_toBottomOf="@+id/bannerImage"
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Category Title -->
     <TextView
         android:gravity="center"
-        android:id="@+id/category_title"
+        android:id="@+id/bannerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -65,3 +63,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+

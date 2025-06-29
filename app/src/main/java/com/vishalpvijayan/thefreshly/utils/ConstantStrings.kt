@@ -8,4 +8,9 @@ object ConstantStrings {
     val user_token = "Refresh_token"
     val username = "user_name"
     val isLoggedIn = "isLoggedIn"
+
+
+
+    //Messages to display in the app
+    val welcome = "Welcome, "
 }

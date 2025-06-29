@@ -13,7 +13,7 @@ class ToolbarViewModel @Inject constructor() : ViewModel() {
     private val _toolbarTitle = MutableStateFlow("Default Title")
     val toolbarTitle: StateFlow<String> = _toolbarTitle
 
-    private val _toolbarSubTitle = MutableStateFlow("Default Title")
+    private val _toolbarSubTitle = MutableStateFlow("Default Sub Title")
     val toolbarSubTitle: StateFlow<String> = _toolbarSubTitle
 
     fun setToolbarTitle(title: String, subTitle: String) {

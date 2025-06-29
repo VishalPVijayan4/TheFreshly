@@ -119,6 +119,9 @@ dependencies {
     val splash = ("1.0.1")
     implementation("androidx.core:core-splashscreen:$splash")
 
+    //paging
+    implementation("androidx.paging:paging-runtime:3.3.0")
+
 
     val corektx = ("1.12.0")
     val appcompat = ("1.6.1")

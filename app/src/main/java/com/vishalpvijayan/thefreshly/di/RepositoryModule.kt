@@ -1,14 +1,20 @@
 package com.vishalpvijayan.thefreshly.di
 
 import com.vishalpvijayan.thefreshly.data.remote.ApiServices
+import com.vishalpvijayan.thefreshly.domain.repository.AllProducts.ProductRepository
+import com.vishalpvijayan.thefreshly.domain.repository.AllProducts.ProductRepositoryImpl
 import com.vishalpvijayan.thefreshly.domain.repository.addUser.AddUserRepository
 import com.vishalpvijayan.thefreshly.domain.repository.addUser.AddUserRepositoryImpl
 import com.vishalpvijayan.thefreshly.domain.repository.login.UserRepository
 import com.vishalpvijayan.thefreshly.domain.repository.login.UserRepositoryImpl
+import com.vishalpvijayan.thefreshly.domain.repository.productByCategory.ProductRepositoryByCategory
+import com.vishalpvijayan.thefreshly.domain.repository.productByCategory.ProductRepositoryByCategoryImpl
 import com.vishalpvijayan.thefreshly.domain.repository.productCategory.ProductCategoryRepository
 import com.vishalpvijayan.thefreshly.domain.repository.productCategory.ProductCategoryRepositoryImpl
 import com.vishalpvijayan.thefreshly.domain.usecase.AddUserUsecase
 import com.vishalpvijayan.thefreshly.domain.usecase.GetProductCategoriesUseCase
+import com.vishalpvijayan.thefreshly.domain.usecase.GetProductsByCategoryUseCase
+import com.vishalpvijayan.thefreshly.domain.usecase.GetProductsUseCase
 import com.vishalpvijayan.thefreshly.domain.usecase.UserLoginUsecase
 import dagger.Module
 import dagger.Provides
@@ -59,5 +65,34 @@ object RepositoryModule {
     fun provideProductCategoryUseCase(repository: ProductCategoryRepository): GetProductCategoriesUseCase {
         return GetProductCategoriesUseCase(repository)
     }
+
+
+    /*         GET ALL PRODUCT           */
+    @Provides
+    @Singleton
+    fun provideProductRepository(apiService: ApiServices): ProductRepository {
+        return ProductRepositoryImpl(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductUseCase(repository: ProductRepository): GetProductsUseCase {
+        return GetProductsUseCase(repository)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideProductByCategoryRepository(apiService: ApiServices): ProductRepositoryByCategory {
+        return ProductRepositoryByCategoryImpl(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductByCategoryUsecase(repository: ProductRepositoryByCategory): GetProductsByCategoryUseCase {
+        return GetProductsByCategoryUseCase(repository)
+    }
+
+
 
 }

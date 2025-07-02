@@ -18,7 +18,7 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         Handler(Looper.getMainLooper()).postDelayed({
-            val action = SplashFragmentDirections.actionSplashToLogin()
+            val action = SplashFragmentDirections.actionSplashToOnboarding()
             findNavController().navigate(action)
         }, 2000)
         return inflater.inflate(R.layout.fragment_splash, container, false)

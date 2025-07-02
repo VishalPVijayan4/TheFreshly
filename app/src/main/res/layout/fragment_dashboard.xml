@@ -9,7 +9,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/azure">
 
 
 
@@ -17,10 +17,7 @@
             android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/sienna"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +26,19 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvShopText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bubblegum_sans_regular"
+                    android:gravity="start"
+                    android:text="Shop"
+                    android:textColor="@color/white"
+                    android:textSize="56sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvWelcome"
@@ -38,79 +46,134 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bubblegum_sans_regular"
                     android:gravity="start"
-                    android:text="@string/welcome_msg"
-                    android:textColor="@color/black"
-                    android:textSize="26sp"
+                    android:text="Hello, emily"
+                    android:textColor="@color/white"
+                    android:layout_margin="20dp"
+                    android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_height="0.9dp"
-                    android:background="@color/gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/category_image"
-                    app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
-
-                <ImageView
-                    android:id="@+id/category_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/bg_rounded_image"
-                    android:backgroundTintMode="src_in"
-                    android:clipToOutline="true"
-                    android:contentDescription="@string/category_image_desc"
-                    android:elevation="4dp"
-                    android:layoutDirection="ltr"
-                    android:scaleType="centerCrop"
-                    android:shape="ring"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
 
                 <TextView
-                    android:id="@+id/tvUserName"
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/open_sans_light"
+                    android:fontFamily="@font/open_sans_medium"
                     android:gravity="start"
-                    android:text="@string/address"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/category_image"
-                    app:layout_constraintTop_toBottomOf="@+id/tvWelcome" />
+                    android:text="By Category"
+                    android:textColor="@color/white"
+                    android:textSize="26sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShopText" />
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/rounded_bg_sienna"
-                    android:src="@drawable/ic_expand_right"
+
+
+                <TextView
+                    android:id="@+id/txtDeliveryTo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="start"
+                    android:layout_margin="10dp"
+                    android:text="DELIVERY TO"
+                    android:textColor="@color/azure"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/txtDeliveryIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="start"
+                    android:layout_margin="10dp"
+                    android:text="DELIVERY TO"
+                    android:textColor="@color/azure"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+                <TextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="start"
+                    android:layout_margin="10dp"
+                    android:text="16th Cross - KK Aveneu "
+                    android:textColor="@color/azure"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDeliveryTo" />
+
+
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="start"
+                    android:layout_margin="10dp"
+                    android:text="15 Minutes "
+                    android:textColor="@color/azure"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDeliveryTo" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/inputSearchLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="25dp"
+                    app:boxBackgroundColor="@color/white"
+                    android:outlineAmbientShadowColor="@color/white"
+                    app:hintTextColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtTime">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_medium"
+                        android:hint="Search"
+                        android:textColorHint="@color/white"
+                        android:textColor="@color/white"
+                        android:drawableRight="@drawable/ic_arrow_sinn"
+                        android:importantForAccessibility="yes"
+                        android:inputType="text"
+                        android:letterSpacing="0.17"
+                        android:maxLines="1"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    app:layout_constraintTop_toBottomOf="@+id/inputSearchLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/txtDelievry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:letterSpacing="0.17"
-            android:layout_margin="5dp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:text="Delivering in 10 Mins"
-            android:fontFamily="@font/bubblegum_sans_regular"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+<!--        <TextView-->
+<!--            android:id="@+id/txtDelievry"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:letterSpacing="0.17"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="18sp"-->
+<!--            android:text="Delivering in 10 Mins"-->
+<!--            android:fontFamily="@font/bubblegum_sans_regular"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/cardView2" />-->
 
-        <com.google.android.material.textfield.TextInputLayout
+<!--        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputSearchLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -132,14 +195,14 @@
                 android:letterSpacing="0.17"
                 android:maxLines="1"
                 android:textSize="14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>-->
 
 
 
 
 
 
-        <TextView
+        <!--<TextView
             android:id="@+id/txtShopByCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,7 +223,7 @@
             android:layout_marginStart="120dp"
             android:background="@color/gray"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtShopByCategory" />
+            app:layout_constraintTop_toBottomOf="@+id/txtShopByCategory" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategory"
@@ -168,11 +231,13 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
-            app:layout_constraintTop_toBottomOf="@id/view3"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView2"
+            app:layout_constraintVertical_bias="0.0"
+            app:spanCount="3"
             tools:itemCount="6"
             tools:listitem="@layout/item_raw_category" />
 

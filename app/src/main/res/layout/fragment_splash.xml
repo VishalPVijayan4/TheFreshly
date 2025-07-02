@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/azure"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.fragment.SplashFragment">
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_margin="50dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:padding="10dp"
+        android:src="@drawable/image_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -58,6 +58,10 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
+                R.id.onboarding -> {
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.customToolbar.visibility = View.GONE
+                }
                 R.id.splash -> {
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.GONE

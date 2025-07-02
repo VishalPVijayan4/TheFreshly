@@ -2,38 +2,44 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="110sp"
-    android:layout_height="150sp"
+    android:layout_width="110dp"
+    android:layout_height="110dp"
     android:orientation="vertical"
     android:padding="5sp"
-    android:background="@drawable/rounded_bg_sienna"
+    android:background="@drawable/rounded_bg_white"
     android:layout_margin="5sp">
 
-
-    <!-- Category Image -->
-    <ImageView
-        android:id="@+id/category_image"
-        android:layout_width="90sp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center"
-        android:backgroundTintMode="src_in"
-        android:clipToOutline="true"
-        android:src="@drawable/ic_launcher_foreground"
-        android:contentDescription="@string/category_image_desc"
-        android:elevation="4sp"
-        android:layoutDirection="ltr"
-        android:scaleType="centerCrop"
-        android:shape="rectangle"
+    <LinearLayout
+        android:id="@+id/ll_"
         app:layout_constraintBottom_toTopOf="@+id/category_title"
         app:layout_constraintEnd_toStartOf="@+id/view"
         app:layout_constraintStart_toEndOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/rounded_bg_sienna"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="70sp"
+        android:layout_height="70sp">
+
+        <ImageView
+            android:id="@+id/category_image"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:contentDescription="@string/category_image_desc"
+            android:elevation="4sp"
+            android:layoutDirection="ltr"
+            android:shape="rectangle"
+            />
+
+    </LinearLayout>
+
 
     <View
         android:id="@+id/view"
         android:layout_width="3sp"
-        android:layout_height="30sp"
+        android:layout_height="50sp"
         android:background="@color/sienna"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,24 +50,27 @@
         android:layout_width="3sp"
         android:layout_height="30sp"
         android:background="@color/sienna"
-        app:layout_constraintBottom_toBottomOf="@+id/category_image"
+        app:layout_constraintBottom_toBottomOf="@+id/ll_"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Category Title -->
+
     <TextView
-        android:gravity="center"
         android:id="@+id/category_title"
-        android:layout_width="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingTop="5dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/open_sans_bold"
-        android:letterSpacing="0.09"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:letterSpacing="0.01"
+        android:textColor="@color/sienna"
+        android:padding="1dp"
         android:maxLines="2"
-        android:padding="4dp"
-        android:text="@string/category_name"
-        android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:rippleColor="@color/black" />
+    <!-- Category Title -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

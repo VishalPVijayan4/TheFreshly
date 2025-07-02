@@ -15,7 +15,7 @@
             android:id="@+id/custom_toolbar"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:background="@color/sienna"
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
                     android:fontFamily="@font/open_sans_medium"
                     android:gravity="center"
                     android:text="@string/title"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     tools:text="Title" />
@@ -51,7 +51,7 @@
                     android:fontFamily="@font/open_sans_bold"
                     android:gravity="center"
                     android:text="@string/sub_title"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
                     android:textSize="8sp"
                     android:textStyle="bold"
                     tools:text="SubTitle" />

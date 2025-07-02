@@ -88,7 +88,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7")
 
 
-    val navigation = ("2.7.6")
+    val navigation = ("2.9.0")
     implementation("androidx.navigation:navigation-fragment-ktx:$navigation")
     implementation("androidx.navigation:navigation-ui-ktx:$navigation")
 
@@ -100,6 +100,7 @@ dependencies {
     ksp("androidx.room:room-compiler:$room")
 
     //glide
+    implementation("io.coil-kt:coil:2.4.0")
     implementation("com.github.bumptech.glide:glide:4.14.2")
     ksp("com.github.bumptech.glide:compiler:4.14.2")
 

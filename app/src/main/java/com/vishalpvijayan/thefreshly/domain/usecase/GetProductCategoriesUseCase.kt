@@ -6,15 +6,6 @@ import com.vishalpvijayan.thefreshly.domain.repository.productCategory.ProductCa
 import kotlinx.coroutines.flow.Flow
 
 
-/*class GetProductCategoriesUseCase(
-    private val repository: ProductCategoryRepository
-) {
-    suspend operator fun invoke(): List<ProductCategory> {
-        return repository.getProductCategories()
-    }
-}*/
-
-
 class GetProductCategoriesUseCase(
     private val repository: ProductCategoryRepository
 ) {

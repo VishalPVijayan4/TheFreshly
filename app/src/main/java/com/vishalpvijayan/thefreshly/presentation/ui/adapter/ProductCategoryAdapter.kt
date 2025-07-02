@@ -119,9 +119,30 @@ class ProductCategoryAdapter(
 
     private fun getImageForCategory(position: Int, item: ProductCategory): Int {
         return when (item.slug) {
-            "beauty" -> R.drawable.ic_category
-            "womens-shoes" -> R.drawable.ic_category
-            "womens-watches" -> R.drawable.ic_category
+            "beauty" -> R.drawable.ic_beauty
+            "fragrances" -> R.drawable.ic_fragnance
+            "furniture" -> R.drawable.ic_furniture
+            "groceries" -> R.drawable.ic_grocery
+            "home-decoration" -> R.drawable.ic_home_decoration
+            "kitchen-accessories"-> R.drawable.ic_kitchen
+            "laptops"-> R.drawable.ic_laptop
+            "mens-shirts"-> R.drawable.ic_shirt
+            "mens-shoes"-> R.drawable.ic_shoes_men
+            "mens-watches"-> R.drawable.ic_men_watch
+            "mobile-accessories"-> R.drawable.ic_mobile
+            "motorcycle"-> R.drawable.ic_motor
+            "skin-care"-> R.drawable.ic_skin
+            "smartphones"-> R.drawable.ic_mobile_acc
+            "sports-accessories"-> R.drawable.ic_sports
+            "sunglasses"-> R.drawable.ic_sunglasses
+            "tablets"-> R.drawable.ic_tablets
+            "tops"-> R.drawable.ic_dress
+            "vehicle"-> R.drawable.ic_vehichle
+            "womens-bags"-> R.drawable.ic_bag
+            "womens-dresses"-> R.drawable.ic_dress
+            "womens-jewellery"-> R.drawable.ic_jewellary
+            "womens-shoes" -> R.drawable.ic_women_shoe
+            "womens-watches" -> R.drawable.ic_women_watch
             else -> R.drawable.ic_launcher_foreground
         }
     }

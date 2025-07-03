@@ -25,6 +25,7 @@ import com.vishalpvijayan.thefreshly.presentation.ui.adapter.ProductCategoryAdap
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.StaticBannerAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
+import com.vishalpvijayan.thefreshly.presentation.vm.UserDetailViewModel
 import com.vishalpvijayan.thefreshly.utils.CategoryListItem
 import com.vishalpvijayan.thefreshly.utils.ConstantStrings
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,7 @@ class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
 
     private val toolbarViewModel: ToolbarViewModel by activityViewModels()
+    private val userDetailsVM: UserDetailViewModel by activityViewModels()
     private val dashBoardVm: DashboardViewModel by activityViewModels()
 
     private lateinit var adapter: ProductCategoryAdapter
@@ -50,6 +52,8 @@ class DashboardFragment : Fragment() {
     ): View? {
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
         toolbarViewModel.setToolbarTitle("Dashboard", "Manage & Explore various categories")
+
+
 
 
         adapter = ProductCategoryAdapter { category ->
@@ -103,6 +107,22 @@ class DashboardFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 dashBoardVm.usernameFlow.collect { username ->
                     binding.tvWelcome.text = ConstantStrings.welcome + username
+                }
+            }
+        }
+
+
+
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                userDetailsVM.userId.collect { userId ->
+                    val id = userId.toIntOrNull() ?: return@collect  // Safely parse or skip if null/invalid
+                    userDetailsVM.loadUserDetail(id)
+
+                    userDetailsVM.user.collect { user ->
+                        binding.txtAddress.text = user?.username.orEmpty()
+                    }
                 }
             }
         }

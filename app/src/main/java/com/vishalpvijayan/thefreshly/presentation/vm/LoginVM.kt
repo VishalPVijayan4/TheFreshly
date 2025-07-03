@@ -26,10 +26,11 @@ class LoginVM @Inject constructor(
     val loginState: LiveData<Resource<UserResponse>> = _loginState
 
 
-    fun saveUserToken(username:String, token: String) {
+    fun saveUserToken(userId: Int ,username:String, token: String) {
         viewModelScope.launch {
             dataStoreManager.savePreference(ConstantStrings.user_token,token)
             dataStoreManager.savePreference(ConstantStrings.username,username)
+            dataStoreManager.savePreference(ConstantStrings.userId,userId)
         }
     }
 

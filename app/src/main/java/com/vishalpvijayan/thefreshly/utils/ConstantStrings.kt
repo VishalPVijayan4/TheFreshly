@@ -7,6 +7,7 @@ object ConstantStrings {
     val DATASTORE = "Freshly_DataStore"
     val user_token = "Refresh_token"
     val username = "user_name"
+    val userId = "user_id"
     val isLoggedIn = "isLoggedIn"
 
 

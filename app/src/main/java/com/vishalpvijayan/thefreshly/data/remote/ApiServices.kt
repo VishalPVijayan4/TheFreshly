@@ -1,6 +1,8 @@
 package com.vishalpvijayan.thefreshly.data.remote
 
 import com.vishalpvijayan.thefreshly.GetAllProducts
+import com.vishalpvijayan.thefreshly.data.remote.model.DtoModel.ProductDetailDto
+import com.vishalpvijayan.thefreshly.data.remote.model.UserDetail.UserDetailDto
 import com.vishalpvijayan.thefreshly.data.remote.model.addUser.AddUserRequest
 import com.vishalpvijayan.thefreshly.data.remote.model.addUser.AddUserResponse
 import com.vishalpvijayan.thefreshly.data.remote.model.login.UserRequest
@@ -39,5 +41,12 @@ interface ApiServices {
     ): GetAllProducts
 
 
+
+    @GET("products/{id}")
+    suspend fun getProductDetail(@Path("id") id: Int): ProductDetailDto
+
+
+    @GET("users/{id}")
+    suspend fun getUserDetail(@Path("id") id: Int): UserDetailDto
 
 }

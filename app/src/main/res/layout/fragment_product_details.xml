@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.ui.fragment.ProductDetailsFragment">
+
+
+<LinearLayout
+    android:background="@drawable/rounded_bg_white"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/rounded_bg_sienna"
+        android:id="@+id/ccDes"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:padding="16dp">
+
+
+        <!-- Product Thumbnail -->
+        <ImageView
+            android:background="@drawable/rounded_bg_white"
+            android:id="@+id/imgThumbnail"
+            android:layout_height="200dp"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/image_icon" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_width="0dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgThumbnail"
+            tools:text="Essence Mascara Lash Princess" />
+
+        <!-- Brand, SKU -->
+        <TextView
+            android:id="@+id/tvBrandSku"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="Brand: Essence | SKU: RCH45Q1A" />
+
+        <!-- Category -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvCategory"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvBrandSku"
+            tools:text="Category: beauty" />
+
+        <!-- Tags -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvTags"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCategory"
+            tools:text="Tags: beauty, mascara" />
+
+        <!-- Price & Discount -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvPrice"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTags"
+            tools:text="Price: $9.99 (-7.17%)" />
+
+        <!-- Rating -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvRating"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPrice"
+            tools:text="Rating: 4.94 / 5" />
+
+        <!-- Stock & Availability -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvStockAvailability"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvRating"
+            tools:text="Stock: 5 | Availability: Low Stock" />
+
+        <!-- Minimum Order Quantity -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvMOQ"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvStockAvailability"
+            tools:text="Minimum Order Quantity: 24" />
+
+        <!-- Description -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvDescription"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMOQ"
+            tools:text="The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects." />
+
+        <!-- Dimensions & Weight -->
+        <TextView
+            android:id="@+id/tvDimensions"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            tools:text="Dimensions: 23.17 x 14.43 x 28.01 cm | Weight: 2g" />
+
+        <!-- Warranty -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvWarranty"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDimensions"
+            tools:text="Warranty: 1 month warranty" />
+
+        <!-- Shipping -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvShipping"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvWarranty"
+            tools:text="Ships in 1 month" />
+
+        <!-- Return Policy -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvReturnPolicy"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvShipping"
+            tools:text="30 days return policy" />
+
+        <!-- Metadata -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvMetadata"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvReturnPolicy"
+            tools:text="Created At: 2024-05-23 | Barcode: 9164035109868" />
+
+        <!-- Review Header -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvReviewHeader"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:text="Reviews"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMetadata" />
+
+        <!-- Review 1 -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvReview1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvReviewHeader"
+            tools:text="John Doe (2★): Very unhappy with my purchase!" />
+
+        <!-- Review 2 -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvReview2"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvReview1"
+            tools:text="Nolan Gonzalez (2★): Not as described!" />
+
+        <!-- Review 3 -->
+        <TextView
+            android:textColor="@color/black"
+            android:id="@+id/tvReview3"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvReview2"
+            tools:text="Scarlett Wright (5★): Very satisfied!" />
+
+        <!-- Bottom Spacer -->
+        <View
+            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvReview3" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAdd"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:letterSpacing="0.17"
+        android:text="Add to Cart"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/sienna"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvReview3"
+        app:rippleColor="@color/black" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:id="@+id/ll_btns"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAdd">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPlus"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:text="+"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/sienna" />
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMinus"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_width="60dp"
+            android:text="-"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/sienna" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+</layout>

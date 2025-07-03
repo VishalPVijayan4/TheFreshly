@@ -58,30 +58,40 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
+                R.id.productDetails -> {
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.customToolbar.visibility = View.VISIBLE
+                }
                 R.id.onboarding -> {
+                    binding.cart.visibility = View.GONE
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.GONE
                 }
                 R.id.splash -> {
+                    binding.cart.visibility = View.GONE
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.GONE
                 }
 
                 R.id.login -> {
+                    binding.cart.visibility = View.GONE
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.GONE
                 }
 
                 R.id.forgotpassword -> {
+                    binding.cart.visibility = View.GONE
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.GONE
                 }
                 R.id.createccount -> {
+                    binding.cart.visibility = View.GONE
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.GONE
                 }
 
                 else -> {
+                    binding.cart.visibility = View.VISIBLE
                     binding.customToolbar.visibility = View.VISIBLE
                     binding.bottomNavView.visibility = View.VISIBLE
                 }

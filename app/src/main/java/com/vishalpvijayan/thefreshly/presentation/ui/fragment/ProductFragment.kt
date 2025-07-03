@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vishalpvijayan.thefreshly.R
@@ -23,7 +24,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlin.getValue
 
-
+@AndroidEntryPoint
 class ProductFragment : Fragment() {
 
     private lateinit var binding : FragmentProductBinding
@@ -43,6 +44,19 @@ class ProductFragment : Fragment() {
 
 
         adapter = AllProductsAdapter { category ->
+            val categoryName = category.title
+            val id = category.id
+
+            val bundle = Bundle().apply {
+                putString("categoryName", categoryName)
+                id?.let { putInt("id", it) }
+            }
+
+
+            findNavController().navigate(
+                R.id.action_product_to_productDetails3,
+                bundle
+            )
             Toast.makeText(requireContext(), "Clicked: ${category.title}", Toast.LENGTH_SHORT).show()
         }
 

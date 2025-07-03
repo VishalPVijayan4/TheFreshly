@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
@@ -56,6 +57,18 @@ class SingleCategoryProductFragment : Fragment() {
         toolbarViewModel.setToolbarTitle(userId+"Products","Shop from wide range of products")
 
         adapter = SingleCategoryProductsAdapter { category ->
+
+            val categoryName = category.title
+            val id = category.id
+            val bundle = Bundle().apply {
+                putString("categoryName", categoryName)
+                id?.let { putInt("id", it) }
+            }
+
+            findNavController().navigate(
+                R.id.action_single_product_from_Category_to_productDetails,
+                bundle
+            )
             Toast.makeText(requireContext(), "Clicked: ${category.title}", Toast.LENGTH_SHORT).show()
         }
 

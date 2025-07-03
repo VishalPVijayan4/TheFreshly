@@ -38,8 +38,8 @@ class AllProductsAdapter(
 
             icon.load(item.thumbnail) {
                 crossfade(true)
-                placeholder(R.drawable.ic_launcher_foreground)
-                error(R.drawable.ic_search)
+                placeholder(R.drawable.image_icon)
+                error(R.drawable.image_icon)
             }
         }
     }

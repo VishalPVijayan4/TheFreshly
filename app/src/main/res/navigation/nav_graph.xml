@@ -93,11 +93,10 @@
         android:label="single_product_from_Category"
         tools:layout="@layout/fragment_single_category_product" >
 
-      <!-- <argument
-            android:name="categoryName"
-            app:argType="String"
-            android:defaultValue="Smartphones" />-->
 
+        <action
+            android:id="@+id/action_single_product_from_Category_to_productDetails"
+            app:destination="@id/productDetails" />
     </fragment>
 
 
@@ -117,6 +116,18 @@
         <action
             android:id="@+id/action_product_to_payment"
             app:destination="@id/payment" />
+        <action
+            android:id="@+id/action_product_to_productDetails3"
+            app:destination="@id/productDetails" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/productDetails"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" >
     </fragment>
 
     <fragment

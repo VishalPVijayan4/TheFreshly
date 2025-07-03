@@ -35,7 +35,7 @@ class LoginFragment : Fragment() {
                         ProgressDialogUtil.hide()
                         Toast.makeText(requireContext(), "Welcome " +
                                 ""+state.data.username, Toast.LENGTH_SHORT).show()
-                        viewModel.saveUserToken(state.data.username.toString(),state.data.accessToken.toString())
+                        viewModel.saveUserToken(state.data.id?.toInt() ?: 1,state.data.username.toString(),state.data.accessToken.toString())
 
                         findNavController().navigate(R.id.action_login_to_dashboard)
                     }

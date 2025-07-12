@@ -49,6 +49,13 @@ class DataStoreManager @Inject constructor(@ApplicationContext val context : Con
         }
     }
 
+
+
+    fun getIntPreference(key: String): Flow<Int?> {
+        val intKey = intPreferencesKey(key)
+        return context.dataStore.data.map { it[intKey] }
+    }
+
     suspend fun clearPreference(key: String) {
         context.dataStore.edit { preferences ->
             preferences.remove(stringPreferencesKey(key)) // Assumes string key, update as needed

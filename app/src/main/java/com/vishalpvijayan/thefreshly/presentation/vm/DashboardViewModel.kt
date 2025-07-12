@@ -45,6 +45,8 @@ class DashboardViewModel @Inject constructor(
         defaultValue = "-"
     )
 
+    val userId : Flow<Int> = dataStoreManager.getPreference("user_id", Int::class.java, -1)
+
 
 
 

@@ -25,7 +25,7 @@ class CreateAccountFragment : Fragment() {
         binding = FragmentCreateAccountBinding.inflate(inflater, container, false)
         binding.btnCreateAccount.setOnClickListener {
 
-            viewModel.addUser(binding.inputUsername.text.toString(),binding.inputPassword.text.toString(),binding.inputEmail.text.toString(),binding.inputPhoneNumber.text.toString().toInt())
+//            viewModel.addUser(binding.inputUsername.text.toString(),binding.inputPassword.text.toString(),binding.inputEmail.text.toString(),binding.inputPhoneNumber.text.toString().toInt())
 
             findNavController().navigate(R.id.action_createccount_to_login)
         }

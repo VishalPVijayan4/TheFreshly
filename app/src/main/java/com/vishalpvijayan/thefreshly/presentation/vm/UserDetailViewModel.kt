@@ -1,5 +1,6 @@
 package com.vishalpvijayan.thefreshly.presentation.vm
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vishalpvijayan.thefreshly.data.local.DataStoreManager
@@ -22,15 +23,25 @@ class UserDetailViewModel @Inject constructor(
     private val _user = MutableStateFlow<UserDetail?>(null)
     val user: StateFlow<UserDetail?> = _user
 
+    val userId : Flow<Int> = dataStoreManager.getPreference(ConstantStrings.userId, Int::class.java, -1)
+
     fun loadUserDetail(id: Int) {
         viewModelScope.launch {
-            _user.value = getUserDetailUseCase(id)
+            try {
+                val userDetail = getUserDetailUseCase(id)
+                _user.value = userDetail
+                Log.d("UserDebug", "User loaded: $userDetail")
+            } catch (e: Exception) {
+                Log.e("UserDebug", "Failed to load user", e)
+            }
         }
     }
 
-    val userId: Flow<String> = dataStoreManager.getPreference(
+
+
+    /*val userId: Flow<Int> = dataStoreManager.getPreference(
         key = ConstantStrings.userId,
         clazz = String::class.java,
-        defaultValue = "1"
-    )
+        defaultValue = 1
+    )*/
 }

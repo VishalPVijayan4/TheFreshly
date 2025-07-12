@@ -1,6 +1,7 @@
 package com.vishalpvijayan.thefreshly.presentation.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import androidx.paging.map
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentDashboardBinding
 import com.vishalpvijayan.thefreshly.databinding.FragmentLoginBinding
@@ -43,6 +45,7 @@ class DashboardFragment : Fragment() {
     private val userDetailsVM: UserDetailViewModel by activityViewModels()
     private val dashBoardVm: DashboardViewModel by activityViewModels()
 
+
     private lateinit var adapter: ProductCategoryAdapter
 
 
@@ -52,6 +55,8 @@ class DashboardFragment : Fragment() {
     ): View? {
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
         toolbarViewModel.setToolbarTitle("Dashboard", "Manage & Explore various categories")
+
+
 
 
 
@@ -114,14 +119,22 @@ class DashboardFragment : Fragment() {
 
 
 
+
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 userDetailsVM.userId.collect { userId ->
-                    val id = userId.toIntOrNull() ?: return@collect  // Safely parse or skip if null/invalid
-                    userDetailsVM.loadUserDetail(id)
+
+                    userDetailsVM.loadUserDetail(1)
 
                     userDetailsVM.user.collect { user ->
-                        binding.txtAddress.text = user?.username.orEmpty()
+                        Log.d("UserData", "Received user: $user")
+                        binding.profilePic.load(user?.image) {
+                            crossfade(true)
+                            placeholder(R.drawable.image_icon)
+                            error(R.drawable.image_icon)
+                        }
+                        binding.txtAddress.text = user?.address?.address.orEmpty() + ""+ user?.address?.city.orEmpty()+ ""+ user?.address?.state.orEmpty()+ ""+ user?.address?.postalCode.orEmpty()
                     }
                 }
             }

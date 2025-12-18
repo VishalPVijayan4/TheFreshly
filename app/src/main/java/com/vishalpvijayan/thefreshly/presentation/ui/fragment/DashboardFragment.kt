@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentDashboardBinding
+import com.vishalpvijayan.thefreshly.domain.repository.location.LocationRepository
 import com.vishalpvijayan.thefreshly.helper.LocationViewModel
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.ProductCategoryAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
@@ -27,9 +28,13 @@ import com.vishalpvijayan.thefreshly.utils.ConstantStrings
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
+
+    @Inject
+    lateinit var repo: LocationRepository
     private lateinit var binding: FragmentDashboardBinding
 
     private val toolbarViewModel: ToolbarViewModel by activityViewModels()
@@ -58,29 +63,50 @@ class DashboardFragment : Fragment() {
                 putString("categoryName", categoryName)
             }
 
-            locationViewModel.startUpdates()
-
-            lifecycleScope.launchWhenStarted {
-                locationViewModel.locationFlow.collect { location ->
-                    location?.let {
-                        val lat = it.latitude
-                        val lng = it.longitude
-                        binding.txtAddress.text = "Lat: $lat, Lng: $lng"
-                    }
-                }
-            }
-
-            binding.txtAddress.setOnClickListener {
-                Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_dashboard_to_mapFragment)
-            }
-
             findNavController().navigate(
                 R.id.action_dashboard_to_single_product_from_Category,
                 bundle
             )
             Toast.makeText(requireContext(), "Clicked: ${category.name}", Toast.LENGTH_SHORT).show()
+
         }
+
+
+        locationViewModel.startUpdates()
+
+        /*lifecycleScope.launchWhenStarted {
+            locationViewModel.locationFlow.collect { location ->
+                location?.let {
+                    val lat = it.latitude
+                    val lng = it.longitude
+                    binding.txtAddress.text = "Lat: $lat, Lng: $lng"
+                }
+            }
+        }*/
+
+        binding.txtAddress.setOnClickListener {
+            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_dashboard_to_mapFragment)
+        }
+
+
+
+// Collect address updates
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                locationViewModel.addressFlow.collect { address ->
+                    address?.let {
+                        binding.txtAddress.text = it
+                        Log.d("DashboardFragment", "Address: $it")
+                    } ?: run {
+                        binding.txtAddress.text = "Getting address..."
+                    }
+                }
+            }
+        }
+
+
+
 
 
 

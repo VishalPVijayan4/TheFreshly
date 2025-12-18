@@ -72,6 +72,10 @@ class SingleCategoryProductFragment : Fragment() {
             Toast.makeText(requireContext(), "Clicked: ${category.title}", Toast.LENGTH_SHORT).show()
         }
 
+        binding.btnPay.setOnClickListener {
+            findNavController().navigate(R.id.action_single_product_from_Category_to_payment)
+        }
+
 
         lifecycleScope.launch {
             singleCategoryProductVM.getProductsByCategory(userId.toString()).collectLatest { pagingData ->

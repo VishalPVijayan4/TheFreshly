@@ -63,6 +63,10 @@ class ProductFragment : Fragment() {
         binding.rvProduct.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.rvProduct.adapter = adapter
 
+        binding.btnPay.setOnClickListener {
+            findNavController().navigate(R.id.action_product_to_payment)
+        }
+
         lifecycleScope.launch {
             productVM.products.collectLatest {
                 adapter.submitData(it)

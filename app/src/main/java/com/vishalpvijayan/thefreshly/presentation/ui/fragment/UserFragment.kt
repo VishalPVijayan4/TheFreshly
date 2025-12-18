@@ -9,6 +9,8 @@ import com.vishalpvijayan.thefreshly.R
 
 class UserFragment : Fragment() {
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

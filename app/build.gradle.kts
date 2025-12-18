@@ -5,6 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.gms.google-services")
     id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -65,6 +66,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("androidx.compose.ui:ui-graphics-android:1.6.4")
     implementation("androidx.compose.foundation:foundation-android:1.6.4")
+    implementation(libs.play.services.location)
+    implementation(libs.play.services.maps)
     val coroutines = ("1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines")
 
@@ -72,6 +75,17 @@ dependencies {
 
     val coil = ("2.5.0")
     implementation("io.coil-kt:coil:$coil")
+
+    implementation ("com.razorpay:checkout:1.6.34")
+
+//    implementation ("com.paypal.checkout:android-sdk:2.16.0")
+
+    /*val CURRENT_VERSION_SNAPSHOT = ("1.7.1")
+    implementation ("com.paypal.android:paypal-native-payments:1.7.1")
+    implementation ("com.paypal.android:card-payments:$CURRENT_VERSION_SNAPSHOT")
+
+    // PayPal Payment Buttons (for pre-built UI buttons)
+    implementation ("com.paypal.android:payment-buttons:1.7.1")*/
 
     val viewmodel = ("2.7.0")
     val activity = ("1.8.2")
@@ -122,6 +136,8 @@ dependencies {
 
     //paging
     implementation("androidx.paging:paging-runtime:3.3.0")
+
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 
 
     val corektx = ("1.12.0")

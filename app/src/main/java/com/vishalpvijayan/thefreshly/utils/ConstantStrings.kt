@@ -11,6 +11,11 @@ object ConstantStrings {
     val isLoggedIn = "isLoggedIn"
 
 
+     val STATE_LOADING = 0
+     val STATE_ERROR = 1
+     val STATE_SUCCESS = 2
+
+
 
     //Messages to display in the app
     val welcome = "Welcome, "

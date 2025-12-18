@@ -19,14 +19,19 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : Fragment() {
     private lateinit var binding:  FragmentLoginBinding
     private val viewModel: LoginVM by viewModels()
+    private var isLoggedIn = false;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        if(binding.cbStaySigned.isChecked){
+            isLoggedIn = true
+        }
         binding.btnLogin.setOnClickListener {
-            viewModel.login(binding.inputEmail.text.toString(), binding.inputPassword.text.toString())
+            viewModel.login(binding.inputEmail.text.toString(),
+                binding.inputPassword.text.toString())
 
             viewModel.loginState.observe(viewLifecycleOwner) { state ->
                 when (state) {
@@ -35,7 +40,7 @@ class LoginFragment : Fragment() {
                         ProgressDialogUtil.hide()
                         Toast.makeText(requireContext(), "Welcome " +
                                 ""+state.data.username, Toast.LENGTH_SHORT).show()
-                        viewModel.saveUserToken(state.data.id?.toInt() ?: 1,state.data.username.toString(),state.data.accessToken.toString())
+                        viewModel.saveUserToken(isLoggedIn,state.data.id?.toInt() ?: 1,state.data.username.toString(),state.data.accessToken.toString())
 
                         findNavController().navigate(R.id.action_login_to_dashboard)
                     }

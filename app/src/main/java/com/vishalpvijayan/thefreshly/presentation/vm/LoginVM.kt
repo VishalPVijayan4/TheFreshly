@@ -12,6 +12,7 @@ import com.vishalpvijayan.thefreshly.domain.usecase.UserLoginUsecase
 import com.vishalpvijayan.thefreshly.utils.ConstantStrings
 import com.vishalpvijayan.thefreshly.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,19 +27,24 @@ class LoginVM @Inject constructor(
     val loginState: LiveData<Resource<UserResponse>> = _loginState
 
 
-    fun saveUserToken(userId: Int ,username:String, token: String) {
+    fun saveUserToken(isLoggedIn: Boolean, userId: Int, username: String, token: String) {
         viewModelScope.launch {
-            dataStoreManager.savePreference(ConstantStrings.user_token,token)
-            dataStoreManager.savePreference(ConstantStrings.username,username)
-            dataStoreManager.savePreference(ConstantStrings.userId,userId)
+            dataStoreManager.savePreference(ConstantStrings.isLoggedIn, isLoggedIn)
+            dataStoreManager.savePreference(ConstantStrings.user_token, token)
+            dataStoreManager.savePreference(ConstantStrings.username, username)
+            dataStoreManager.savePreference(ConstantStrings.userId, userId)
         }
     }
+
+
+    val isLoggedIn: Flow<Boolean> =
+        dataStoreManager.getPreference(ConstantStrings.isLoggedIn, Boolean::class.java, false)
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
             _loginState.value = Resource.Loading
-           /* val result = loginUseCase(UserRequest(username, password))
-            _loginState.value = result*/
+            /* val result = loginUseCase(UserRequest(username, password))
+             _loginState.value = result*/
 
             try {
                 val result = loginUseCase(UserRequest(username, password))

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.vishalpvijayan.thefreshly.data.local.DataStoreManager
@@ -28,6 +29,11 @@ class DashboardViewModel @Inject constructor(
 ):
     ViewModel(){
 
+    private val _loadState = MutableLiveData<LoadState>()
+    val loadState: LiveData<LoadState> = _loadState
+
+
+
     val categories: Flow<PagingData<ProductCategory>> =
         getProductCategoriesUseCase().cachedIn(viewModelScope)
 
@@ -45,11 +51,9 @@ class DashboardViewModel @Inject constructor(
         defaultValue = "-"
     )
 
+    fun setLoadState(state: LoadState) {
+        _loadState.value = state
+    }
+
     val userId : Flow<Int> = dataStoreManager.getPreference("user_id", Int::class.java, -1)
-
-
-
-
-
-
 }

@@ -2,39 +2,30 @@ package com.vishalpvijayan.thefreshly.presentation.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.paging.cachedIn
-import androidx.paging.map
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentDashboardBinding
-import com.vishalpvijayan.thefreshly.databinding.FragmentLoginBinding
+import com.vishalpvijayan.thefreshly.helper.LocationViewModel
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.ProductCategoryAdapter
-import com.vishalpvijayan.thefreshly.presentation.ui.adapter.StaticBannerAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.UserDetailViewModel
-import com.vishalpvijayan.thefreshly.utils.CategoryListItem
 import com.vishalpvijayan.thefreshly.utils.ConstantStrings
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -44,9 +35,15 @@ class DashboardFragment : Fragment() {
     private val toolbarViewModel: ToolbarViewModel by activityViewModels()
     private val userDetailsVM: UserDetailViewModel by activityViewModels()
     private val dashBoardVm: DashboardViewModel by activityViewModels()
+    private val locationViewModel: LocationViewModel by viewModels()
 
 
     private lateinit var adapter: ProductCategoryAdapter
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        locationViewModel.stopUpdates()
+    }
 
 
     override fun onCreateView(
@@ -55,18 +52,27 @@ class DashboardFragment : Fragment() {
     ): View? {
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
         toolbarViewModel.setToolbarTitle("Dashboard", "Manage & Explore various categories")
-
-
-
-
-
-
         adapter = ProductCategoryAdapter { category ->
-
-
             val categoryName = category.name
             val bundle = Bundle().apply {
                 putString("categoryName", categoryName)
+            }
+
+            locationViewModel.startUpdates()
+
+            lifecycleScope.launchWhenStarted {
+                locationViewModel.locationFlow.collect { location ->
+                    location?.let {
+                        val lat = it.latitude
+                        val lng = it.longitude
+                        binding.txtAddress.text = "Lat: $lat, Lng: $lng"
+                    }
+                }
+            }
+
+            binding.txtAddress.setOnClickListener {
+                Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_dashboard_to_mapFragment)
             }
 
             findNavController().navigate(
@@ -78,7 +84,78 @@ class DashboardFragment : Fragment() {
 
 
 
-        adapter.addLoadStateListener { loadState ->
+        dashBoardVm.loadState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is LoadState.Loading -> {
+                    binding.viewFlipper.displayedChild = ConstantStrings.STATE_LOADING
+                    binding.layoutLoading.visibility = View.VISIBLE
+                    binding.layoutSuccess.visibility = View.GONE
+                    binding.layoutError.visibility = View.GONE
+                }
+                is LoadState.NotLoading -> {
+                    binding.viewFlipper.displayedChild = ConstantStrings.STATE_SUCCESS
+                    binding.layoutLoading.visibility = View.GONE
+                    binding.layoutSuccess.visibility = View.VISIBLE
+                    binding.layoutError.visibility = View.GONE
+                }
+                is LoadState.Error -> {
+                    binding.viewFlipper.displayedChild = ConstantStrings.STATE_ERROR
+                    binding.layoutLoading.visibility = View.GONE
+                    binding.layoutSuccess.visibility = View.GONE
+                    binding.layoutError.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        binding.btnRetry.setOnClickListener {
+            adapter.retry()
+        }
+
+     /*   viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                dashBoardVm.loadState.asFlow().collectLatest { state ->
+                    when (state) {
+                        is LoadState.Loading -> {
+                            binding.layoutLoading.visibility = View.VISIBLE
+                            binding.layoutSuccess.visibility = View.GONE
+                            binding.layoutError.visibility = View.GONE
+                        }
+                        is LoadState.NotLoading -> {
+                            binding.layoutLoading.visibility = View.GONE
+                            binding.layoutSuccess.visibility = View.VISIBLE
+                            binding.layoutError.visibility = View.GONE
+                        }
+                        is LoadState.Error -> {
+                            binding.layoutLoading.visibility = View.GONE
+                            binding.layoutSuccess.visibility = View.GONE
+                            binding.layoutError.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+        }*/
+
+
+        /*adapter.addLoadStateListener { loadState ->
+            dashBoardVm.setLoadState(loadState.refresh)
+
+            val errorState = loadState.refresh as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+            errorState?.let {
+                Toast.makeText(
+                    requireContext(),
+                    "Error: ${it.error.localizedMessage}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }*/
+
+        adapter.addLoadStateListener { loadStates ->
+            dashBoardVm.setLoadState(loadStates.refresh)
+        }
+
+        /*adapter.addLoadStateListener { loadState ->
             binding.progressbar.visibility =
                 if (loadState.refresh is LoadState.Loading) View.VISIBLE else View.GONE
 
@@ -92,22 +169,19 @@ class DashboardFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
             }
-        }
-
-
-
+        }*/
         binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.rvCategory.adapter = adapter
+
+        binding.llProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboard_to_profile)
+        }
 
         lifecycleScope.launch {
             dashBoardVm.categories.collectLatest {
                 adapter.submitData(it)
             }
         }
-
-
-
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 dashBoardVm.usernameFlow.collect { username ->
@@ -115,12 +189,6 @@ class DashboardFragment : Fragment() {
                 }
             }
         }
-
-
-
-
-
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 userDetailsVM.userId.collect { userId ->
@@ -134,15 +202,11 @@ class DashboardFragment : Fragment() {
                             placeholder(R.drawable.image_icon)
                             error(R.drawable.image_icon)
                         }
-                        binding.txtAddress.text = user?.address?.address.orEmpty() + ""+ user?.address?.city.orEmpty()+ ""+ user?.address?.state.orEmpty()+ ""+ user?.address?.postalCode.orEmpty()
+//                        binding.txtAddress.text = user?.address?.address.orEmpty() + ""+ user?.address?.city.orEmpty()+ ""+ user?.address?.state.orEmpty()+ ""+ user?.address?.postalCode.orEmpty()
                     }
                 }
             }
         }
-
-
-
-
         return binding.root
     }
 }

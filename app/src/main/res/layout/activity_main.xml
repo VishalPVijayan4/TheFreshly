@@ -21,6 +21,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageButton
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:visibility="gone"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="TODO"
+                android:padding="16dp"
+                android:src="@drawable/ic_back" />
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -65,7 +76,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="TODO"
                 android:padding="16dp"
-                android:src="@drawable/ic_payment" />
+                android:src="@drawable/ic_notification" />
         </androidx.appcompat.widget.Toolbar>
 
         <!-- Fragment Container -->
@@ -75,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/custom_toolbar"
@@ -94,18 +105,46 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/custom_toolbar" />
 
-        <!-- Bottom Navigation -->
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/bottom_nav_card"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="15dp"-->
+<!--            app:cardCornerRadius="24dp"-->
+<!--            app:cardElevation="8dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:cardBackgroundColor="@color/wheat">-->
+
+<!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--                android:id="@+id/bottom_nav_view"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                app:itemIconTint="@color/sienna"-->
+<!--                app:itemTextColor="@color/black"-->
+<!--                app:labelVisibilityMode="labeled"-->
+<!--                app:menu="@menu/bottom_nav_menu" />-->
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+
+<!--         Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/wheat"
-            app:itemIconTint="@color/sienna"
-            app:itemTextColor="@color/black"
-            app:labelVisibilityMode="labeled"
+            android:layout_margin="25dp"
+            app:itemIconTint="@color/bottom_nav_selector"
+            app:itemTextColor="@color/bottom_nav_selector"
+            app:itemRippleColor="@color/azure"
+            android:outlineSpotShadowColor="@color/light_grey"
+            app:labelVisibilityMode="selected"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:cardBackgroundColor="@android:color/transparent"
+            android:background="@drawable/rounded_bottom_nav"
             app:menu="@menu/bottom_nav_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

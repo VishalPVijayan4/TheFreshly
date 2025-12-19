@@ -129,6 +129,11 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.GONE
                 }
+                R.id.mapFragment -> {
+                    binding.cart.visibility = View.GONE
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.customToolbar.visibility = View.GONE
+                }
 
                 else -> {
                     binding.cart.visibility = View.VISIBLE

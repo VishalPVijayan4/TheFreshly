@@ -7,7 +7,7 @@ import com.vishalpvijayan.thefreshly.domain.repository.location.LocationReposito
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-@HiltViewModel
+/*@HiltViewModel
 class LocationViewModel @Inject constructor(
     private val repo: LocationRepository
 ) : ViewModel() {
@@ -22,7 +22,26 @@ class LocationViewModel @Inject constructor(
         super.onCleared()
         repo.stopLocationUpdates()
     }
+}*/
+
+
+@HiltViewModel
+class LocationViewModel @Inject constructor(
+    val repo: LocationRepository  // Change from private to public
+) : ViewModel() {
+
+    val locationFlow = repo.locationFlow
+    val addressFlow = repo.addressFlow
+
+    fun startUpdates() = repo.startLocationUpdates()
+    fun stopUpdates() = repo.stopLocationUpdates()
+
+    override fun onCleared() {
+        super.onCleared()
+        repo.stopLocationUpdates()
+    }
 }
+
 
 
 

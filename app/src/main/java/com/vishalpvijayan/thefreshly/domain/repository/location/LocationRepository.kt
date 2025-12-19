@@ -127,12 +127,49 @@ class LocationRepository @Inject constructor(
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
-    private suspend fun getAddressFromLocation(location: Location): String? = withContext(Dispatchers.IO) {
+//    private suspend fun getAddressFromLocation(location: Location): String? = withContext(Dispatchers.IO) {
+//        try {
+//            val geocoder = Geocoder(context, Locale.getDefault())
+//
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                // For Android 13+
+//                var address: String? = null
+//                geocoder.getFromLocation(
+//                    location.latitude,
+//                    location.longitude,
+//                    1
+//                ) { addresses ->
+//                    if (addresses.isNotEmpty()) {
+//                        address = addresses[0].getAddressLine(0)
+//                    }
+//                }
+//                delay(500) // Wait for callback
+//                return@withContext address
+//            } else {
+//                // For older versions
+//                @Suppress("DEPRECATION")
+//                val addresses = geocoder.getFromLocation(
+//                    location.latitude,
+//                    location.longitude,
+//                    1
+//                )
+//
+//                if (!addresses.isNullOrEmpty()) {
+//                    return@withContext addresses[0].getAddressLine(0)
+//                }
+//            }
+//        } catch (e: Exception) {
+//            Log.e("LocationRepository", "Geocoding failed", e)
+//        }
+//        return@withContext null
+//    }
+
+    // In LocationRepository.kt, change from private to public
+    suspend fun getAddressFromLocation(location: Location): String? = withContext(Dispatchers.IO) {
         try {
             val geocoder = Geocoder(context, Locale.getDefault())
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                // For Android 13+
                 var address: String? = null
                 geocoder.getFromLocation(
                     location.latitude,
@@ -143,10 +180,9 @@ class LocationRepository @Inject constructor(
                         address = addresses[0].getAddressLine(0)
                     }
                 }
-                delay(500) // Wait for callback
+                delay(500)
                 return@withContext address
             } else {
-                // For older versions
                 @Suppress("DEPRECATION")
                 val addresses = geocoder.getFromLocation(
                     location.latitude,
@@ -163,4 +199,5 @@ class LocationRepository @Inject constructor(
         }
         return@withContext null
     }
+
 }

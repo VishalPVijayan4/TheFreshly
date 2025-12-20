@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.ui.fragment.AddressPermissionFragment">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <ImageView
+           android:id="@+id/tvAppName1"
+           android:layout_width="80sp"
+           android:layout_height="80sp"
+           android:layout_margin="100dp"
+           android:src="@drawable/image_icon"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
+
+       <TextView
+           android:id="@+id/txttext"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/open_sans_bold"
+           android:text="What's Your Location ? "
+           android:layout_margin="20dp"
+           android:textAlignment="center"
+           android:textSize="18sp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/tvAppName1" />
+
+       <TextView
+           android:id="@+id/txtSubtxt"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:fontFamily="@font/open_sans_light"
+           android:text="We need to know your location in order to suggest nearby services "
+           android:layout_margin="20dp"
+           android:textAlignment="center"
+           android:textSize="16sp"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/txttext" />
+
+       <com.google.android.material.button.MaterialButton
+           android:id="@+id/btnLogin"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_margin="20dp"
+           android:letterSpacing="0.17"
+           android:text="Allow Location Access"
+           android:textColor="@color/white"
+           app:backgroundTint="@color/sienna"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toBottomOf="@+id/txtSubtxt"
+           app:rippleColor="@color/black" />
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

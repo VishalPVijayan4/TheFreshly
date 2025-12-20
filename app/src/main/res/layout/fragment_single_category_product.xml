@@ -11,7 +11,38 @@
         android:background="@color/wheat"
         >
 
-        <com.google.android.material.textfield.TextInputLayout
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search products..."
+            android:padding="12dp"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawablePadding="8dp"
+            android:background="@drawable/rounded_bg_white"
+            android:layout_margin="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvCartBadge"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/rounded_bg_sienna"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+       <!-- <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputSearchLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -33,7 +64,7 @@
                 android:letterSpacing="0.17"
                 android:maxLines="1"
                 android:textSize="14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProduct"
@@ -41,7 +72,7 @@
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputSearchLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/etSearch" />
 
         <ProgressBar
             android:id="@+id/progressbar"

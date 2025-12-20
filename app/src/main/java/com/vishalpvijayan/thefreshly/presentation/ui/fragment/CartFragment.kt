@@ -42,7 +42,7 @@ class CartFragment : Fragment() {
 
         binding.btnCheckout.setOnClickListener {
             // Navigate to checkout/payment
-            findNavController().navigate(R.id.action_cart_to_payment)
+            findNavController().navigate(R.id.action_cartFragment_to_payment)
         }
 
         binding.btnClearCart.setOnClickListener {
@@ -61,7 +61,7 @@ class CartFragment : Fragment() {
                 val bundle = Bundle().apply {
                     putInt("id", item.productId)
                 }
-                findNavController().navigate(R.id.action_cart_to_productDetails, bundle)
+                findNavController().navigate(R.id.action_cartFragment_to_productDetails, bundle)
             }
         )
     }

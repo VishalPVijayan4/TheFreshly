@@ -90,7 +90,7 @@ class ProductFragment : Fragment() {
 
     private fun setupSearch() {
         // Assuming you have an EditText with id etSearch in your layout
-        binding.etSearch?.let { searchEditText ->
+        binding.edtSearch?.let { searchEditText ->
             SearchHelper(
                 searchEditText = searchEditText,
                 lifecycleScope = lifecycleScope,

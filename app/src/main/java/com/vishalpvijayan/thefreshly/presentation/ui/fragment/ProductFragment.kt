@@ -50,7 +50,12 @@ class ProductFragment : Fragment() {
         observeCartCount()
 
         binding.btnPay.setOnClickListener {
-            findNavController().navigate(R.id.action_product_to_payment)
+            Toast.makeText(requireContext(), "Proceeding to cart.", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_product_to_cartFragment)
+        }
+
+        binding.tvCartBadge.setOnClickListener {
+            findNavController().navigate(R.id.action_product_to_cartFragment)
         }
 
         return binding.root

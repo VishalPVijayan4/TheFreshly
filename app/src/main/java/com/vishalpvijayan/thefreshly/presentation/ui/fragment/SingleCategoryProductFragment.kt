@@ -51,8 +51,12 @@ class SingleCategoryProductFragment : Fragment() {
         observeCart()
         observeCartCount()
 
+        binding.tvCartBadge.setOnClickListener {
+            findNavController().navigate(R.id.action_single_product_from_Category_to_cartFragment)
+        }
+
         binding.btnPay.setOnClickListener {
-            findNavController().navigate(R.id.action_single_product_from_Category_to_payment)
+            findNavController().navigate(R.id.action_single_product_from_Category_to_cartFragment)
         }
 
         return binding.root

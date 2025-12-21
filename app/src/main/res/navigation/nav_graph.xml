@@ -135,6 +135,9 @@
         <action
             android:id="@+id/action_single_product_from_Category_to_payment"
             app:destination="@id/payment" />
+        <action
+            android:id="@+id/action_single_product_from_Category_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
 
     <fragment
@@ -164,6 +167,9 @@
         <action
             android:id="@+id/action_product_to_productDetails3"
             app:destination="@id/productDetails" />
+        <action
+            android:id="@+id/action_product_to_cartFragment"
+            app:destination="@id/cartFragment" />
 
     </fragment>
 

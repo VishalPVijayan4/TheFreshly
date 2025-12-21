@@ -28,18 +28,18 @@
 
         <TextView
             android:id="@+id/tvCartBadge"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:background="@drawable/rounded_bg_sienna"
             android:gravity="center"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_margin="20dp"
             android:visibility="gone"
-            tools:text="3"
+            app:layout_constraintBottom_toTopOf="@+id/btnPay"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            tools:text="3" />
 
 
        <!-- <com.google.android.material.textfield.TextInputLayout

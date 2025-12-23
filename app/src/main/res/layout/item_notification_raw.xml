@@ -1,62 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@color/wheat"
-    android:layout_margin="10dp">
+    android:background="@drawable/bg_luxury_glass"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="8dp"
+    android:padding="16dp">
 
+    <!-- Icon -->
     <ImageView
         android:id="@+id/ivIcon"
-        android:layout_width="30sp"
-        android:layout_height="30sp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#E6FFFFFF"
+        tools:src="@drawable/ic_location" />
 
+    <!-- Title -->
     <TextView
         android:id="@+id/txtTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="@string/title"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/ivIcon"
+        app:layout_constraintEnd_toStartOf="@id/txtTime"
+        app:layout_constraintStart_toEndOf="@id/ivIcon"
+        app:layout_constraintTop_toTopOf="@id/ivIcon" />
+
+    <!-- Time Badge -->
+    <TextView
+        android:id="@+id/txtTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_bold"
-        android:text="@string/title"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/ivIcon"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_luxury_icon"
+        android:gravity="center"
+        android:fontFamily="@font/open_sans_light"
+        android:minWidth="32dp"
+        android:padding="6dp"
+        android:text="@string/tt"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivIcon"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Description -->
     <TextView
         android:id="@+id/txtDescription"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/open_sans_light"
         android:text="@string/default_address"
-        android:textColor="@color/gray"
+        android:textColor="#E6FFFFFF"
         android:textSize="14sp"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivIcon" />
+        app:layout_constraintStart_toEndOf="@id/ivIcon"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle" />
 
-    <TextView
-        android:fontFamily="@font/open_sans_bold"
-        android:textColor="@color/gray"
-        android:id="@+id/txtTime"
-        android:layout_margin="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+    <!-- Luxury Divider -->
     <View
-        android:layout_width="match_parent"
-        android:layout_height="0.4sp"
-        android:layout_marginTop="10dp"
-        android:background="@color/sienna"
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="#33FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+        app:layout_constraintTop_toBottomOf="@id/txtDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

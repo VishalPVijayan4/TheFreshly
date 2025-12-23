@@ -117,7 +117,11 @@
 
         <!-- Luxury Gold FAB -->
         <!-- Alternative: Gradient FAB Container -->
+        <!-- Luxury Gold FAB with Badge -->
+        <!-- Luxury Gold FAB -->
+        <!-- Alternative: Gradient FAB Container -->
         <FrameLayout
+            android:id="@+id/fabContainer"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_margin="24dp"
@@ -143,6 +147,8 @@
                 app:tint="@android:color/black" />
 
         </FrameLayout>
+
+
 
 
         <!-- Luxury Glass Bottom Navigation -->

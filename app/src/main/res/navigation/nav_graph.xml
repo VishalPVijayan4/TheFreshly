@@ -5,6 +5,9 @@
     app:startDestination="@id/splash"
     android:id="@+id/nav_graph">
 
+
+
+
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.MapsFragment"
@@ -197,6 +200,9 @@
         <action
             android:id="@+id/action_payment_to_fail"
             app:destination="@id/fail" />
+        <action
+            android:id="@+id/action_payment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
 
     <fragment

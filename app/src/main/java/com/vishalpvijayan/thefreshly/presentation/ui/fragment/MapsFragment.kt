@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -29,8 +30,10 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentMapsBinding
+import com.vishalpvijayan.thefreshly.domain.model.SavedLocation
 import com.vishalpvijayan.thefreshly.helper.LocationViewModel
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.SavedLocationAdapter
+import com.vishalpvijayan.thefreshly.presentation.vm.CheckoutViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.SavedLocationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -41,6 +44,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentMapsBinding
     private val locationViewModel: LocationViewModel by viewModels()
     private val savedLocationViewModel: SavedLocationViewModel by viewModels()
+
+    private val checkoutViewModel: CheckoutViewModel by activityViewModels()
 
     private var googleMap: GoogleMap? = null
     private var currentMarker: Marker? = null
@@ -138,7 +143,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                             binding.btnConfirmLocation.isEnabled = false
                             binding.btnConfirmLocation.text = "Saving..."
                         }
-                        is SavedLocationViewModel.SaveState.Success -> {
+                       /* is SavedLocationViewModel.SaveState.Success -> {
                             Toast.makeText(
                                 context,
                                 "Location saved successfully!",
@@ -147,7 +152,24 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                             savedLocationViewModel.resetSaveState()
                             findNavController().navigate(R.id.action_mapFragment_to_payment)
 
+                        }*/
+                        is SavedLocationViewModel.SaveState.Success -> {
+                            // Create SavedLocation object and set it
+                            val location = SavedLocation(
+                                id = state.id.toInt(),
+                                address = selectedAddress,
+                                latitude = selectedLatitude,
+                                longitude = selectedLongitude,
+                                timestamp = System.currentTimeMillis()
+                            )
+                            checkoutViewModel.setSelectedAddress(location)
+
+                            Toast.makeText(context, "Location saved successfully!", Toast.LENGTH_SHORT).show()
+                            savedLocationViewModel.resetSaveState()
+                            findNavController().navigate(R.id.action_mapFragment_to_payment)
                         }
+
+
                         is SavedLocationViewModel.SaveState.Error -> {
                             Toast.makeText(
                                 context,

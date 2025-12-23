@@ -35,7 +35,7 @@ class SplashFragment : Fragment() {
             loginViewModel.isLoggedIn.collect { isLoggedIn ->
                 delay(2000) // Delay in coroutine instead of Handler
                 if (isAdded) { // To avoid crash if fragment is not attached
-                    val action = if (isLoggedIn) {
+                    val action = if (true) {
                         SplashFragmentDirections.actionSplashToOnboarding()
                     } else {
                         SplashFragmentDirections.actionSplashToLogin()

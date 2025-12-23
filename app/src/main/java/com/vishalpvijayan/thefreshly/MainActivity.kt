@@ -1,45 +1,38 @@
 package com.vishalpvijayan.thefreshly
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.google.android.gms.location.CurrentLocationRequest
 import com.vishalpvijayan.thefreshly.databinding.ActivityMainBinding
+import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.LoginVM
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.util.jar.Manifest
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val toolbarViewModel: ToolbarViewModel by viewModels()
     private val loginViewModel: LoginVM by viewModels()
+    private val cartViewModel: CartViewModel by viewModels()
+
+    private var currentDestinationId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
-
-
-
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
@@ -49,7 +42,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.customToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        // Observe cart count for FAB visibility
+        observeCartCount()
 
+        // Setup cart FAB click listener
+        binding.cart.setOnClickListener {
+            navController.navigate(R.id.cartFragment)
+        }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -65,17 +64,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Observe Toolbar Subtitle (Optional)
+        // Observe Toolbar Subtitle
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 toolbarViewModel.toolbarSubTitle.collect { subTitle ->
                     binding.customToolbar.findViewById<TextView>(R.id.toolbarSubTitle).text = subTitle
-
                 }
             }
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            currentDestinationId = destination.id
+            updateFabVisibility()
+
             when (destination.id) {
                 R.id.notificationFragment -> {
                     binding.bottomNavView.visibility = View.GONE
@@ -107,48 +108,19 @@ class MainActivity : AppCompatActivity() {
                     binding.threeDotButton.visibility = View.VISIBLE
                     binding.ivBack.visibility = View.GONE
                 }
-
                 R.id.productDetails -> {
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.VISIBLE
                     binding.ivBack.visibility = View.VISIBLE
-                    binding.threeDotButton.visibility = View.VISIBLE
+                    binding.threeDotButton.visibility = View.GONE
                 }
-                R.id.onboarding -> {
-                    binding.cart.visibility = View.GONE
+                R.id.onboarding, R.id.splash, R.id.login,
+                R.id.forgotpassword, R.id.createccount,
+                R.id.mapFragment, R.id.payment -> {
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.GONE
                 }
-                R.id.splash -> {
-                    binding.cart.visibility = View.GONE
-                    binding.bottomNavView.visibility = View.GONE
-                    binding.customToolbar.visibility = View.GONE
-                }
-
-                R.id.login -> {
-                    binding.cart.visibility = View.GONE
-                    binding.bottomNavView.visibility = View.GONE
-                    binding.customToolbar.visibility = View.GONE
-                }
-
-                R.id.forgotpassword -> {
-                    binding.cart.visibility = View.GONE
-                    binding.bottomNavView.visibility = View.GONE
-                    binding.customToolbar.visibility = View.GONE
-                }
-                R.id.createccount -> {
-                    binding.cart.visibility = View.GONE
-                    binding.bottomNavView.visibility = View.GONE
-                    binding.customToolbar.visibility = View.GONE
-                }
-                R.id.mapFragment -> {
-                    binding.cart.visibility = View.GONE
-                    binding.bottomNavView.visibility = View.GONE
-                    binding.customToolbar.visibility = View.GONE
-                }
-
                 else -> {
-                    binding.cart.visibility = View.VISIBLE
                     binding.customToolbar.visibility = View.VISIBLE
                     binding.bottomNavView.visibility = View.VISIBLE
                 }
@@ -156,5 +128,57 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun observeCartCount() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                cartViewModel.totalCartCount.collect { count ->
+                    Log.d("MainActivity", "Cart count updated: $count")
 
+                    // Access the parent FrameLayout
+                    val fabParent = binding.cart.parent as? View
+
+                    // Screens where FAB should be hidden
+                    val hideOnScreens = setOf(
+                        R.id.onboarding,
+                        R.id.splash,
+                        R.id.login,
+                        R.id.forgotpassword,
+                        R.id.createccount,
+                        R.id.mapFragment,
+                        R.id.payment,
+                        R.id.cartFragment
+                    )
+
+                    val shouldShow = count > 0 && currentDestinationId !in hideOnScreens
+
+                    fabParent?.isVisible = shouldShow
+
+                    Log.d("MainActivity", "FAB should show: $shouldShow (count: $count, screen: $currentDestinationId)")
+                }
+            }
+        }
+    }
+
+
+    private fun updateFabVisibility() {
+        val cartCount = cartViewModel.totalCartCount.value
+
+        // Screens where FAB should NEVER show regardless of cart count
+        val hideOnScreens = setOf(
+            R.id.onboarding,
+            R.id.splash,
+            R.id.login,
+            R.id.forgotpassword,
+            R.id.createccount,
+            R.id.mapFragment,
+            R.id.payment,
+            R.id.cartFragment // Don't show on cart screen itself
+        )
+
+        val shouldShow = cartCount > 0 && currentDestinationId !in hideOnScreens
+
+        Log.d("MainActivity", "FAB visibility - count: $cartCount, destination: $currentDestinationId, shouldShow: $shouldShow")
+
+        binding.fabContainer.isVisible = shouldShow
+    }
 }

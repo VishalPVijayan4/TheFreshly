@@ -3,147 +3,165 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_luxury_gradient"
         tools:context=".MainActivity">
 
-        <!-- Custom Toolbar -->
+        <!-- FIXED Toolbar - Shows titles GUARANTEED -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/custom_toolbar"
             android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/sienna"
-            android:minHeight="?attr/actionBarSize"
+            android:layout_height="80dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/bg_luxury_glass"
+            android:elevation="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:visibility="gone"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                android:padding="16dp"
-                android:src="@drawable/ic_back" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+                <!-- Back Button -->
+                <ImageButton
+                    android:id="@+id/ivBack"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/bg_luxury_icon"
+                    android:contentDescription="Back"
+                    android:padding="12dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_back"
+                    app:tint="@android:color/white"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@id/threeDotButton"
-                app:layout_constraintTop_toTopOf="@id/custom_toolbar">
-
+                <!-- Title -->
                 <TextView
                     android:id="@+id/toolbarTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/open_sans_medium"
-                    android:gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/open_sans_bold"
                     android:text="@string/title"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="Title" />
+                    android:textColor="@android:color/white"
+                    android:textSize="22sp"
+                    android:letterSpacing="0.02"
+                    android:gravity="start|center_vertical"
+                    tools:text="Luxury Collection"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/threeDotButton"
+                    app:layout_constraintStart_toEndOf="@id/ivBack"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <!-- Subtitle -->
                 <TextView
                     android:id="@+id/toolbarSubTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif-medium"
                     android:text="@string/sub_title"
-                    android:textColor="@color/white"
-                    android:textSize="8sp"
-                    android:textStyle="bold"
-                    tools:text="SubTitle" />
-            </LinearLayout>
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="11sp"
+                    android:gravity="start"
+                    tools:text="Premium Selection"
+                    app:layout_constraintEnd_toEndOf="@id/toolbarTitle"
+                    app:layout_constraintStart_toStartOf="@id/toolbarTitle"
+                    app:layout_constraintTop_toBottomOf="@id/toolbarTitle" />
 
-            <ImageButton
-                android:id="@+id/threeDotButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="TODO"
-                android:padding="16dp"
-                android:src="@drawable/ic_notification" />
+                <!-- Menu Button -->
+                <ImageButton
+                    android:id="@+id/threeDotButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_luxury_icon"
+                    android:contentDescription="Menu"
+                    android:padding="12dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_notification"
+                    app:tint="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.appcompat.widget.Toolbar>
+
+
+
+
 
         <!-- Fragment Container -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/navHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/custom_toolbar"
             app:navGraph="@navigation/nav_graph" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:contentDescription="@string/category_image_desc"
-            android:src="@drawable/ic_cart"
-            android:tint="@android:color/white"
-            app:backgroundTint="@color/sienna"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_toolbar" />
+        <!-- Luxury Gold FAB -->
+        <!-- Alternative: Gradient FAB Container -->
+        <FrameLayout
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_margin="24dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
+            app:layout_constraintEnd_toEndOf="parent">
 
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:id="@+id/bottom_nav_card"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="15dp"-->
-<!--            app:cardCornerRadius="24dp"-->
-<!--            app:cardElevation="8dp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:cardBackgroundColor="@color/wheat">-->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_luxury_accent"
+                android:elevation="16dp" />
 
-<!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--                android:id="@+id/bottom_nav_view"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@android:color/transparent"-->
-<!--                app:itemIconTint="@color/sienna"-->
-<!--                app:itemTextColor="@color/black"-->
-<!--                app:labelVisibilityMode="labeled"-->
-<!--                app:menu="@menu/bottom_nav_menu" />-->
-<!--        </com.google.android.material.card.MaterialCardView>-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/category_image_desc"
+                app:backgroundTint="@android:color/transparent"
+                app:fabCustomSize="64dp"
+                android:src="@drawable/ic_cart"
+                app:tint="@android:color/black" />
+
+        </FrameLayout>
 
 
-<!--         Bottom Navigation -->
+        <!-- Luxury Glass Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemIconTint="@color/bottom_nav_selector"
-            app:itemTextColor="@color/bottom_nav_selector"
-            app:itemRippleColor="@color/azure"
-            android:outlineSpotShadowColor="@color/light_grey"
-            app:labelVisibilityMode="selected"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_luxury_glass"
+            android:elevation="16dp"
+            app:itemIconSize="28dp"
+            app:itemIconTint="@color/bottom_nav_luxury_selector"
+            app:itemRippleColor="#33F1C40F"
+            app:itemTextColor="@color/bottom_nav_luxury_selector"
+            app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:cardBackgroundColor="@android:color/transparent"
-            android:background="@drawable/rounded_bottom_nav"
             app:menu="@menu/bottom_nav_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

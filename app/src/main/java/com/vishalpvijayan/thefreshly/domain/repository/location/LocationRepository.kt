@@ -180,7 +180,7 @@ class LocationRepository @Inject constructor(
                         address = addresses[0].getAddressLine(0)
                     }
                 }
-                delay(500)
+                delay(50000)
                 return@withContext address
             } else {
                 @Suppress("DEPRECATION")

@@ -42,7 +42,7 @@ class CartFragment : Fragment() {
 
         binding.btnCheckout.setOnClickListener {
             // Navigate to checkout/payment
-            findNavController().navigate(R.id.action_cartFragment_to_payment)
+            findNavController().navigate(R.id.action_cartFragment_to_mapFragment)
         }
 
         binding.btnClearCart.setOnClickListener {

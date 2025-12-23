@@ -310,26 +310,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/txtCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/bubblegum_sans_regular"
-            android:letterSpacing="0.17"
-            android:text="Your cart items.."
-            android:textColor="@color/sienna"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 
-        <!--<androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProduct"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCart" />-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPay"
@@ -342,7 +323,7 @@
             app:backgroundTint="@color/sienna"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCart"
+            app:layout_constraintTop_toBottomOf="@+id/cardView2"
             app:rippleColor="@color/black" />
 
 

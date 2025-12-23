@@ -1,111 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        tools:context=".presentation.ui.fragment.MapsFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_luxury_gradient">
 
+        <!-- Map Fragment (full screen behind glass elements) -->
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
+        <!-- Luxury Glass Saved Locations -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardSavedLocations"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_luxury_glass"
+            android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvSavedLocations"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
+                android:clickable="true"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableTint="#E6FFFFFF"
+                android:drawablePadding="12dp"
+                android:focusable="true"
+                android:text="Select from saved locations"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tvSavedLocations"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:clickable="true"
-                    android:drawableEnd="@drawable/ic_arrow_down"
-                    android:drawablePadding="8dp"
-                    android:focusable="true"
-                    android:padding="16dp"
-                    android:text="Select from saved locations"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSavedLocations"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:overScrollMode="never"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSavedLocations"
+                tools:listitem="@layout/item_saved_location" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvSavedLocations"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:overScrollMode="always"
-                    android:visibility="gone"
-                    tools:listitem="@layout/item_saved_location" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+        <!-- Luxury Glass Address Card -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardAddress"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            app:cardCornerRadius="8dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardElevation="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_luxury_glass"
+            android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/txtSelectedAddress"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/white"
-                android:padding="16dp">
+                android:gravity="center_vertical"
+                android:minHeight="48dp"
+                android:text="Tap on map to select location"
+                android:textColor="#E6FFFFFF"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txtSelectedAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:minHeight="48dp"
-                    android:text="Tap on map to select location"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+            <!-- Luxury Confirm Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnConfirmLocation"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:text="Confirm Location"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:letterSpacing="0.05"
+                app:backgroundTint="#F1C40F"
+                app:cornerRadius="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtSelectedAddress"
+                app:rippleColor="#33FFFFFF" />
 
-                <Button
-                    android:id="@+id/btnConfirmLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="8dp"
-                    android:text="Confirm Location" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
-

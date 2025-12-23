@@ -9,19 +9,24 @@
         android:id="@+id/mapFragment"
         android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapFragment_to_payment"
+            app:destination="@id/payment" />
+    </fragment>
 
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
-        <action
-            android:id="@+id/action_cartFragment_to_payment"
-            app:destination="@id/payment" />
+
         <action
             android:id="@+id/action_cartFragment_to_productDetails"
             app:destination="@id/productDetails" />
+        <action
+            android:id="@+id/action_cartFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
 
     <fragment

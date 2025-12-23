@@ -1,0 +1,20 @@
+<!-- res/drawable/bg_luxury_glass.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#FF111319"
+                android:centerColor="#FF181B24"
+                android:endColor="#FF050608" />
+            <corners android:radius="18dp" />
+        </shape>
+    </item>
+    <item android:top="1dp" android:bottom="1dp" android:left="1dp" android:right="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#1AFFFFFF" />
+            <corners android:radius="17dp" />
+        </shape>
+    </item>
+</layer-list>

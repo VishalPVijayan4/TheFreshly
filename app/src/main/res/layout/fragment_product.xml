@@ -1,74 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.ui.fragment.ProductFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/wheat"
-        >
+        android:background="@drawable/bg_luxury_gradient">
 
-        <EditText
-            android:id="@+id/edtSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Search products..."
-            android:padding="12dp"
-            android:drawableStart="@android:drawable/ic_menu_search"
-            android:drawablePadding="8dp"
-            android:background="@drawable/rounded_bg_white"
-            android:layout_margin="12dp"
+        <!-- Glass Search Bar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchContainer"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_luxury_glass"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/ivSearchIcon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@android:drawable/ic_menu_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#E6FFFFFF" />
+
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Search products..."
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:padding="0dp"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textColorHint="#80FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivSearchIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Cart badge -->
         <TextView
             android:id="@+id/tvCartBadge"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:background="@drawable/rounded_bg_sienna"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/bg_luxury_icon"
             android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
             android:textStyle="bold"
-            android:layout_margin="20dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/btnPay"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="3" />
 
-
+        <!-- Products grid -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProduct"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            app:layout_constraintBottom_toTopOf="@id/btnPay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtSearch" />
+            app:layout_constraintTop_toBottomOf="@id/searchContainer"
+            tools:listitem="@layout/item_products" />
 
+        <!-- Center loading -->
         <ProgressBar
             android:id="@+id/progressbar"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="@+id/rvProduct"
+            android:indeterminateTint="#F1C40F"
+            app:layout_constraintBottom_toBottomOf="@id/rvProduct"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rvProduct" />
 
+        <!-- Luxury Pay button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:letterSpacing="0.17"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:letterSpacing="0.05"
             android:text="@string/proceed_to_payment"
-            app:backgroundTint="@color/sienna"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:backgroundTint="#F1C40F"
+            app:cornerRadius="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:rippleColor="@color/black" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:rippleColor="#33FFFFFF" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
+

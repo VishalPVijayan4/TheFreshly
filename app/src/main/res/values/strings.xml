@@ -38,6 +38,7 @@
     <string name="default_address">John Doe #42, 5th Cross, Maple Residency Indiranagar, Bengaluru - 560038 Karnataka, India Phone: +91 98765 43210</string>
     <string name="change_address">Change Address</string>
     <string name="logo">logo</string>
+    <string name="tt">TT</string>
 
     <string-array name="sample_data">
         <item>Item 1</item>

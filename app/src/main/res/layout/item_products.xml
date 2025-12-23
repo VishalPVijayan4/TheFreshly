@@ -5,148 +5,186 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:background="@drawable/bg_luxury_glass"
+        android:padding="10dp">
 
-        <!-- Product Image -->
-        <ImageView
+        <!-- Product Image (smaller for grid) -->
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/category_image"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
             android:scaleType="centerCrop"
-            android:background="@drawable/rounded_bg_white"
+            app:strokeColor="#33F1C40F"
+            app:strokeWidth="1.5dp"
+            app:cornerRadius="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/image_icon" />
 
         <!-- Product Name -->
         <TextView
             android:id="@+id/txtProductName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/open_sans_bold"
             android:maxLines="2"
             android:ellipsize="end"
             android:gravity="center"
-            tools:text="Product Name Here" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/category_image"
+            tools:text="Luxury Handbag" />
 
-        <!-- Brand/Title -->
+        <!-- Brand -->
         <TextView
             android:id="@+id/product_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="12sp"
-            android:textColor="@android:color/darker_gray"
-            android:gravity="center"
-            tools:text="Brand Name" />
-
-        <!-- Actual Price -->
-        <TextView
-            android:id="@+id/productActualprice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textSize="12sp"
-            android:textColor="@color/black"
-            android:gravity="center"
-            tools:text="Price \n$99.99" />
-
-        <!-- Discounted Price -->
-        <TextView
-            android:id="@+id/productDiscountedprice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:textColor="@color/sienna"
-            android:gravity="center"
-            tools:text="Your Price \n$79.99" />
-
-        <!-- Discount Percentage -->
-        <TextView
-            android:id="@+id/productDiscountedpercentage"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textSize="11sp"
-            android:textColor="@android:color/holo_green_dark"
+            android:textColor="#E6FFFFFF"
+            android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            tools:text="Discount \n20%" />
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtProductName"
+            tools:text="Prada" />
 
-        <!-- Shipment/Description -->
+        <!-- Price row (very tight) -->
+        <LinearLayout
+            android:id="@+id/priceContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="2dp"
+            android:background="@drawable/bg_luxury_glass"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_title">
+
+            <TextView
+                android:id="@+id/productActualprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:textColor="#D1D5DB"
+                android:alpha="0.7"
+                android:fontFamily="sans-serif"
+                tools:text="₹999" />
+
+            <TextView
+                android:id="@+id/productDiscountedprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#F1C40F"
+                android:fontFamily="@font/open_sans_bold"
+                tools:text="₹799" />
+
+            <TextView
+                android:id="@+id/productDiscountedpercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textSize="9sp"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/open_sans_bold"
+                android:background="#33F1C40F"
+                android:paddingHorizontal="4dp"
+                android:paddingVertical="1dp"
+                android:gravity="center"
+                tools:text="-20%" />
+        </LinearLayout>
+
+        <!-- Single line description or badge -->
         <TextView
             android:id="@+id/shipment"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textSize="10sp"
-            android:textColor="@android:color/darker_gray"
-            android:maxLines="2"
+            android:textSize="9sp"
+            android:textColor="#D1D5DB"
+            android:fontFamily="sans-serif"
+            android:maxLines="1"
             android:ellipsize="end"
             android:gravity="center"
-            tools:text="What's this product \nDescription here" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priceContainer"
+            tools:text="Free next‑day delivery" />
 
-        <!-- Divider Line -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/darker_gray" />
-
-        <!-- Cart Controls Container -->
+        <!-- Add / Qty area (compact) -->
         <LinearLayout
             android:id="@+id/cartControlsContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shipment"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <!-- Add to Cart Button -->
+            <!-- Add button (shown by default) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddToCart"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:text="Add"
-                android:textSize="12sp"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/sienna"
-                app:cornerRadius="8dp" />
+                android:textSize="11sp"
+                android:textColor="@android:color/black"
+                app:backgroundTint="#F1C40F"
+                app:cornerRadius="18dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp" />
 
-            <!-- Quantity Controls (Hidden by default) -->
+            <!-- Quantity controls container (initially gone) -->
             <LinearLayout
                 android:id="@+id/quantityControls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
                 android:orientation="horizontal"
                 android:gravity="center"
+                android:background="@drawable/bg_luxury_glass"
+                android:paddingHorizontal="4dp"
                 android:visibility="gone">
 
-                <!-- Decrease Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnDecrease"
                     android:layout_width="0dp"
-                    android:layout_height="36dp"
+                    android:layout_height="26dp"
                     android:layout_weight="1"
                     android:text="-"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="#33F1C40F"
+                    app:cornerRadius="10dp"
                     android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:padding="0dp"
-                    android:textColor="@color/white"
-                    app:backgroundTint="@color/sienna"
-                    app:cornerRadius="8dp" />
+                    android:insetBottom="0dp" />
 
-                <!-- Quantity Text -->
                 <TextView
                     android:id="@+id/tvQuantityCount"
                     android:layout_width="0dp"
@@ -154,26 +192,25 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="1"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
                     android:textStyle="bold"
-                    android:textColor="@color/black" />
+                    android:fontFamily="@font/open_sans_bold" />
 
-                <!-- Increase Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnIncrease"
                     android:layout_width="0dp"
-                    android:layout_height="36dp"
+                    android:layout_height="26dp"
                     android:layout_weight="1"
                     android:text="+"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="#33F1C40F"
+                    app:cornerRadius="10dp"
                     android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:padding="0dp"
-                    android:textColor="@color/white"
-                    app:backgroundTint="@color/sienna"
-                    app:cornerRadius="8dp" />
+                    android:insetBottom="0dp" />
             </LinearLayout>
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

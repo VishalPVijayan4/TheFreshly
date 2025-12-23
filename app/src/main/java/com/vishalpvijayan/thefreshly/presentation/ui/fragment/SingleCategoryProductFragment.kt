@@ -82,7 +82,7 @@ class SingleCategoryProductFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvProduct.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProduct.adapter = adapter
 
         adapter.addLoadStateListener { loadState ->

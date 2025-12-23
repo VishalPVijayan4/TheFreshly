@@ -145,7 +145,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                                 Toast.LENGTH_SHORT
                             ).show()
                             savedLocationViewModel.resetSaveState()
-                            findNavController().navigateUp()
+                            findNavController().navigate(R.id.action_mapFragment_to_payment)
+
                         }
                         is SavedLocationViewModel.SaveState.Error -> {
                             Toast.makeText(

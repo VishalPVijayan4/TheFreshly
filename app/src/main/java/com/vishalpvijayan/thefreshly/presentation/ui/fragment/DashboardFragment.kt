@@ -96,7 +96,7 @@ class DashboardFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 locationViewModel.addressFlow.collect { address ->
                     address?.let {
-                        binding.txtAddress.text = it
+                        binding.txtAddress.text = "Current Location : "+it
                         Log.d("DashboardFragment", "Address: $it")
                     } ?: run {
                         binding.txtAddress.text = "Getting address..."
@@ -196,10 +196,10 @@ class DashboardFragment : Fragment() {
                 ).show()
             }
         }*/
-        binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvCategory.adapter = adapter
 
-        binding.llProfile.setOnClickListener {
+        binding.profilePic.setOnClickListener {
             findNavController().navigate(R.id.action_dashboard_to_profile)
         }
 

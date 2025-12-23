@@ -78,7 +78,7 @@ class ProductFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        binding.rvProduct.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.rvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProduct.adapter = adapter
 
         adapter.addLoadStateListener { loadState ->
@@ -95,7 +95,7 @@ class ProductFragment : Fragment() {
 
     private fun setupSearch() {
         // Assuming you have an EditText with id etSearch in your layout
-        binding.edtSearch?.let { searchEditText ->
+        binding.etSearch.let { searchEditText ->
             SearchHelper(
                 searchEditText = searchEditText,
                 lifecycleScope = lifecycleScope,

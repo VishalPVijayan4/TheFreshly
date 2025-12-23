@@ -41,11 +41,11 @@
     <TextView
         android:fontFamily="@font/open_sans_bold"
         android:textColor="@color/gray"
-        android:id="@id/txtTime"
+        android:id="@+id/txtTime"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TT"
+        android:text="@string/tt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

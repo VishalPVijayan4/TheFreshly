@@ -6,39 +6,65 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@drawable/bg_luxury_gradient">
+
+        <!-- Cart badge (top right) -->
+        <TextView
+            android:id="@+id/tvCartBadge"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_luxury_icon"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="3" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCart"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:clipToPadding="false"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
             app:layout_constraintBottom_toTopOf="@id/cartSummary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvCartBadge"
             tools:listitem="@layout/item_cart" />
 
+        <!-- Empty cart state -->
         <TextView
             android:id="@+id/emptyCartView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your cart is empty"
             android:textSize="18sp"
+            android:textColor="#E6FFFFFF"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/rvCart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/rvCart" />
 
-        <LinearLayout
+        <!-- Luxury Glass Cart Summary -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cartSummary"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@drawable/rounded_bg_white"
-            android:elevation="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_luxury_glass"
+            android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -48,34 +74,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0 items"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="#E6FFFFFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvTotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total: $0.00"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:layout_marginTop="8dp" />
+                android:textColor="@android:color/white"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/tvItemCount"
+                app:layout_constraintTop_toBottomOf="@id/tvItemCount" />
 
+            <!-- Luxury Checkout Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCheckout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Proceed to Checkout"
-                android:layout_marginTop="12dp"
-                app:backgroundTint="@color/sienna" />
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:text="Confirm Delivery Address"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                android:letterSpacing="0.05"
+                app:backgroundTint="#F1C40F"
+                app:cornerRadius="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTotalPrice"
+                app:rippleColor="#33FFFFFF" />
 
+            <!-- Secondary Clear Cart Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnClearCart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="12dp"
                 android:text="Clear Cart"
-                android:layout_marginTop="8dp"
+                android:textColor="#E6FFFFFF"
+                android:textSize="14sp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="@color/sienna" />
-        </LinearLayout>
+                app:strokeColor="#E6FFFFFF"
+                app:strokeWidth="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnCheckout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

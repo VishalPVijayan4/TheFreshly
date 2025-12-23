@@ -6,7 +6,7 @@
     </style>
 
     <style name="Theme.TheFreshly" parent="Base.Theme.TheFreshly" >
-        <item name="colorPrimary">@color/sienna
+        <item name="colorPrimary">@color/black
         </item>
     </style>
 </resources>

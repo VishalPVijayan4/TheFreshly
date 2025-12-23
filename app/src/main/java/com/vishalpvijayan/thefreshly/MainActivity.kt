@@ -89,6 +89,12 @@ class MainActivity : AppCompatActivity() {
                     binding.threeDotButton.visibility = View.GONE
                     binding.ivBack.visibility = View.VISIBLE
                 }
+                R.id.cartFragment -> {
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.customToolbar.visibility = View.VISIBLE
+                    binding.threeDotButton.visibility = View.GONE
+                    binding.ivBack.visibility = View.VISIBLE
+                }
                 R.id.single_product_from_Category -> {
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.VISIBLE

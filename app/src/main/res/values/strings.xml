@@ -9,7 +9,8 @@
     <string name="Client_id">AdGZrtKA3drs3pfP-Aj9WcTSy0kj6FsxNBoC9fqV63HP2niKxzaSB4lxeGwKQcvPWFRnbJcSEKK_KUVg</string>
     <string name="secret_id">EHYbnWvFuN3O-ou8lHEzr_OysSKvYv7kHcY3SSjSpCF0AhPmhf-PjNtw50M3B8AFbjF9U3ElJRyD74x2</string>
 
-    <string name="RazarPay">key_id,key_secret,rzp_test_U680lHq8BgJPvD,htSuBSzYQ1NzVTFfwbuNATun</string>
+<!--    <string name="RazarPay">key_id,key_secret,rzp_test_U680lHq8BgJPvD,htSuBSzYQ1NzVTFfwbuNATun</string>-->
+    <string name="RazarPay">key_id,key_secret,rzp_test_RvYknb590BqzaM,kKdPUu6BiT3Fg9Bw6s6aR3qs</string>
     <string name="Email">Email</string>
     <string name="resetText">Reset</string>
     <string name="phone">Phone Number</string>

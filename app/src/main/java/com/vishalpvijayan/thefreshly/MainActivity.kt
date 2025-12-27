@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.razorpay.PaymentData
 import com.vishalpvijayan.thefreshly.databinding.ActivityMainBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.LoginVM
@@ -21,7 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListener,
+    com.razorpay.ExternalWalletListener {
+
     private lateinit var binding: ActivityMainBinding
     private val toolbarViewModel: ToolbarViewModel by viewModels()
     private val loginViewModel: LoginVM by viewModels()
@@ -73,11 +76,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             currentDestinationId = destination.id
             updateFabVisibility()
 
             when (destination.id) {
+                R.id.SettingsFragment -> {
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.customToolbar.visibility = View.VISIBLE
+                    binding.threeDotButton.visibility = View.GONE
+                    binding.ivBack.visibility = View.VISIBLE
+                }
+                R.id.SupportChatFragment -> {
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.customToolbar.visibility = View.VISIBLE
+                    binding.threeDotButton.visibility = View.GONE
+                    binding.ivBack.visibility = View.VISIBLE
+                }
                 R.id.notificationFragment -> {
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.VISIBLE
@@ -91,6 +108,12 @@ class MainActivity : AppCompatActivity() {
                     binding.ivBack.visibility = View.VISIBLE
                 }
                 R.id.cartFragment -> {
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.customToolbar.visibility = View.VISIBLE
+                    binding.threeDotButton.visibility = View.GONE
+                    binding.ivBack.visibility = View.VISIBLE
+                }
+                R.id.product -> {
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.VISIBLE
                     binding.threeDotButton.visibility = View.GONE
@@ -146,7 +169,9 @@ class MainActivity : AppCompatActivity() {
                         R.id.createccount,
                         R.id.mapFragment,
                         R.id.payment,
-                        R.id.cartFragment
+                        R.id.cartFragment,
+                        R.id.SettingsFragment,
+                        R.id.SupportChatFragment
                     )
 
                     val shouldShow = count > 0 && currentDestinationId !in hideOnScreens
@@ -158,6 +183,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
 
 
     private fun updateFabVisibility() {
@@ -181,4 +209,30 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabContainer.isVisible = shouldShow
     }
+
+    fun startRazorpayPayment(options: org.json.JSONObject) {
+        val checkout = com.razorpay.Checkout()
+        checkout.setKeyID("rzp_test_RvYknb590BqzaM")
+        checkout.open(this, options)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        com.razorpay.Checkout.handleActivityResult(this, requestCode, resultCode, data, this, this)
+    }
+
+
+
+    override fun onPaymentSuccess(p0: String?, p1: PaymentData?) {
+        Log.d("MainActivity", "PAYMENT SUCCESS:")
+    }
+
+    override fun onPaymentError(p0: Int, p1: String?, p2: PaymentData?) {
+        Log.e("MainActivity", "PAYMENT ERROR: code= response=")
+    }
+
+    override fun onExternalWalletSelected(p0: String?, p1: PaymentData?) {
+        TODO("Not yet implemented")
+    }
+
 }

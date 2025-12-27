@@ -17,9 +17,9 @@
 
 
     <item
-        android:id="@+id/single_product_from_Category"
-        android:icon="@drawable/ic_cart"
+        android:id="@+id/SettingsFragment"
+        android:icon="@drawable/ic_setting"
         app:showAsAction="ifRoom"
-        android:title="Cart"
+        android:title="Setting"
         />
 </menu>

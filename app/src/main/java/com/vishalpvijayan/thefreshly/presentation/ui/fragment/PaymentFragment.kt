@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.razorpay.Checkout
 import com.razorpay.PaymentResultListener
+import com.vishalpvijayan.thefreshly.MainActivity
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentPaymentBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
@@ -127,35 +129,48 @@ class PaymentFragment : Fragment(), PaymentResultListener {
     }
 
     private fun startPayment() {
-        val activity = activity
-        if (activity == null || !isAdded || activity.isFinishing || activity.isDestroyed) {
+        Log.d("PaymentFragment", "🔥 startPayment() called")
+
+        val activity = requireActivity() // Use requireActivity() for non-null
+        if (!isAdded || activity.isFinishing || activity.isDestroyed) {
+            Log.e("PaymentFragment", "❌ Activity/Fragment invalid - isAdded: $isAdded, isFinishing: ${activity.isFinishing}, isDestroyed: ${activity.isDestroyed}")
             Toast.makeText(context, "Activity not in valid state", Toast.LENGTH_SHORT).show()
             return
         }
 
+        Log.d("PaymentFragment", "✅ Activity valid, preloading Checkout...")
+
+        // Preload FIRST - Critical for white screen fix
+        Checkout.preload(activity)
+        Log.d("PaymentFragment", "✅ Checkout preloaded")
+
         val checkout = Checkout().apply {
-            setKeyID("rzp_test_hOnOpLwgUuTWTI")
+            setKeyID("rzp_test_RvYknb590BqzaM")
         }
+        Log.d("PaymentFragment", "✅ Checkout instance created")
 
         try {
             viewLifecycleOwner.lifecycleScope.launch {
+                Log.d("PaymentFragment", "🚀 Creating payment options...")
+
                 val totalPrice = cartViewModel.totalCartPrice.value
                 val deliveryCharges = checkoutViewModel.deliveryCharges
                 val cgst = totalPrice * 0.09
                 val sgst = totalPrice * 0.09
                 val grandTotal = totalPrice + cgst + sgst + deliveryCharges
-
                 val amountInPaise = (grandTotal * 100).toLong()
+
+                Log.d("PaymentFragment", "💰 Totals - totalPrice: $totalPrice, grandTotal: $grandTotal, amountInPaise: $amountInPaise")
 
                 val options = JSONObject().apply {
                     put("name", "Freshly")
+                    put("image", "https://picsum.photos/200/300")
                     put("description", "Grocery Payment")
-                    put("image", "https://i.imgur.com/A1xyzBq.png")
+                    put("order_id", 44550)
                     put("theme.color", "#A0522D")
                     put("currency", "INR")
                     put("amount", amountInPaise.toString())
 
-                    // Add notes with delivery details
                     put("notes", JSONObject().apply {
                         put("address", checkoutViewModel.selectedAddress.value?.address ?: "")
                         put("instructions", deliveryInstructions)
@@ -167,32 +182,58 @@ class PaymentFragment : Fragment(), PaymentResultListener {
                     })
                 }
 
-                checkout.open(activity, options)
-            }
+                Log.d("PaymentFragment", "📦 Options created: ${options.toString()}")
+                Log.d("PaymentFragment", "🎯 Opening Checkout...")
 
+//                checkout.open(activity, options)
+//                checkout.open(requireActivity(), options)
+                (requireActivity() as MainActivity).startRazorpayPayment(options)
+
+                Log.d("PaymentFragment", "✅ Checkout.open() called successfully")
+            }
         } catch (e: Exception) {
-            e.printStackTrace()
+            Log.e("PaymentFragment", "💥 Payment setup ERROR", e)
             Toast.makeText(context, "Payment error: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onPaymentSuccess(razorpayPaymentID: String) {
-        if (!isAdded) return
+        Log.d("PaymentFragment", "✅✅ PAYMENT SUCCESS: $razorpayPaymentID")
+
+        if (!isAdded) {
+            Log.w("PaymentFragment", "⚠️ Fragment not added, skipping success handling")
+            return
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            // Clear cart after successful payment
+            Log.d("PaymentFragment", "🧹 Clearing cart...")
             cartViewModel.clearCart()
+            Log.d("PaymentFragment", "✅ Cart cleared")
         }
 
         Toast.makeText(context, "Payment Success: $razorpayPaymentID", Toast.LENGTH_LONG).show()
-        // Navigate to success screen if you have one
+        Log.d("PaymentFragment", "🎉 Success toast shown")
         // findNavController().navigate(R.id.action_payment_to_success)
     }
 
     override fun onPaymentError(code: Int, response: String?) {
-        if (!isAdded) return
-        Toast.makeText(context, "Payment Failed: $response", Toast.LENGTH_LONG).show()
+        Log.e("PaymentFragment", "❌❌ PAYMENT ERROR - Code: $code, Response: $response")
+
+        if (!isAdded) {
+            Log.w("PaymentFragment", "⚠️ Fragment not added, skipping error handling")
+            return
+        }
+
+        val errorMsg = when (code) {
+            0 -> "Payment cancelled by user"
+            1 -> "Payment failed - network error"
+            else -> "Payment failed: $response (Code: $code)"
+        }
+
+        Log.e("PaymentFragment", "💥 Final error message: $errorMsg")
+        Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show()
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

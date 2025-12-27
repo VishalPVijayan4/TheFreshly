@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
 
         }
 
-        binding.btnCreateAccount.setOnClickListener {
+        binding.tvCreateAccount.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_createccount2)
         }
 

@@ -15,6 +15,7 @@ android {
     buildFeatures {
         //noinspection DataBindingWithoutKapt
         dataBinding = true
+        buildConfig = true
     }
 
     defaultConfig {
@@ -25,10 +26,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildFeatures {
-        //noinspection DataBindingWithoutKapt
-        dataBinding = true
+
+        buildConfigField("String", "RAZORPAY_KEY_ID", "\"rzp_test_RvYknb590BqzaM\"")
+
     }
 
     buildTypes {
@@ -39,10 +39,10 @@ android {
         release {
             // This makes the DEBUG field false for release builds
             isMinifyEnabled = false
-            proguardFiles(
+            /*proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
-            )
+            )*/
         }
     }
 
@@ -76,7 +76,7 @@ dependencies {
     val coil = ("2.5.0")
     implementation("io.coil-kt:coil:$coil")
 
-    implementation ("com.razorpay:checkout:1.6.34")
+    implementation("com.razorpay:checkout:1.6.41")
 
 //    implementation ("com.paypal.checkout:android-sdk:2.16.0")
 
@@ -137,7 +137,7 @@ dependencies {
     //paging
     implementation("androidx.paging:paging-runtime:3.3.0")
 
-    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 
 
     val corektx = ("1.12.0")
@@ -150,9 +150,9 @@ dependencies {
     implementation("com.google.android.material:material:$material")
     implementation("androidx.constraintlayout:constraintlayout:$constraintlayout")
 
-    implementation ("androidx.datastore:datastore:1.1.7")
+    implementation("androidx.datastore:datastore:1.1.7")
     implementation("androidx.datastore:datastore-preferences:1.1.0")
-    implementation ("androidx.datastore:datastore-core:1.1.7")
+    implementation("androidx.datastore:datastore-core:1.1.7")
 
 //    implementation("com.github.Romancha:android-material-play-pause-view-button:2.3")
 

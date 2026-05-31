@@ -13,7 +13,7 @@
         android:layout_height="130dp"
         android:contentDescription="@string/logo"
         android:padding="10dp"
-        android:src="@drawable/image_icon"
+        android:src="@drawable/ic_icon_offical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -64,7 +64,8 @@ class PaymentFragment : Fragment(), PaymentResultListener {
         setupDeliveryInstructions()
 
         binding.btnPay.setOnClickListener {
-            startPayment()
+//            startPayment()
+            MockPayment()
         }
     }
 
@@ -127,6 +128,61 @@ class PaymentFragment : Fragment(), PaymentResultListener {
             }
         }
     }
+
+    private fun MockPayment() {
+        // Show bottom sheet dialog with payment options
+        showPaymentSelectionDialog()
+    }
+
+    private fun showPaymentSelectionDialog() {
+        val bottomSheetDialog = com.google.android.material.bottomsheet.BottomSheetDialog(requireContext())
+        val dialogBinding = com.vishalpvijayan.thefreshly.databinding.BottomSheetPaymentSelectionBinding.inflate(layoutInflater)
+
+        bottomSheetDialog.setContentView(dialogBinding.root)
+
+        dialogBinding.btnPaymentSuccess.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            handlePaymentSuccess()
+        }
+
+        dialogBinding.btnPaymentFail.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            showPaymentFailedDialog()
+        }
+
+        bottomSheetDialog.show()
+    }
+
+    private fun handlePaymentSuccess() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            Toast.makeText(context, "Payment Successful!", Toast.LENGTH_SHORT).show()
+            // Navigate to order success screen
+            findNavController().navigate(R.id.action_payment_to_orderSuccessFragment)
+        }
+    }
+
+    private fun showPaymentFailedDialog() {
+        val dialog = android.app.Dialog(requireContext())
+        val dialogBinding = com.vishalpvijayan.thefreshly.databinding.DialogPaymentFailedBinding.inflate(layoutInflater)
+
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(false)
+
+        dialogBinding.btnRetry.setOnClickListener {
+            dialog.dismiss()
+            // Show payment selection dialog again
+            showPaymentSelectionDialog()
+        }
+
+        dialogBinding.btnCancel.setOnClickListener {
+            dialog.dismiss()
+            Toast.makeText(context, "Payment cancelled", Toast.LENGTH_SHORT).show()
+        }
+
+        dialog.show()
+    }
+
 
     private fun startPayment() {
         Log.d("PaymentFragment", "🔥 startPayment() called")

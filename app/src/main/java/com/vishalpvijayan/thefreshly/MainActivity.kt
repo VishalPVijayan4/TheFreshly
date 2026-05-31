@@ -84,10 +84,10 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
 
             when (destination.id) {
                 R.id.SettingsFragment -> {
-                    binding.bottomNavView.visibility = View.GONE
+                    binding.bottomNavView.visibility = View.VISIBLE
                     binding.customToolbar.visibility = View.VISIBLE
                     binding.threeDotButton.visibility = View.GONE
-                    binding.ivBack.visibility = View.VISIBLE
+                    binding.ivBack.visibility = View.GONE
                 }
                 R.id.SupportChatFragment -> {
                     binding.bottomNavView.visibility = View.GONE
@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.VISIBLE
                     binding.threeDotButton.visibility = View.GONE
-                    binding.ivBack.visibility = View.VISIBLE
+                    binding.ivBack.visibility = View.GONE
                 }
                 R.id.single_product_from_Category -> {
                     binding.bottomNavView.visibility = View.GONE
@@ -135,6 +135,12 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
                     binding.bottomNavView.visibility = View.GONE
                     binding.customToolbar.visibility = View.VISIBLE
                     binding.ivBack.visibility = View.VISIBLE
+                    binding.threeDotButton.visibility = View.GONE
+                }
+                R.id.orderSuccessFragment -> {
+                    binding.bottomNavView.visibility = View.GONE
+                    binding.customToolbar.visibility = View.VISIBLE
+                    binding.ivBack.visibility = View.GONE
                     binding.threeDotButton.visibility = View.GONE
                 }
                 R.id.onboarding, R.id.splash, R.id.login,
@@ -200,7 +206,9 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
             R.id.createccount,
             R.id.mapFragment,
             R.id.payment,
-            R.id.cartFragment // Don't show on cart screen itself
+            R.id.cartFragment,
+            R.id.SupportChatFragment,
+            R.id.orderSuccessFragment// Don't show on cart screen itself
         )
 
         val shouldShow = cartCount > 0 && currentDestinationId !in hideOnScreens

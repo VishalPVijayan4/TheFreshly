@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
                 }
                 R.id.dashboard -> {
                     binding.bottomNavView.visibility = View.VISIBLE
-                    binding.customToolbar.visibility = View.VISIBLE
+                    binding.customToolbar.visibility = View.GONE
                     binding.threeDotButton.visibility = View.VISIBLE
                     binding.ivBack.visibility = View.GONE
                 }

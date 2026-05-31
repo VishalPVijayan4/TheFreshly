@@ -7,7 +7,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_luxury_gradient"
+        android:background="@drawable/bg_fresh_app"
         tools:context=".MainActivity">
 
         <!-- FIXED Toolbar - Shows titles GUARANTEED -->
@@ -122,29 +122,37 @@
         <!-- Alternative: Gradient FAB Container -->
         <FrameLayout
             android:id="@+id/fabContainer"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_margin="24dp"
+            android:layout_width="216dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_fresh_pill_dark"
+            android:elevation="12dp"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bg_luxury_accent"
-                android:elevation="16dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/cart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_gravity="start|center_vertical"
                 android:contentDescription="@string/category_image_desc"
-                app:backgroundTint="@android:color/transparent"
-                app:fabCustomSize="64dp"
                 android:src="@drawable/ic_cart"
-                app:tint="@android:color/black" />
+                app:backgroundTint="@android:color/transparent"
+                app:borderWidth="0dp"
+                app:elevation="0dp"
+                app:fabCustomSize="52dp"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="View Cart"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
 
         </FrameLayout>
 
@@ -155,15 +163,14 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/bg_luxury_glass"
-            android:elevation="16dp"
-            app:itemIconSize="28dp"
-            app:itemIconTint="@color/bottom_nav_luxury_selector"
-            app:itemRippleColor="#33F1C40F"
-            app:itemTextColor="@color/bottom_nav_luxury_selector"
+            android:layout_height="76dp"
+            android:background="@drawable/bg_fresh_bottom_nav"
+            android:elevation="12dp"
+            app:itemActiveIndicatorStyle="@style/FreshBottomNavIndicator"
+            app:itemIconSize="24dp"
+            app:itemIconTint="@color/bottom_nav_fresh_selector"
+            app:itemRippleColor="#228AF3B8"
+            app:itemTextColor="@color/bottom_nav_fresh_selector"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

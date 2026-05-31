@@ -11,5 +11,10 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="FreshBottomNavIndicator">
+        <item name="android:color">#8AF3B8</item>
+        <item name="android:width">72dp</item>
+        <item name="android:height">44dp</item>
+    </style>
 
 </resources>

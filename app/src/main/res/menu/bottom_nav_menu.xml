@@ -12,7 +12,7 @@
         android:id="@+id/product"
         android:icon="@drawable/ic_category"
         app:showAsAction="ifRoom"
-        android:title="Products"
+        android:title="Categories"
         />
 
 
@@ -20,6 +20,6 @@
         android:id="@+id/SettingsFragment"
         android:icon="@drawable/ic_setting"
         app:showAsAction="ifRoom"
-        android:title="Setting"
+        android:title="Account"
         />
 </menu>

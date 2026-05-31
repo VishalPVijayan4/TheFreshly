@@ -5,14 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.data.remote.model.productCategory.ProductCategory
 import com.vishalpvijayan.thefreshly.presentation.model.CategoryDisplayInfo
-import com.vishalpvijayan.thefreshly.utils.CategoryListItem
 
 class ProductCategoryAdapter(
     private val onClick: (ProductCategory) -> Unit
@@ -23,8 +21,8 @@ class ProductCategoryAdapter(
         private val icon: ImageView = view.findViewById(R.id.category_image)
         private val description: TextView = view.findViewById(R.id.category_description)
 
-        fun bind(item: ProductCategory, position: Int) {
-            val displayInfo = getDisplayInfoForCategory(position, item)
+        fun bind(item: ProductCategory) {
+            val displayInfo = getDisplayInfoForCategory(item)
 
             title.text = item.name
             icon.setImageResource(displayInfo.imageRes)
@@ -44,7 +42,7 @@ class ProductCategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it, position) }
+        getItem(position)?.let { holder.bind(it) }
     }
 
     companion object {
@@ -59,7 +57,7 @@ class ProductCategoryAdapter(
         }
     }
 
-    private fun getDisplayInfoForCategory(position: Int, item: ProductCategory): CategoryDisplayInfo {
+    private fun getDisplayInfoForCategory(item: ProductCategory): CategoryDisplayInfo {
         return when (item.slug) {
             "beauty" -> CategoryDisplayInfo(R.drawable.ic_beauty, "Unlock your natural glow with premium beauty picks.")
             "fragrances" -> CategoryDisplayInfo(R.drawable.ic_fragnance, "Let every moment linger with irresistible scents.")
@@ -98,7 +96,7 @@ class ProductCategoryAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val title: TextView = view.findViewById(R.id.category_title)
         private val icon: ImageView = view.findViewById(R.id.category_image)
-        fun bind(item: ProductCategory, position: Int) {
+        fun bind(item: ProductCategory) {
             title.text = item.name
             icon.setImageResource(getImageForCategory(position,item))  // OR getImageForCategory(position, item)
             itemView.setOnClickListener { onClick(item) }

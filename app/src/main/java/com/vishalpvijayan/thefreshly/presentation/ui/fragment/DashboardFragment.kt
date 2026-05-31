@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentDashboardBinding
@@ -96,7 +96,7 @@ class DashboardFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 locationViewModel.addressFlow.collect { address ->
                     address?.let {
-                        binding.txtAddress.text = "Current Location : "+it
+                        binding.txtAddress.text = it
                         Log.d("DashboardFragment", "Address: $it")
                     } ?: run {
                         binding.txtAddress.text = "Getting address..."
@@ -196,7 +196,7 @@ class DashboardFragment : Fragment() {
                 ).show()
             }
         }*/
-        binding.rvCategory.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvCategory.adapter = adapter
 
         binding.profilePic.setOnClickListener {
@@ -208,12 +208,12 @@ class DashboardFragment : Fragment() {
                 adapter.submitData(it)
             }
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                dashBoardVm.usernameFlow.collect { username ->
-                    binding.tvWelcome.text = ConstantStrings.welcome + username
-                }
-            }
+        binding.tvWelcome.text = "Freshly"
+        binding.ivNotification.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboard_to_notificationFragment)
+        }
+        binding.searchContainer.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboard_to_product)
         }
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

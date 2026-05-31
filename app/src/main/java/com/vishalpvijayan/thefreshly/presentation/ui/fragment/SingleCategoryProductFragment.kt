@@ -150,8 +150,10 @@ class SingleCategoryProductFragment : Fragment() {
     private fun observeCartCount() {
         lifecycleScope.launch {
             cartViewModel.totalCartCount.collectLatest { count ->
-                binding.tvCartBadge?.text = if (count > 0) count.toString() else ""
-                binding.tvCartBadge?.isVisible = count > 0
+                binding.tvCartBadge.text = if (count > 0) count.toString() else ""
+                binding.tvCartBadge.isVisible = count > 0
+                binding.btnPay.isVisible = count > 0
+                binding.btnPay.text = if (count > 0) "View cart ($count)" else "View cart"
             }
         }
     }

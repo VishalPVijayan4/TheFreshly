@@ -41,6 +41,15 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController: NavController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.bottomNavView, navController)
+        binding.bottomNavView.setOnItemSelectedListener { item ->
+            if (currentDestinationId == item.itemId) {
+                true
+            } else {
+                runCatching {
+                    navController.navigate(item.itemId)
+                }.isSuccess
+            }
+        }
 
         setSupportActionBar(binding.customToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -49,9 +58,11 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
         observeCartCount()
 
         // Setup cart FAB click listener
-        binding.cart.setOnClickListener {
+        val openCart = View.OnClickListener {
             navController.navigate(R.id.cartFragment)
         }
+        binding.cart.setOnClickListener(openCart)
+        binding.fabContainer.setOnClickListener(openCart)
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -114,8 +125,8 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
                     binding.ivBack.visibility = View.VISIBLE
                 }
                 R.id.product -> {
-                    binding.bottomNavView.visibility = View.GONE
-                    binding.customToolbar.visibility = View.VISIBLE
+                    binding.bottomNavView.visibility = View.VISIBLE
+                    binding.customToolbar.visibility = View.GONE
                     binding.threeDotButton.visibility = View.GONE
                     binding.ivBack.visibility = View.GONE
                 }

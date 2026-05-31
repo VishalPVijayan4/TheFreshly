@@ -5,106 +5,113 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="7dp"
+    android:layout_margin="8dp"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="22dp"
-    app:cardElevation="3dp"
+    app:cardElevation="2dp"
     app:strokeColor="#E2EEE8"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="278dp"
         android:padding="12dp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/category_image"
+        <FrameLayout
+            android:id="@+id/productImageBg"
             android:layout_width="0dp"
-            android:layout_height="132dp"
-            android:scaleType="centerCrop"
-            app:cornerRadius="18dp"
+            android:layout_height="118dp"
+            android:background="@drawable/bg_fresh_soft_chip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/image_icon" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/productDiscountedpercentage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/bg_fresh_chip"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="4dp"
-            android:textColor="#075D3B"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/category_image"
-            app:layout_constraintTop_toTopOf="@id/category_image"
-            tools:text="-20%" />
+            <ImageView
+                android:id="@+id/category_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/category_image_desc"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/image_icon" />
 
-        <TextView
-            android:id="@+id/txtProductName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/open_sans_bold"
-            android:maxLines="2"
-            android:textColor="#101612"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/category_image"
-            tools:text="Organic Hass Avocado" />
+            <TextView
+                android:id="@+id/productDiscountedpercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|top"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_fresh_chip"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:textColor="#075D3B"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:text="-20%" />
+        </FrameLayout>
 
         <TextView
             android:id="@+id/product_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="10dp"
             android:ellipsize="end"
-            android:fontFamily="sans-serif-medium"
-            android:maxLines="3"
-            android:textColor="#075D3B"
-            android:textSize="11sp"
+            android:maxLines="1"
             android:textAllCaps="true"
+            android:textColor="#075D3B"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtProductName"
-            tools:text="LOCAL FARM · GROCERIES · 4.8★" />
+            app:layout_constraintTop_toBottomOf="@id/productImageBg"
+            tools:text="LOCAL FARM · 4.8★" />
+
+        <TextView
+            android:id="@+id/txtProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/open_sans_bold"
+            android:maxLines="2"
+            android:minHeight="42dp"
+            android:textColor="#101612"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_title"
+            tools:text="Organic Hass Avocado" />
 
         <TextView
             android:id="@+id/productActualprice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="#6F7772"
             android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_title"
-            tools:text="List $3.99 · SKU ABC123 · 250g" />
+            app:layout_constraintTop_toBottomOf="@id/txtProductName"
+            tools:text="List $3.99 · 98 in stock" />
 
         <TextView
             android:id="@+id/shipment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_fresh_soft_chip"
+            android:layout_marginTop="6dp"
             android:ellipsize="end"
-            android:lineSpacingExtra="2dp"
-            android:maxLines="5"
-            android:padding="10dp"
+            android:maxLines="2"
             android:textColor="#343C37"
             android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/productActualprice"
-            tools:text="98 in stock · Ships tomorrow · Warranty info · Return policy · Tags" />
+            tools:text="Ships tomorrow · Warranty included" />
 
         <TextView
             android:id="@+id/productDiscountedprice"
@@ -112,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:textColor="#075D3B"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/cartControlsContainer"
@@ -120,70 +127,80 @@
             app:layout_constraintTop_toBottomOf="@id/shipment"
             tools:text="$3.50" />
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/cartControlsContainer"
-            android:layout_width="54dp"
-            android:layout_height="42dp"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:layout_width="92dp"
+            android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="@id/productDiscountedprice"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/productDiscountedprice">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddToCart"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end|center_vertical"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
                 android:text="+"
                 android:textColor="@android:color/white"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 app:backgroundTint="#075D3B"
-                app:cornerRadius="21dp" />
+                app:cornerRadius="20dp" />
 
             <LinearLayout
                 android:id="@+id/quantityControls"
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
+                android:layout_width="92dp"
+                android:layout_height="40dp"
                 android:background="@drawable/bg_fresh_pill_dark"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingHorizontal="2dp"
+                android:paddingHorizontal="4dp"
                 android:visibility="gone">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnDecrease"
-                    android:layout_width="16dp"
-                    android:layout_height="30dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
-                    android:text="-"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
+                    android:text="−"
                     android:textColor="@android:color/white"
-                    android:textSize="10sp"
-                    app:backgroundTint="#00000000" />
+                    android:textSize="18sp"
+                    app:backgroundTint="#00000000"
+                    app:cornerRadius="16dp" />
 
                 <TextView
                     android:id="@+id/tvQuantityCount"
-                    android:layout_width="18dp"
+                    android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="1"
                     android:textColor="@android:color/white"
-                    android:textSize="11sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnIncrease"
-                    android:layout_width="16dp"
-                    android:layout_height="30dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="0dp"
                     android:text="+"
                     android:textColor="@android:color/white"
-                    android:textSize="10sp"
-                    app:backgroundTint="#00000000" />
+                    android:textSize="18sp"
+                    app:backgroundTint="#00000000"
+                    app:cornerRadius="16dp" />
             </LinearLayout>
-        </LinearLayout>
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

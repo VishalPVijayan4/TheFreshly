@@ -1,6 +1,5 @@
 package com.vishalpvijayan.thefreshly.presentation.vm
 
-import androidx.compose.ui.unit.Constraints
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +8,9 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.vishalpvijayan.thefreshly.data.local.DataStoreManager
-import com.vishalpvijayan.thefreshly.data.remote.model.login.UserResponse
+import com.vishalpvijayan.thefreshly.Products
+import com.vishalpvijayan.thefreshly.data.remote.ApiServices
 import com.vishalpvijayan.thefreshly.data.remote.model.productCategory.ProductCategory
-import com.vishalpvijayan.thefreshly.domain.usecase.AddUserUsecase
 import com.vishalpvijayan.thefreshly.domain.usecase.GetProductCategoriesUseCase
 import com.vishalpvijayan.thefreshly.utils.ConstantStrings
 import com.vishalpvijayan.thefreshly.utils.Resource
@@ -25,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
     private val getProductCategoriesUseCase: GetProductCategoriesUseCase,
-    private val dataStoreManager: DataStoreManager
+    private val dataStoreManager: DataStoreManager,
+    private val apiServices: ApiServices
 ):
     ViewModel(){
 
@@ -36,6 +36,30 @@ class DashboardViewModel @Inject constructor(
 
     val categories: Flow<PagingData<ProductCategory>> =
         getProductCategoriesUseCase().cachedIn(viewModelScope)
+
+    private val _curatedProducts = MutableStateFlow<List<Products>>(emptyList())
+    val curatedProducts: StateFlow<List<Products>> = _curatedProducts
+
+    fun loadCuratedProducts() {
+        viewModelScope.launch {
+            try {
+                val firstCategory = apiServices.getProductCategory().firstOrNull()?.slug.orEmpty()
+                if (firstCategory.isBlank()) {
+                    _curatedProducts.value = emptyList()
+                    return@launch
+                }
+
+                val response = apiServices.getProductsByCategory(
+                    category = firstCategory,
+                    limit = 4,
+                    skip = 0
+                )
+                _curatedProducts.value = response.products.take(4)
+            } catch (e: Exception) {
+                _curatedProducts.value = emptyList()
+            }
+        }
+    }
 
 
     private val _username = MutableLiveData<String?>()

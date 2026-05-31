@@ -440,30 +440,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvCuratedTitle" />
 
-                <GridLayout
-                    android:id="@+id/productGrid"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCuratedProducts"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:columnCount="2"
-                    android:useDefaultMargins="false"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvCuratedTitle">
-
-                    <include
-                        android:id="@+id/dashboardProductOne"
-                        layout="@layout/item_dashboard_product" />
-                    <include
-                        android:id="@+id/dashboardProductTwo"
-                        layout="@layout/item_dashboard_product_2" />
-                    <include
-                        android:id="@+id/dashboardProductThree"
-                        layout="@layout/item_dashboard_product_3" />
-                    <include
-                        android:id="@+id/dashboardProductFour"
-                        layout="@layout/item_dashboard_product_4" />
-                </GridLayout>
+                    app:layout_constraintTop_toBottomOf="@id/tvCuratedTitle"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_curated_product" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/promiseCard"
@@ -474,7 +462,7 @@
                     android:padding="22dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/productGrid">
+                    app:layout_constraintTop_toBottomOf="@id/rvCuratedProducts">
 
                     <FrameLayout
                         android:id="@+id/promiseIconBg"

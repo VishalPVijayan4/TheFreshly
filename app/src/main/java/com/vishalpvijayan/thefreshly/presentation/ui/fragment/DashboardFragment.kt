@@ -14,12 +14,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentDashboardBinding
 import com.vishalpvijayan.thefreshly.domain.repository.location.LocationRepository
 import com.vishalpvijayan.thefreshly.helper.LocationViewModel
+import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CuratedProductAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.ProductCategoryAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
@@ -28,6 +30,9 @@ import com.vishalpvijayan.thefreshly.utils.ConstantStrings
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -44,6 +49,7 @@ class DashboardFragment : Fragment() {
 
 
     private lateinit var adapter: ProductCategoryAdapter
+    private lateinit var curatedProductAdapter: CuratedProductAdapter
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -71,6 +77,12 @@ class DashboardFragment : Fragment() {
 
         }
 
+        curatedProductAdapter = CuratedProductAdapter { product ->
+            val bundle = Bundle().apply {
+                product.id?.let { putInt("id", it) }
+            }
+            findNavController().navigate(R.id.productDetails, bundle)
+        }
 
         locationViewModel.startUpdates()
 
@@ -199,13 +211,27 @@ class DashboardFragment : Fragment() {
         binding.rvCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvCategory.adapter = adapter
 
+        binding.rvCuratedProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvCuratedProducts.adapter = curatedProductAdapter
+        binding.tvHeroSubtitle.text = "Your ${getTodayName()} morning\nessentials"
+        dashBoardVm.loadCuratedProducts()
+
         binding.profilePic.setOnClickListener {
             findNavController().navigate(R.id.action_dashboard_to_profile)
         }
 
-        lifecycleScope.launch {
-            dashBoardVm.categories.collectLatest {
-                adapter.submitData(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                dashBoardVm.categories.collectLatest {
+                    adapter.submitData(it)
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                dashBoardVm.curatedProducts.collectLatest { products ->
+                    curatedProductAdapter.submitList(products.take(4))
+                }
             }
         }
         binding.tvWelcome.text = "Freshly"
@@ -234,5 +260,9 @@ class DashboardFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun getTodayName(): String {
+        return SimpleDateFormat("EEEE", Locale.getDefault()).format(Date())
     }
 }

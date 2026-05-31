@@ -39,12 +39,36 @@ class AllProductsAdapter(
         private val tvQuantityCount: TextView? = view.findViewById(R.id.tvQuantityCount)
 
         fun bind(item: Products, position: Int) {
-            title.text = "\n${item.title}\n"
-            productTitle.text = item.brand
-            productActualprice.text = "Price \n$${item.price}"
-            productDiscountedprice.text = "Your Price \n$${item.price}"
-            productDiscountedpercentage.text = "Discount \n${item.discountPercentage}%"
-            shipment.text = "What's this product \n${item.description}"
+            val price = item.price ?: 0.0
+            val discount = item.discountPercentage ?: 0.0
+            val listPrice = if (discount > 0.0 && discount < 100.0) {
+                price / (1 - (discount / 100.0))
+            } else {
+                price
+            }
+            val dimensions = item.dimensions
+            val dimensionText = dimensions?.let {
+                "${it.width} x ${it.height} x ${it.depth} cm"
+            }.orEmpty()
+            val tags = item.tags.joinToString(" • ").ifBlank { "No tags" }
+
+            title.text = item.title.orEmpty()
+            productTitle.text = listOfNotNull(
+                item.brand?.takeIf { it.isNotBlank() },
+                item.category?.takeIf { it.isNotBlank() },
+                item.rating?.let { "$it★" }
+            ).joinToString(" · ")
+            productActualprice.text = "List $${String.format("%.2f", listPrice)} · SKU ${item.sku.orEmpty()} · ${item.weight ?: 0}g · MOQ ${item.minimumOrderQuantity ?: 0}"
+            productDiscountedprice.text = "$${String.format("%.2f", price)}"
+            productDiscountedpercentage.text = "-${String.format("%.1f", discount)}%"
+            shipment.text = listOf(
+                item.description.orEmpty(),
+                "${item.stock ?: 0} in stock · ${item.availabilityStatus.orEmpty()}",
+                "Ships: ${item.shippingInformation.orEmpty()}",
+                "Warranty: ${item.warrantyInformation.orEmpty()}",
+                "Returns: ${item.returnPolicy.orEmpty()}",
+                "Size: $dimensionText · Tags: $tags"
+            ).filter { it.isNotBlank() }.joinToString("\n")
 
             itemView.setOnClickListener { onClick(item) }
 

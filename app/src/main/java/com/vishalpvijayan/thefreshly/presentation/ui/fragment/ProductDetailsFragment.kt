@@ -91,23 +91,31 @@ class ProductDetailsFragment : Fragment() {
 
     private fun bindProduct(product: ProductDetail) {
         binding.tvTitle.text = product.title
-        binding.tvBrandSku.text = "Brand: ${product.brand} | SKU: ${product.sku}"
-        binding.tvCategory.text = "Category: ${product.category}"
-        binding.tvTags.text = "Tags: ${product.tags.joinToString(", ")}"
-        binding.tvPrice.text = "Price: \$${product.price} (-${product.discountPercentage}%)"
-        binding.tvRating.text = "Rating: ${product.rating} / 5"
-        binding.tvStockAvailability.text = "Stock: ${product.stock} | Availability: ${product.availabilityStatus}"
-        binding.tvMOQ.text = "Minimum Order Quantity: ${product.minimumOrderQuantity}"
+        binding.tvBrandSku.text = "${product.brand} • SKU ${product.sku}"
+        binding.tvCategory.text = "Category • ${product.category}"
+        binding.tvTags.text = "Tags • ${product.tags.joinToString(" • ")}"
+        binding.tvPrice.text = "$${String.format("%.2f", product.price)}"
+        binding.tvRating.text = "${product.rating}★"
+        binding.tvStockAvailability.text = "${product.stock} in stock • ${product.availabilityStatus}"
+        binding.tvMOQ.text = "Minimum\n${product.minimumOrderQuantity}"
         binding.tvDescription.text = product.description
-        binding.tvDimensions.text = "Dimensions: ${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} cm | Weight: ${product.weight}g"
-        binding.tvWarranty.text = "Warranty: ${product.warrantyInformation}"
+        binding.tvDimensions.text = "Dimensions • ${product.dimensions.width} x ${product.dimensions.height} x ${product.dimensions.depth} cm\nWeight • ${product.weight}g"
+        binding.tvWarranty.text = "Warranty • ${product.warrantyInformation}"
         binding.tvShipping.text = product.shippingInformation
-        binding.tvReturnPolicy.text = product.returnPolicy
-        binding.tvMetadata.text = "Created At: ${product.meta.createdAt} | Barcode: ${product.meta.barcode}"
+        binding.tvReturnPolicy.text = "Returns • ${product.returnPolicy}"
+        binding.tvMetadata.text = listOf(
+            "ID: ${product.id}",
+            "Discount: ${product.discountPercentage}%",
+            "Created: ${product.meta.createdAt}",
+            "Updated: ${product.meta.updatedAt}",
+            "Barcode: ${product.meta.barcode}",
+            "QR: ${product.meta.qrCode}",
+            "Images: ${product.images.joinToString(", ")}"
+        ).joinToString("\n")
 
         val reviews = product.reviews.take(3)
-        binding.tvReviewHeader.text = "Reviews"
-        binding.tvReview1.text = reviews.getOrNull(0)?.let { "${it.reviewerName} (${it.rating}★): ${it.comment}" } ?: ""
+        binding.tvReviewHeader.text = "Reviews (${product.reviews.size})"
+        binding.tvReview1.text = reviews.getOrNull(0)?.let { "${it.reviewerName} (${it.rating}★): ${it.comment}" } ?: "No review yet"
         binding.tvReview2.text = reviews.getOrNull(1)?.let { "${it.reviewerName} (${it.rating}★): ${it.comment}" } ?: ""
         binding.tvReview3.text = reviews.getOrNull(2)?.let { "${it.reviewerName} (${it.rating}★): ${it.comment}" } ?: ""
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.ui.fragment.ProductDetailsFragment">
@@ -8,384 +7,400 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_luxury_gradient">
+        android:background="@drawable/bg_fresh_app">
 
-        <!-- Scrollable content -->
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollContent"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:fillViewport="true"
             android:clipToPadding="false"
-            android:paddingBottom="96dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="18dp"
             app:layout_constraintBottom_toTopOf="@id/bottomBar"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:orientation="vertical"
+                android:padding="24dp">
 
-                <!-- Glass product card -->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ccDes"
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tvDetailsBrand"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_luxury_glass"
-                    android:padding="16dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    android:text="Freshly"
+                    android:textColor="#075D3B"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/open_sans_bold" />
 
-                    <!-- Product image -->
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/imgThumbnail"
-                        android:layout_width="0dp"
-                        android:layout_height="220dp"
-                        android:scaleType="fitCenter"
-                        app:strokeColor="#33F1C40F"
-                        app:strokeWidth="2dp"
-                        app:cornerRadius="20dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:src="@drawable/image_icon" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgThumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="360dp"
+                    android:layout_marginTop="18dp"
+                    android:background="#F3F6F4"
+                    android:scaleType="fitCenter"
+                    app:cornerRadius="4dp"
+                    tools:src="@drawable/image_icon" />
 
-                    <!-- Title -->
-                    <TextView
-                        android:id="@+id/tvTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        android:fontFamily="@font/open_sans_bold"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        app:layout_constraintTop_toBottomOf="@id/imgThumbnail"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Essence Mascara Lash Princess" />
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:gravity="center"
+                    android:textColor="#075D3B"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    tools:text="Organic Hass Avocado" />
 
-                    <!-- Brand & SKU -->
-                    <TextView
-                        android:id="@+id/tvBrandSku"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textSize="12sp"
-                        android:textColor="#D1D5DB"
-                        android:fontFamily="sans-serif-medium"
-                        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Essence · SKU RCH45Q1A" />
+                <TextView
+                    android:id="@+id/tvBrandSku"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:textColor="#2D332F"
+                    android:textSize="16sp"
+                    tools:text="Brand · SKU" />
 
-                    <!-- Category & tags row -->
-                    <TextView
-                        android:id="@+id/tvCategory"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:textSize="11sp"
-                        android:textColor="#E6FFFFFF"
-                        android:fontFamily="sans-serif"
-                        app:layout_constraintTop_toBottomOf="@id/tvBrandSku"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Category · Beauty  •  Tags · mascara, lashes" />
-
-                    <TextView
-                        android:id="@+id/tvTags"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:textSize="11sp"
-                        android:textColor="#E6FFFFFF"
-                        android:fontFamily="sans-serif"
-                        app:layout_constraintTop_toBottomOf="@id/tvCategory"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Tags · beauty, mascara" />
-
-                    <!-- Price row -->
-                    <LinearLayout
-                        android:id="@+id/priceRow"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        app:layout_constraintTop_toBottomOf="@id/tvCategory"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
-
-                        <TextView
-                            android:id="@+id/tvPrice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:textColor="#F1C40F"
-                            android:fontFamily="@font/open_sans_bold"
-                            tools:text="$9.99" />
-
-                        <TextView
-                            android:id="@+id/tvDiscount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:textSize="12sp"
-                            android:textColor="#D1D5DB"
-                            tools:text="(-7.17%)" />
-                    </LinearLayout>
-
-                    <!-- Rating & stock row -->
-                    <TextView
-                        android:id="@+id/tvRating"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textSize="12sp"
-                        android:textColor="#E6FFFFFF"
-                        android:fontFamily="sans-serif"
-                        app:layout_constraintTop_toBottomOf="@id/priceRow"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Rating 4.9 · 120 reviews" />
-
-                    <TextView
-                        android:id="@+id/tvStockAvailability"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textSize="12sp"
-                        android:textColor="#E6FFFFFF"
-                        android:fontFamily="sans-serif"
-                        app:layout_constraintTop_toBottomOf="@id/tvRating"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Stock 5 · Low availability" />
-
-                    <TextView
-                        android:id="@+id/tvMOQ"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textSize="11sp"
-                        android:textColor="#D1D5DB"
-                        app:layout_constraintTop_toBottomOf="@id/tvStockAvailability"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Minimum order · 24 units" />
-
-                    <!-- Description -->
-                    <TextView
-                        android:id="@+id/tvDescription"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:textSize="12sp"
-                        android:textColor="#D1D5DB"
-                        android:lineSpacingExtra="2dp"
-                        android:maxLines="5"
-                        android:ellipsize="end"
-                        app:layout_constraintTop_toBottomOf="@id/tvMOQ"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="The Essence Mascara Lash Princess delivers dramatic volume and length with a single coat, in a feather‑light, clump‑free formula." />
-
-                    <!-- Specs group -->
-                    <TextView
-                        android:id="@+id/tvDimensions"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:textSize="11sp"
-                        android:textColor="#E6FFFFFF"
-                        app:layout_constraintTop_toBottomOf="@id/tvDescription"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="23.17 × 14.43 × 28.01 cm · 2 g" />
-
-                    <TextView
-                        android:id="@+id/tvWarranty"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textSize="11sp"
-                        android:textColor="#E6FFFFFF"
-                        app:layout_constraintTop_toBottomOf="@id/tvDimensions"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Warranty · 1 month" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tvShipping"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textSize="11sp"
-                        android:textColor="#E6FFFFFF"
-                        app:layout_constraintTop_toBottomOf="@id/tvWarranty"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Ships in · up to 1 month" />
-
-                    <TextView
-                        android:id="@+id/tvReturnPolicy"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textSize="11sp"
-                        android:textColor="#E6FFFFFF"
-                        app:layout_constraintTop_toBottomOf="@id/tvShipping"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Returns · 30 days" />
-
-                    <TextView
-                        android:id="@+id/tvMetadata"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textSize="10sp"
-                        android:textColor="#9CA3AF"
-                        app:layout_constraintTop_toBottomOf="@id/tvReturnPolicy"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Created 2024‑05‑23 · Barcode 9164035109868" />
-
-                    <!-- Reviews -->
-                    <TextView
-                        android:id="@+id/tvReviewHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="Reviews"
+                        android:background="@drawable/bg_fresh_chip"
+                        android:paddingStart="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="10dp"
+                        android:textColor="#075D3B"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"
-                        app:layout_constraintTop_toBottomOf="@id/tvMetadata"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        tools:text="Ships in 1 month" />
 
                     <TextView
-                        android:id="@+id/tvReview1"
-                        android:layout_width="0dp"
+                        android:id="@+id/tvStockAvailability"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textSize="11sp"
-                        android:textColor="#D1D5DB"
-                        app:layout_constraintTop_toBottomOf="@id/tvReviewHeader"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="John · ★★☆☆☆ · Very unhappy with my purchase." />
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/bg_fresh_soft_chip"
+                        android:paddingStart="16dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="10dp"
+                        android:textColor="#1A241E"
+                        android:textSize="14sp"
+                        tools:text="98% in stock" />
+                </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvReview2"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:textSize="11sp"
-                        android:textColor="#D1D5DB"
-                        app:layout_constraintTop_toBottomOf="@id/tvReview1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:text="Nolan · ★★☆☆☆ · Not as described." />
+                        android:layout_height="150dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_fresh_card"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                    <TextView
-                        android:id="@+id/tvReview3"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="RATING"
+                            android:textColor="#101612"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:textColor="#075D3B"
+                            android:textSize="34sp"
+                            android:textStyle="bold"
+                            tools:text="4.8 / 5" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dp"
-                        android:textSize="11sp"
-                        android:textColor="#D1D5DB"
-                        app:layout_constraintTop_toBottomOf="@id/tvReview2"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        tools:text="Scarlett · ★★★★★ · Extremely satisfied." />
+                        android:layout_height="150dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_fresh_card"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ORDER"
+                            android:textColor="#101612"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/tvMOQ"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="14dp"
+                            android:gravity="center"
+                            android:textColor="#075D3B"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:text="Minimum 24" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Why users trust this product"
+                    android:textColor="#101612"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/open_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_fresh_chip"
+                    android:lineSpacingExtra="4dp"
+                    android:padding="20dp"
+                    android:textColor="#202A24"
+                    android:textSize="16sp"
+                    tools:text="Sourced directly from certified organic farmers." />
+
+                <TextView
+                    android:id="@+id/tvCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:padding="16dp"
+                    android:textColor="#075D3B"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    tools:text="Category: groceries" />
+
+                <TextView
+                    android:id="@+id/tvTags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:padding="16dp"
+                    android:textColor="#202A24"
+                    android:textSize="15sp"
+                    tools:text="Tags: beauty, mascara" />
+
+                <TextView
+                    android:id="@+id/tvDimensions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:padding="16dp"
+                    android:textColor="#202A24"
+                    android:textSize="15sp"
+                    tools:text="Dimensions and weight" />
+
+                <TextView
+                    android:id="@+id/tvWarranty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:padding="16dp"
+                    android:textColor="#202A24"
+                    android:textSize="15sp"
+                    tools:text="Warranty" />
+
+                <TextView
+                    android:id="@+id/tvReturnPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:padding="16dp"
+                    android:textColor="#202A24"
+                    android:textSize="15sp"
+                    tools:text="Return policy" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="24dp"
+                    android:background="#DDE7E2" />
+
+                <TextView
+                    android:id="@+id/tvMetadata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:textColor="#202A24"
+                    android:textSize="14sp"
+                    tools:text="Created At: ... | Barcode: ..." />
+
+                <TextView
+                    android:id="@+id/tvReviewHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Reviews"
+                    android:textColor="#101612"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/open_sans_bold" />
+
+                <TextView
+                    android:id="@+id/tvReview1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:padding="16dp"
+                    android:textColor="#202A24"
+                    android:textSize="14sp"
+                    tools:text="John (4★): Great" />
+
+                <TextView
+                    android:id="@+id/tvReview2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:padding="16dp"
+                    android:textColor="#202A24"
+                    android:textSize="14sp"
+                    tools:text="Jane (5★): Perfect" />
+
+                <TextView
+                    android:id="@+id/tvReview3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:padding="16dp"
+                    android:textColor="#202A24"
+                    android:textSize="14sp"
+                    tools:text="Lee (3★): Good" />
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- Bottom CTA bar -->
         <LinearLayout
             android:id="@+id/bottomBar"
             android:layout_width="0dp"
-            android:layout_height="72dp"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="12dp"
-            android:paddingBottom="16dp"
+            android:layout_height="88dp"
+            android:background="@android:color/white"
             android:gravity="center_vertical"
-            android:background="@drawable/bg_luxury_glass"
+            android:orientation="horizontal"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <!-- Quantity controls (hidden initially) -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Price"
+                    android:textColor="#101612"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#075D3B"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:text="$3.50" />
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_btns"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="128dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="14dp"
+                android:background="@drawable/bg_fresh_soft_chip"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:visibility="gone">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMinus"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:text="-"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/white"
-                    app:backgroundTint="#33F1C40F"
-                    app:cornerRadius="12dp" />
+                    android:layout_width="38dp"
+                    android:layout_height="42dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="−"
+                    android:textColor="#075D3B"
+                    android:textSize="20sp"
+                    app:backgroundTint="#00000000" />
 
                 <TextView
                     android:id="@+id/tvQuantity"
-                    android:layout_width="40dp"
+                    android:layout_width="42dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
                     android:gravity="center"
                     android:text="1"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold" />
+                    android:textColor="#101612"
+                    android:textSize="20sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPlus"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="38dp"
+                    android:layout_height="42dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="+"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/white"
-                    app:backgroundTint="#33F1C40F"
-                    app:cornerRadius="12dp" />
+                    android:textColor="#075D3B"
+                    android:textSize="20sp"
+                    app:backgroundTint="#00000000" />
             </LinearLayout>
 
-            <!-- Primary CTA -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAdd"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_width="156dp"
+                android:layout_height="58dp"
                 android:text="Add to Cart"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:letterSpacing="0.05"
-                app:backgroundTint="#F1C40F"
-                app:cornerRadius="24dp"
-                app:rippleColor="#33FFFFFF" />
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:backgroundTint="#075D3B"
+                app:cornerRadius="26dp"
+                app:icon="@drawable/ic_cart"
+                app:iconTint="@android:color/white" />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

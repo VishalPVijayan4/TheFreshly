@@ -7,32 +7,40 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_luxury_gradient">
+        android:background="@drawable/bg_fresh_app">
 
-        <!-- Back Button -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginTop="18dp"
+            android:backgroundTint="#FFFFFF"
+            android:contentDescription="Back"
+            android:elevation="4dp"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="22dp"
             app:icon="@drawable/ic_arrow_back"
-            app:iconTint="@android:color/white"
-            app:strokeColor="#33FFFFFF"
-            app:strokeWidth="1dp"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="#075D3B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:rippleColor="#66FFFFFF" />
+            app:rippleColor="#228AF3B8" />
 
-        <!-- Settings Content -->
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/settingsScroll"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="104dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,9 +49,70 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="18dp">
 
-                <!-- About Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_fresh_card"
+                    android:elevation="4dp"
+                    android:orientation="vertical"
+                    android:padding="22dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Settings"
+                        android:textColor="#101612"
+                        android:textSize="28sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Manage Freshly help, privacy and account actions in one place."
+                        android:textColor="#6F7772"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/bg_fresh_chip"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_badge_check"
+                            app:tint="#075D3B" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="Fresh support and policy details are always available."
+                            android:textColor="#075D3B"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="General"
+                    android:textColor="#101612"
+                    android:textSize="18sp" />
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardAbout"
                     android:layout_width="match_parent"
@@ -51,54 +120,75 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardCornerRadius="16dp"
-                    app:strokeColor="#66FFFFFF"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="3dp"
+                    app:rippleColor="#118AF3B8"
+                    app:strokeColor="#E3EEE8"
                     app:strokeWidth="1dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp">
+                        android:minHeight="76dp"
+                        android:padding="18dp">
 
-                        <ImageView
-                            android:id="@+id/ivAboutIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_expand_right"
-                            app:tint="#F1C40F"
+                        <FrameLayout
+                            android:id="@+id/ivAboutIconBg"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_fresh_state_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivAboutIcon"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_badge_check"
+                                app:tint="#075D3B" />
+                        </FrameLayout>
 
                         <TextView
                             android:id="@+id/tvAboutTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="About"
-                            android:textColor="@android:color/white"
+                            android:layout_marginStart="14dp"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:text="About Freshly"
+                            android:textColor="#101612"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:fontFamily="@font/open_sans_medium"
-                            app:layout_constraintStart_toEndOf="@id/ivAboutIcon"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/ivChevronAbout" />
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronAbout"
+                            app:layout_constraintStart_toEndOf="@id/ivAboutIconBg"
+                            app:layout_constraintTop_toTopOf="@id/ivAboutIconBg" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Version, mission and contact details"
+                            android:textColor="#6F7772"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronAbout"
+                            app:layout_constraintStart_toEndOf="@id/ivAboutIconBg"
+                            app:layout_constraintTop_toBottomOf="@id/tvAboutTitle" />
 
                         <ImageView
                             android:id="@+id/ivChevronAbout"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/ic_expand_right"
-                            app:tint="#E6FFFFFF"
+                            android:src="@drawable/ic_arrow_forward_fresh"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
-
+                            app:tint="#075D3B" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Privacy Policy Section -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardPrivacy"
                     android:layout_width="match_parent"
@@ -106,54 +196,75 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardCornerRadius="16dp"
-                    app:strokeColor="#66FFFFFF"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="3dp"
+                    app:rippleColor="#118AF3B8"
+                    app:strokeColor="#E3EEE8"
                     app:strokeWidth="1dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp">
+                        android:minHeight="76dp"
+                        android:padding="18dp">
 
-                        <ImageView
-                            android:id="@+id/ivPrivacyIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_expand_right"
-                            app:tint="#F1C40F"
+                        <FrameLayout
+                            android:id="@+id/ivPrivacyIconBg"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_fresh_state_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivPrivacyIcon"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_shield_check"
+                                app:tint="#075D3B" />
+                        </FrameLayout>
 
                         <TextView
                             android:id="@+id/tvPrivacyTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="14dp"
+                            android:fontFamily="@font/open_sans_medium"
                             android:text="Privacy Policy"
-                            android:textColor="@android:color/white"
+                            android:textColor="#101612"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                             android:fontFamily="@font/open_sans_medium"
-                            app:layout_constraintStart_toEndOf="@id/ivPrivacyIcon"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/ivChevronPrivacy" />
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronPrivacy"
+                            app:layout_constraintStart_toEndOf="@id/ivPrivacyIconBg"
+                            app:layout_constraintTop_toTopOf="@id/ivPrivacyIconBg" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Data usage, permissions and protection"
+                            android:textColor="#6F7772"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronPrivacy"
+                            app:layout_constraintStart_toEndOf="@id/ivPrivacyIconBg"
+                            app:layout_constraintTop_toBottomOf="@id/tvPrivacyTitle" />
 
                         <ImageView
                             android:id="@+id/ivChevronPrivacy"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/ic_expand_right"
-                            app:tint="#E6FFFFFF"
+                            android:src="@drawable/ic_arrow_forward_fresh"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
-
+                            app:tint="#075D3B" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Contact Support Section -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardSupport"
                     android:layout_width="match_parent"
@@ -161,54 +272,85 @@
                     android:layout_marginBottom="12dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardCornerRadius="16dp"
-                    app:strokeColor="#66FFFFFF"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="3dp"
+                    app:rippleColor="#118AF3B8"
+                    app:strokeColor="#E3EEE8"
                     app:strokeWidth="1dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp">
+                        android:minHeight="76dp"
+                        android:padding="18dp">
 
-                        <ImageView
-                            android:id="@+id/ivSupportIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_expand_right"
-                            app:tint="#F1C40F"
+                        <FrameLayout
+                            android:id="@+id/ivSupportIconBg"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_fresh_state_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivSupportIcon"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_receipt"
+                                app:tint="#075D3B" />
+                        </FrameLayout>
 
                         <TextView
                             android:id="@+id/tvSupportTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="14dp"
+                            android:fontFamily="@font/open_sans_medium"
                             android:text="Contact Support"
-                            android:textColor="@android:color/white"
+                            android:textColor="#101612"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                             android:fontFamily="@font/open_sans_medium"
-                            app:layout_constraintStart_toEndOf="@id/ivSupportIcon"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/ivChevronSupport" />
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronSupport"
+                            app:layout_constraintStart_toEndOf="@id/ivSupportIconBg"
+                            app:layout_constraintTop_toTopOf="@id/ivSupportIconBg" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Chat with Freshly care"
+                            android:textColor="#6F7772"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronSupport"
+                            app:layout_constraintStart_toEndOf="@id/ivSupportIconBg"
+                            app:layout_constraintTop_toBottomOf="@id/tvSupportTitle" />
 
                         <ImageView
                             android:id="@+id/ivChevronSupport"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/ic_expand_right"
-                            app:tint="#E6FFFFFF"
+                            android:src="@drawable/ic_arrow_forward_fresh"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
-
+                            app:tint="#075D3B" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Logout Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Account"
+                    android:textColor="#101612"
+                    android:textSize="18sp" />
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardLogout"
                     android:layout_width="match_parent"
@@ -216,55 +358,64 @@
                     android:layout_marginBottom="24dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardCornerRadius="16dp"
-                    app:strokeColor="#FF6B6B"
-                    app:strokeWidth="1.5dp">
+                    app:cardBackgroundColor="#FFF7F7"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="2dp"
+                    app:rippleColor="#22FF6B6B"
+                    app:strokeColor="#FFD6D6"
+                    app:strokeWidth="1dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp">
+                        android:minHeight="76dp"
+                        android:padding="18dp">
 
-                        <ImageView
-                            android:id="@+id/ivLogoutIcon"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_expand_right"
-                            app:tint="#FF6B6B"
+                        <FrameLayout
+                            android:id="@+id/ivLogoutIconBg"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_logout_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivLogoutIcon"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_arrow_forward_fresh"
+                                app:tint="#D94242" />
+                        </FrameLayout>
 
                         <TextView
                             android:id="@+id/tvLogoutTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="14dp"
+                            android:fontFamily="@font/open_sans_medium"
                             android:text="Logout"
-                            android:textColor="#FF6B6B"
+                            android:textColor="#D94242"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                             android:fontFamily="@font/open_sans_medium"
-                            app:layout_constraintStart_toEndOf="@id/ivLogoutIcon"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/ivChevronLogout" />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronLogout"
+                            app:layout_constraintStart_toEndOf="@id/ivLogoutIconBg"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/ivChevronLogout"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/ic_expand_right"
-                            app:tint="#FF6B6B"
+                            android:src="@drawable/ic_arrow_forward_fresh"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
-
+                            app:tint="#D94242" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
-
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

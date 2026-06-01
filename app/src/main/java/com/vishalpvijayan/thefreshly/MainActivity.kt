@@ -187,6 +187,7 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
                         R.id.mapFragment,
                         R.id.payment,
                         R.id.cartFragment,
+                        R.id.productDetails,
                         R.id.SettingsFragment,
                         R.id.SupportChatFragment
                     )
@@ -218,6 +219,7 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
             R.id.mapFragment,
             R.id.payment,
             R.id.cartFragment,
+            R.id.productDetails,
             R.id.SupportChatFragment,
             R.id.orderSuccessFragment// Don't show on cart screen itself
         )
@@ -251,7 +253,7 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
     }
 
     override fun onExternalWalletSelected(p0: String?, p1: PaymentData?) {
-        TODO("Not yet implemented")
+        Log.d("MainActivity", "External wallet selected: $p0")
     }
 
 }

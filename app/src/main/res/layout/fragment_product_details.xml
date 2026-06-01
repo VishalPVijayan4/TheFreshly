@@ -30,7 +30,7 @@
                     android:id="@+id/tvDetailsBrand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Freshly"
+                    android:text="Product details"
                     android:textColor="#075D3B"
                     android:textSize="28sp"
                     android:textStyle="bold"
@@ -348,24 +348,24 @@
 
             <LinearLayout
                 android:id="@+id/ll_btns"
-                android:layout_width="128dp"
-                android:layout_height="52dp"
+                android:layout_width="136dp"
+                android:layout_height="54dp"
                 android:layout_marginEnd="14dp"
                 android:background="@drawable/bg_fresh_soft_chip"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMinus"
-                    android:layout_width="38dp"
-                    android:layout_height="42dp"
+                    android:layout_width="42dp"
+                    android:layout_height="44dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="−"
                     android:textColor="#075D3B"
                     android:textSize="20sp"
-                    app:backgroundTint="#00000000" />
+                    app:backgroundTint="#DDF9EA" />
 
                 <TextView
                     android:id="@+id/tvQuantity"
@@ -378,14 +378,14 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPlus"
-                    android:layout_width="38dp"
-                    android:layout_height="42dp"
+                    android:layout_width="42dp"
+                    android:layout_height="44dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="+"
                     android:textColor="#075D3B"
                     android:textSize="20sp"
-                    app:backgroundTint="#00000000" />
+                    app:backgroundTint="#DDF9EA" />
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton

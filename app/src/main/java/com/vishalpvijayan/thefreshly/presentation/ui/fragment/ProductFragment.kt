@@ -50,10 +50,6 @@ class ProductFragment : Fragment() {
         observeCart()
         observeCartCount()
 
-        binding.btnPay.setOnClickListener {
-            Toast.makeText(requireContext(), "Proceeding to cart.", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_product_to_cartFragment)
-        }
 
         binding.tvCartBadge.setOnClickListener {
             findNavController().navigate(R.id.action_product_to_cartFragment)
@@ -140,8 +136,6 @@ class ProductFragment : Fragment() {
             cartViewModel.totalCartCount.collectLatest { count ->
                 binding.tvCartBadge.text = if (count > 0) count.toString() else ""
                 binding.tvCartBadge.isVisible = count > 0
-                binding.btnPay.isVisible = count > 0
-                binding.btnPay.text = if (count > 0) "View cart ($count)" else "View cart"
             }
         }
     }

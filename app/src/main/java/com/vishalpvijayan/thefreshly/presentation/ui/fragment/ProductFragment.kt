@@ -22,6 +22,7 @@ import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
 import com.vishalpvijayan.thefreshly.utils.SearchHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -33,7 +34,7 @@ class ProductFragment : Fragment() {
     private val cartViewModel: CartViewModel by activityViewModels()
 
     private lateinit var adapter: AllProductsAdapter
-    private var currentSearchQuery = ""
+    private val searchQuery = MutableStateFlow("")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,25 +102,8 @@ class ProductFragment : Fragment() {
                 lifecycleScope = lifecycleScope,
                 debounceTime = 300L
             ) { query ->
-                currentSearchQuery = query
-                applySearch(query)
-            }
-        }
-    }
-
-    private fun applySearch(query: String) {
-        lifecycleScope.launch {
-            productVM.products.collectLatest { pagingData ->
-                if (query.isEmpty()) {
-                    adapter.submitData(pagingData)
-                } else {
-                    val filtered = pagingData.filter { product ->
-                        product.title?.contains(query, ignoreCase = true) == true ||
-                                product.brand?.contains(query, ignoreCase = true) == true ||
-                                product.category?.contains(query, ignoreCase = true) == true
-                    }
-                    adapter.submitData(filtered)
-                }
+                searchQuery.value = query
+                adapter.refresh()
             }
         }
     }
@@ -127,9 +111,18 @@ class ProductFragment : Fragment() {
     private fun observeProducts() {
         lifecycleScope.launch {
             productVM.products.collectLatest { pagingData ->
-                if (currentSearchQuery.isEmpty()) {
-                    adapter.submitData(pagingData)
+                val query = searchQuery.value
+                val displayData = if (query.isBlank()) {
+                    pagingData
+                } else {
+                    pagingData.filter { product ->
+                        product.title?.contains(query, ignoreCase = true) == true ||
+                                product.brand?.contains(query, ignoreCase = true) == true ||
+                                product.category?.contains(query, ignoreCase = true) == true
+                    }
                 }
+
+                adapter.submitData(displayData)
             }
         }
     }

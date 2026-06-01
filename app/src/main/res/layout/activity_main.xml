@@ -10,96 +10,83 @@
         android:background="@drawable/bg_fresh_app"
         tools:context=".MainActivity">
 
-        <!-- FIXED Toolbar - Shows titles GUARANTEED -->
+        <!-- Fresh top bar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/custom_toolbar"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_margin="20dp"
-            android:background="@drawable/bg_luxury_glass"
-            android:elevation="12dp"
+            android:layout_height="90dp"
+            android:background="@drawable/bg_fresh_toolbar"
+            android:elevation="6dp"
+            android:paddingTop="12dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetEnd="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingStart="28dp"
+                android:paddingEnd="28dp">
 
-                <!-- Back Button -->
                 <ImageButton
                     android:id="@+id/ivBack"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@drawable/bg_luxury_icon"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="Back"
-                    android:padding="12dp"
+                    android:padding="8dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_back"
-                    app:tint="@android:color/white"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#101612" />
 
-                <!-- Title -->
                 <TextView
                     android:id="@+id/toolbarTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="12dp"
                     android:fontFamily="@font/open_sans_bold"
-                    android:text="@string/title"
-                    android:textColor="@android:color/white"
-                    android:textSize="22sp"
-                    android:letterSpacing="0.02"
                     android:gravity="start|center_vertical"
-                    tools:text="Luxury Collection"
+                    android:text="Freshly"
+                    android:textColor="#075D3B"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/threeDotButton"
                     app:layout_constraintStart_toEndOf="@id/ivBack"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Freshly" />
 
-                <!-- Subtitle -->
                 <TextView
                     android:id="@+id/toolbarSubTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="@string/sub_title"
-                    android:textColor="#E6FFFFFF"
-                    android:textSize="11sp"
-                    android:gravity="start"
-                    tools:text="Premium Selection"
-                    app:layout_constraintEnd_toEndOf="@id/toolbarTitle"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@id/toolbarTitle"
                     app:layout_constraintTop_toBottomOf="@id/toolbarTitle" />
 
-                <!-- Menu Button -->
                 <ImageButton
                     android:id="@+id/threeDotButton"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/bg_luxury_icon"
-                    android:contentDescription="Menu"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_profile_circle"
+                    android:contentDescription="Account"
                     android:padding="12dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/ic_notification"
-                    app:tint="@android:color/white"
+                    android:src="@drawable/ic_user"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#075D3B" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.Toolbar>
-
-
-
 
 
         <!-- Fragment Container -->
@@ -122,10 +109,12 @@
         <!-- Alternative: Gradient FAB Container -->
         <FrameLayout
             android:id="@+id/fabContainer"
-            android:layout_width="216dp"
-            android:layout_height="52dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/bg_fresh_pill_dark"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/bg_view_cart_button"
             android:elevation="12dp"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
@@ -150,9 +139,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/open_sans_bold"
+                android:letterSpacing="0.03"
                 android:text="View Cart"
                 android:textColor="@android:color/white"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
         </FrameLayout>
 

@@ -31,9 +31,12 @@ class CartAdapter(
         private val btnRemove: MaterialButton = view.findViewById(R.id.btnCartRemove)
 
         fun bind(item: CartItemEntity) {
+            val unitPrice = "$${"%.2f".format(item.price)}"
+            val lineTotal = item.price * item.quantity
+
             tvTitle.text = item.title
-            tvBrand.text = item.brand
-            tvPrice.text = "$${item.price} x ${item.quantity} = $${item.price * item.quantity}"
+            tvBrand.text = "${item.quantity} units • $unitPrice"
+            tvPrice.text = "$${"%.2f".format(lineTotal)}"
             tvQuantity.text = item.quantity.toString()
 
             imgProduct.load(item.thumbnail) {

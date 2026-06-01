@@ -33,7 +33,7 @@ class CartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCartBinding.inflate(inflater, container, false)
-        toolbarViewModel.setToolbarTitle("My Cart", "Review your items")
+        toolbarViewModel.setToolbarTitle("Freshly", "")
 
         setupAdapter()
         setupRecyclerView()
@@ -80,6 +80,7 @@ class CartFragment : Fragment() {
                 binding.emptyCartView.isVisible = items.isEmpty()
                 binding.rvCart.isVisible = items.isNotEmpty()
                 binding.btnCheckout.isEnabled = items.isNotEmpty()
+                binding.checkoutDock.isVisible = items.isNotEmpty()
             }
         }
     }
@@ -87,13 +88,20 @@ class CartFragment : Fragment() {
     private fun observeTotalPrice() {
         lifecycleScope.launch {
             cartViewModel.totalCartPrice.collectLatest { total ->
-                binding.tvTotalPrice.text = "Total: $${"%.2f".format(total)}"
+                val platformFee = if (total > 0.0) 0.50 else 0.0
+                val estimatedTaxes = if (total > 0.0) total * 0.07 else 0.0
+                val toPay = total + platformFee + estimatedTaxes
+
+                binding.tvItemsSubtotal.text = "$${"%.2f".format(total)}"
+                binding.tvTaxes.text = "$${"%.2f".format(estimatedTaxes)}"
+                binding.tvTotalPrice.text = "$${"%.2f".format(toPay)}"
+                binding.tvDockTotal.text = "$${"%.2f".format(toPay)} Total"
             }
         }
 
         lifecycleScope.launch {
             cartViewModel.totalCartCount.collectLatest { count ->
-                binding.tvItemCount.text = "$count items"
+                binding.tvItemCount.text = "$count ITEMS"
             }
         }
     }

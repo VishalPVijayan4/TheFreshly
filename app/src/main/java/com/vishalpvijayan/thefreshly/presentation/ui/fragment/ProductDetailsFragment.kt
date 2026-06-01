@@ -32,7 +32,7 @@ class ProductDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
-        toolbarViewModel.setToolbarTitle("Product Details", "Details of the selected product")
+        toolbarViewModel.setToolbarTitle("Freshly", "")
 
         val productId = arguments?.getInt("id") ?: 1
         viewModel.loadProductDetail(productId)

@@ -32,7 +32,7 @@ class ProductDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
-        toolbarViewModel.setToolbarTitle("Freshly", "")
+        toolbarViewModel.setToolbarTitle("Product details", "")
 
         val productId = arguments?.getInt("id") ?: 1
         viewModel.loadProductDetail(productId)
@@ -79,17 +79,14 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun updateCartUI(quantity: Int?) {
-        if (quantity != null && quantity > 0) {
-            binding.btnAdd.isVisible = false
-            binding.llBtns.isVisible = true
-            binding.tvQuantity.text = quantity.toString()
-        } else {
-            binding.btnAdd.isVisible = true
-            binding.llBtns.isVisible = false
-        }
+        binding.llBtns.isVisible = true
+        binding.tvQuantity.text = (quantity ?: 1).toString()
+        binding.btnAdd.isVisible = false
     }
 
     private fun bindProduct(product: ProductDetail) {
+        toolbarViewModel.setToolbarTitle(product.title, product.category)
+        binding.tvDetailsBrand.text = product.title
         binding.tvTitle.text = product.title
         binding.tvBrandSku.text = "${product.brand} • SKU ${product.sku}"
         binding.tvCategory.text = "Category • ${product.category}"

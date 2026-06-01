@@ -7,56 +7,74 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_luxury_gradient">
+        android:background="@drawable/bg_fresh_app">
 
-        <!-- Luxury Glass Payment Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardView2"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/paymentScroll"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="20dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:cardCornerRadius="24dp"
-            app:strokeColor="#33FFFFFF"
-            app:strokeWidth="1dp"
-            app:layout_constraintBottom_toTopOf="@id/btnPay"
+            android:clipToPadding="false"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="112dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="24dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Secure checkout"
+                    android:textColor="#202A24"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Payment Details"
+                    android:textColor="#075D3B"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cardView2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:elevation="3dp"
+                    android:padding="20dp">
 
-                    <!-- Payment Details Header -->
                     <TextView
                         android:id="@+id/txt1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Payment Details"
-                        android:textColor="@android:color/white"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Bill summary"
+                        android:textColor="#101612"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <!-- Product Total -->
                     <TextView
                         android:id="@+id/txt2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
+                        android:layout_marginTop="22dp"
                         android:text="Product total"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="14sp"
+                        android:textColor="#56615B"
+                        android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt1" />
 
@@ -64,23 +82,21 @@
                         android:id="@+id/txt3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="$5600"
-                        android:textColor="@android:color/white"
+                        android:text="₹0.00"
+                        android:textColor="#101612"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt1" />
+                        app:layout_constraintBaseline_toBaselineOf="@id/txt2"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                    <!-- CGST -->
                     <TextView
                         android:id="@+id/txt4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="CGST"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="14sp"
+                        android:textColor="#56615B"
+                        android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt2" />
 
@@ -88,22 +104,20 @@
                         android:id="@+id/txt5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="$40"
-                        android:textColor="@android:color/white"
+                        android:text="₹0.00"
+                        android:textColor="#101612"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt3" />
+                        app:layout_constraintBaseline_toBaselineOf="@id/txt4"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                    <!-- SGST -->
                     <TextView
                         android:id="@+id/txt6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="SGST"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="14sp"
+                        android:textColor="#56615B"
+                        android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt4" />
 
@@ -111,22 +125,20 @@
                         android:id="@+id/txt7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="$40"
-                        android:textColor="@android:color/white"
+                        android:text="₹0.00"
+                        android:textColor="#101612"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt5" />
+                        app:layout_constraintBaseline_toBaselineOf="@id/txt6"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                    <!-- Delivery Charges -->
                     <TextView
                         android:id="@+id/txt8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Delivery Charges"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:text="Delivery charges"
+                        android:textColor="#56615B"
+                        android:textSize="15sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txt6" />
 
@@ -134,198 +146,160 @@
                         android:id="@+id/txt9"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="$40"
-                        android:textColor="@android:color/white"
+                        android:text="₹0.00"
+                        android:textColor="#101612"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt7" />
+                        app:layout_constraintBaseline_toBaselineOf="@id/txt8"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                    <!-- Total Divider -->
                     <View
-                        android:id="@+id/divider"
+                        android:id="@+id/summaryDivider"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="#66FFFFFF"
+                        android:layout_marginTop="18dp"
+                        android:background="#DDE7E2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txt9" />
+                        app:layout_constraintTop_toBottomOf="@id/txt8" />
 
-                    <!-- Total Amount -->
                     <TextView
-                        android:id="@+id/txttotal"
+                        android:id="@+id/txt10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="Total"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp"
+                        android:layout_marginTop="18dp"
+                        android:text="Grand total"
+                        android:textColor="#101612"
+                        android:textSize="17sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/divider" />
+                        app:layout_constraintTop_toBottomOf="@id/summaryDivider" />
 
                     <TextView
                         android:id="@+id/txttotalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="$5680"
-                        android:textColor="#F1C40F"
-                        android:textSize="24sp"
+                        android:text="₹0.00"
+                        android:textColor="#075D3B"
+                        android:textSize="22sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/divider" />
+                        app:layout_constraintBaseline_toBaselineOf="@id/txt10"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!-- Delivery Address Header -->
-                    <TextView
-                        android:id="@+id/txtAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:text="Delivery Address"
-                        android:textColor="@android:color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txttotal" />
-
-                    <!-- Change Address Button -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnAddAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="Change Address"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="14sp"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        app:strokeColor="#E6FFFFFF"
-                        app:strokeWidth="1dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtAddress" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:elevation="3dp"
+                    android:padding="20dp">
 
                     <TextView
                         android:id="@+id/txtAddressDefault"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="@string/default_address"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/btnAddAddress" />
-
-                    <!-- Delivery Instructions Header -->
-                    <TextView
-                        android:id="@+id/txtDeliveryInstructions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:text="Delivery Instructions"
-                        android:textColor="@android:color/white"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtAddressDefault" />
-
-                    <!-- Instructions Input -->
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputEmailLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        app:boxStrokeColor="#33FFFFFF"
-                        app:boxBackgroundMode="outline"
-                        app:boxCornerRadiusTopStart="12dp"
-                        app:boxCornerRadiusTopEnd="12dp"
-                        app:boxCornerRadiusBottomStart="12dp"
-                        app:boxCornerRadiusBottomEnd="12dp"
-                        app:hintTextColor="#E6FFFFFF"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtDeliveryInstructions">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/inputEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@android:color/white"
-                            android:textColorHint="#E6FFFFFF"
-                            android:textSize="16sp"
-                            android:hint="Instruction (if any)"
-                            android:inputType="text"
-                            android:maxLines="3" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- Submit Instructions Button -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSubmitInstruction"
-                        android:layout_width="wrap_content"
-                        android:layout_height="44dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Submit"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="14sp"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                        app:strokeColor="#E6FFFFFF"
-                        app:strokeWidth="1dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/inputEmailLayout" />
-
-                    <!-- Delivery Time Info -->
-                    <TextView
-                        android:id="@+id/txtDeliveryTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="Delivery in 10 minutes"
-                        android:textColor="#F1C40F"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Delivering to saved address"
+                        android:textColor="#101612"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/btnAddAddress"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/btnSubmitInstruction" />
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAddAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:text="Change"
+                        android:textAllCaps="false"
+                        android:textColor="#075D3B"
+                        app:backgroundTint="#DDF9EA"
+                        app:cornerRadius="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/txtActualAddress"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Enjoy the rain at that time"
-                        android:textColor="#E6FFFFFF"
-                        android:textSize="14sp"
+                        android:layout_marginTop="12dp"
+                        android:lineSpacingExtra="3dp"
+                        android:text="Select an address to keep your fresh order moving."
+                        android:textColor="#56615B"
+                        android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtDeliveryTime" />
-
+                        app:layout_constraintTop_toBottomOf="@id/txtAddressDefault" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.core.widget.NestedScrollView>
-        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Luxury Pay Button -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_fresh_card"
+                    android:elevation="3dp"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Delivery instructions"
+                        android:textColor="#101612"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/inputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="14dp"
+                        android:background="@drawable/bg_fresh_search"
+                        android:hint="E.g. Leave at reception"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:singleLine="true"
+                        android:textColor="#122018"
+                        android:textColorHint="#8A938E"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSubmitInstruction"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="14dp"
+                        android:text="Save instructions"
+                        android:textAllCaps="false"
+                        android:textColor="#075D3B"
+                        android:textStyle="bold"
+                        app:backgroundTint="#DDF9EA"
+                        app:cornerRadius="24dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPay"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="20dp"
-            android:text="Proceed to Pay"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:letterSpacing="0.05"
-            app:backgroundTint="#F1C40F"
-            app:cornerRadius="24dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="18dp"
+            android:text="Pay securely"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:backgroundTint="#075D3B"
+            app:cornerRadius="26dp"
+            app:icon="@drawable/ic_payment"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
+            app:iconTint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:rippleColor="#33FFFFFF" />
-
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

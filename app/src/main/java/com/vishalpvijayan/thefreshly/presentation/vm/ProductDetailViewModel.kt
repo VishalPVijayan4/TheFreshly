@@ -63,7 +63,11 @@ class ProductDetailViewModel @Inject constructor(
     fun incrementQuantity() {
         viewModelScope.launch {
             _product.value?.let { product ->
-                cartRepository.incrementQuantity(product.id)
+                if (_cartItem.value == null) {
+                    addToCart()
+                } else {
+                    cartRepository.incrementQuantity(product.id)
+                }
             }
         }
     }

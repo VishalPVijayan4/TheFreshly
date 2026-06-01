@@ -83,21 +83,9 @@ class AllProductsAdapter(
             updateCartUI(quantity)
 
             // Cart button listeners
-            btnAddToCart?.setOnClickListener {
-                it.isClickable = false
-                onAddToCart(item)
-                it.postDelayed({ it.isClickable = true }, 500)
-            }
-            btnIncrease?.setOnClickListener {
-                it.isClickable = false
-                onIncrement(item)
-                it.postDelayed({ it.isClickable = true }, 300)
-            }
-            btnDecrease?.setOnClickListener {
-                it.isClickable = false
-                onDecrement(item)
-                it.postDelayed({ it.isClickable = true }, 300)
-            }
+            btnAddToCart?.setOnClickListener { onAddToCart(item) }
+            btnIncrease?.setOnClickListener { onIncrement(item) }
+            btnDecrease?.setOnClickListener { onDecrement(item) }
         }
 
         private fun updateCartUI(quantity: Int?) {

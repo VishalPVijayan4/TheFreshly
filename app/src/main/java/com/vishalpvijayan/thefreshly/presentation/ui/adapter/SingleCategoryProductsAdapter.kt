@@ -38,12 +38,28 @@ class SingleCategoryProductsAdapter(
         private val tvQuantityCount: TextView? = view.findViewById(R.id.tvQuantityCount)
 
         fun bind(item: Products, position: Int) {
-            title.text = "\n${item.title}\n"
-            productTitle.text = item.brand
-            productActualprice.text = "Price \n$${item.price}"
-            productDiscountedprice.text = "Your Price \n$${item.price}"
-            productDiscountedpercentage.text = "Discount \n${item.discountPercentage}%"
-            shipment.text = "What's this product \n${item.description}"
+            val price = item.price ?: 0.0
+            val discount = item.discountPercentage ?: 0.0
+            val listPrice = if (discount > 0.0 && discount < 100.0) {
+                price / (1 - (discount / 100.0))
+            } else {
+                price
+            }
+
+            title.text = item.title.orEmpty()
+            productTitle.text = listOfNotNull(
+                item.brand?.takeIf { it.isNotBlank() },
+                item.category?.takeIf { it.isNotBlank() },
+                item.rating?.let { "$it★" }
+            ).joinToString(" · ")
+            productActualprice.text = "List $${String.format("%.2f", listPrice)} · ${item.stock ?: 0} in stock"
+            productDiscountedprice.text = "$${String.format("%.2f", price)}"
+            productDiscountedpercentage.text = "-${String.format("%.1f", discount)}%"
+            shipment.text = listOf(
+                item.shippingInformation.orEmpty(),
+                item.warrantyInformation.orEmpty(),
+                item.returnPolicy.orEmpty()
+            ).filter { it.isNotBlank() }.joinToString(" · ")
 
             itemView.setOnClickListener { onClick(item) }
 
@@ -56,21 +72,9 @@ class SingleCategoryProductsAdapter(
             val quantity = getCartQuantity(item.id ?: 0)
             updateCartUI(quantity)
 
-            btnAddToCart?.setOnClickListener {
-                it.isClickable = false
-                onAddToCart(item)
-                it.postDelayed({ it.isClickable = true }, 500)
-            }
-            btnIncrease?.setOnClickListener {
-                it.isClickable = false
-                onIncrement(item)
-                it.postDelayed({ it.isClickable = true }, 300)
-            }
-            btnDecrease?.setOnClickListener {
-                it.isClickable = false
-                onDecrement(item)
-                it.postDelayed({ it.isClickable = true }, 300)
-            }
+            btnAddToCart?.setOnClickListener { onAddToCart(item) }
+            btnIncrease?.setOnClickListener { onIncrement(item) }
+            btnDecrease?.setOnClickListener { onDecrement(item) }
         }
 
         private fun updateCartUI(quantity: Int?) {

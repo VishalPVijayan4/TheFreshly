@@ -102,54 +102,7 @@
             app:layout_constraintTop_toBottomOf="@id/custom_toolbar"
             app:navGraph="@navigation/nav_graph" />
 
-        <!-- Luxury Gold FAB -->
-        <!-- Alternative: Gradient FAB Container -->
-        <!-- Luxury Gold FAB with Badge -->
-        <!-- Luxury Gold FAB -->
-        <!-- Alternative: Gradient FAB Container -->
-        <FrameLayout
-            android:id="@+id/fabContainer"
-            android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginEnd="28dp"
-            android:layout_marginBottom="18dp"
-            android:background="@drawable/bg_view_cart_button"
-            android:elevation="12dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/cart"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_gravity="start|center_vertical"
-                android:contentDescription="@string/category_image_desc"
-                android:src="@drawable/ic_cart"
-                app:backgroundTint="@android:color/transparent"
-                app:borderWidth="0dp"
-                app:elevation="0dp"
-                app:fabCustomSize="52dp"
-                app:tint="@android:color/white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/open_sans_bold"
-                android:letterSpacing="0.03"
-                android:text="View Cart"
-                android:textColor="@android:color/white"
-                android:textSize="17sp" />
-
-        </FrameLayout>
-
-
-
-
-        <!-- Luxury Glass Bottom Navigation -->
+        <!-- Bottom navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav_view"
             android:layout_width="0dp"
@@ -159,7 +112,7 @@
             app:itemActiveIndicatorStyle="@style/FreshBottomNavIndicator"
             app:itemIconSize="24dp"
             app:itemIconTint="@color/bottom_nav_fresh_selector"
-            app:itemRippleColor="#228AF3B8"
+            app:itemRippleColor="@android:color/transparent"
             app:itemTextColor="@color/bottom_nav_fresh_selector"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"

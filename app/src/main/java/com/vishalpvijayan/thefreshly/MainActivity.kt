@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -15,8 +14,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.razorpay.PaymentData
 import com.vishalpvijayan.thefreshly.databinding.ActivityMainBinding
-import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
-import com.vishalpvijayan.thefreshly.presentation.vm.LoginVM
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -27,8 +24,6 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
 
     private lateinit var binding: ActivityMainBinding
     private val toolbarViewModel: ToolbarViewModel by viewModels()
-    private val loginViewModel: LoginVM by viewModels()
-    private val cartViewModel: CartViewModel by viewModels()
 
     private var currentDestinationId: Int = 0
 
@@ -53,16 +48,6 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
 
         setSupportActionBar(binding.customToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        // Observe cart count for FAB visibility
-        observeCartCount()
-
-        // Setup cart FAB click listener
-        val openCart = View.OnClickListener {
-            navController.navigate(R.id.cartFragment)
-        }
-        binding.cart.setOnClickListener(openCart)
-        binding.fabContainer.setOnClickListener(openCart)
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -91,8 +76,6 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             currentDestinationId = destination.id
-            updateFabVisibility()
-
             when (destination.id) {
                 R.id.SettingsFragment -> {
                     binding.bottomNavView.visibility = View.VISIBLE
@@ -166,69 +149,6 @@ class MainActivity : AppCompatActivity(),com.razorpay.PaymentResultWithDataListe
                 }
             }
         }
-    }
-
-    private fun observeCartCount() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                cartViewModel.totalCartCount.collect { count ->
-                    Log.d("MainActivity", "Cart count updated: $count")
-
-                    // Access the parent FrameLayout
-                    val fabParent = binding.cart.parent as? View
-
-                    // Screens where FAB should be hidden
-                    val hideOnScreens = setOf(
-                        R.id.onboarding,
-                        R.id.splash,
-                        R.id.login,
-                        R.id.forgotpassword,
-                        R.id.createccount,
-                        R.id.mapFragment,
-                        R.id.payment,
-                        R.id.cartFragment,
-                        R.id.productDetails,
-                        R.id.SettingsFragment,
-                        R.id.SupportChatFragment
-                    )
-
-                    val shouldShow = count > 0 && currentDestinationId !in hideOnScreens
-
-                    fabParent?.isVisible = shouldShow
-
-                    Log.d("MainActivity", "FAB should show: $shouldShow (count: $count, screen: $currentDestinationId)")
-                }
-            }
-        }
-    }
-
-
-
-
-
-    private fun updateFabVisibility() {
-        val cartCount = cartViewModel.totalCartCount.value
-
-        // Screens where FAB should NEVER show regardless of cart count
-        val hideOnScreens = setOf(
-            R.id.onboarding,
-            R.id.splash,
-            R.id.login,
-            R.id.forgotpassword,
-            R.id.createccount,
-            R.id.mapFragment,
-            R.id.payment,
-            R.id.cartFragment,
-            R.id.productDetails,
-            R.id.SupportChatFragment,
-            R.id.orderSuccessFragment// Don't show on cart screen itself
-        )
-
-        val shouldShow = cartCount > 0 && currentDestinationId !in hideOnScreens
-
-        Log.d("MainActivity", "FAB visibility - count: $cartCount, destination: $currentDestinationId, shouldShow: $shouldShow")
-
-        binding.fabContainer.isVisible = shouldShow
     }
 
     fun startRazorpayPayment(options: org.json.JSONObject) {

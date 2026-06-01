@@ -40,6 +40,7 @@ class SettingsFragment : Fragment() {
 
         toolbarViewModel.setToolbarTitle("Settings", "Manage your account")
 
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         setupClickListeners()
     }
 

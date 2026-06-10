@@ -79,9 +79,10 @@ class ProductDetailsFragment : Fragment() {
     }
 
     private fun updateCartUI(quantity: Int?) {
-        binding.llBtns.isVisible = true
-        binding.tvQuantity.text = (quantity ?: 1).toString()
-        binding.btnAdd.isVisible = false
+        val isInCart = quantity != null && quantity > 0
+        binding.llBtns.isVisible = isInCart
+        binding.btnAdd.isVisible = !isInCart
+        binding.tvQuantity.text = quantity?.toString().orEmpty()
     }
 
     private fun bindProduct(product: ProductDetail) {

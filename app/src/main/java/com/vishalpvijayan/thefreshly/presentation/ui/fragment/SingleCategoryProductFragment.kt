@@ -58,10 +58,6 @@ class SingleCategoryProductFragment : Fragment() {
             findNavController().navigateSafely(R.id.action_single_product_from_Category_to_cartFragment)
         }
 
-        binding.btnPay.setOnClickListener {
-            findNavController().navigateSafely(R.id.action_single_product_from_Category_to_cartFragment)
-        }
-
         return binding.root
     }
 
@@ -144,8 +140,6 @@ class SingleCategoryProductFragment : Fragment() {
             cartViewModel.totalCartCount.collectLatest { count ->
                 binding.tvCartBadge.text = if (count > 0) count.toString() else ""
                 binding.tvCartBadge.isVisible = count > 0
-                binding.btnPay.isVisible = count > 0
-                binding.btnPay.text = if (count > 0) "View cart ($count)" else "View cart"
             }
         }
     }

@@ -6,46 +6,44 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="6dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/messageCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            app:cardBackgroundColor="@android:color/transparent"
-            app:cardCornerRadius="20dp"
-            app:strokeColor="#66FFFFFF"
-            app:strokeWidth="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_marginEnd="56dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="#DCEAE3"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/tvMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
                     android:fontFamily="@font/open_sans_medium"
-                    tools:text="This is a user message" />
+                    android:textColor="#18221C"
+                    android:textSize="14sp"
+                    tools:text="How can we help today?" />
 
                 <TextView
                     android:id="@+id/tvTimestamp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#E6FFFFFF"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#758079"
                     android:textSize="11sp"
-                    android:fontFamily="@font/open_sans_light"
                     tools:text="10:30 AM" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

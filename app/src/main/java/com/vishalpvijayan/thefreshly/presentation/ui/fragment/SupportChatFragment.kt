@@ -47,6 +47,7 @@ class SupportChatFragment : Fragment() {
         setupRecyclerView()
         observeMessages()
         setupMessageInput()
+        setupQuickTopics()
     }
 
     private fun setupRecyclerView() {
@@ -85,6 +86,19 @@ class SupportChatFragment : Fragment() {
                 false
             }
         }
+    }
+
+
+    private fun setupQuickTopics() {
+        binding.chipOrderHelp.setOnClickListener { sendQuickTopic("I need help with my order.") }
+        binding.chipDelivery.setOnClickListener { sendQuickTopic("I have a delivery question.") }
+        binding.chipRefund.setOnClickListener { sendQuickTopic("I need help with a refund.") }
+    }
+
+    private fun sendQuickTopic(message: String) {
+        binding.etMessage.setText(message)
+        binding.etMessage.setSelection(message.length)
+        sendMessage()
     }
 
     private fun sendMessage() {

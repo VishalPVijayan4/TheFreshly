@@ -44,6 +44,8 @@ class SupportRepositoryImpl @Inject constructor(
     }
 
     override suspend fun initializePredefinedMessages() {
+        if (dao.getMessageCount() > 0) return
+
         val predefinedMessages = listOf(
             SupportMessageEntity(
                 message = "Welcome to Freshly Support! How can we help you today?",

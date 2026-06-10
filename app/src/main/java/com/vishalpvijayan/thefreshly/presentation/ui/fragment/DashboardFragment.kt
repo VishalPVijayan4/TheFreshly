@@ -27,6 +27,7 @@ import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.UserDetailViewModel
 import com.vishalpvijayan.thefreshly.utils.ConstantStrings
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -69,7 +70,7 @@ class DashboardFragment : Fragment() {
                 putString("categoryName", categoryName)
             }
 
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 R.id.action_dashboard_to_single_product_from_Category,
                 bundle
             )
@@ -81,7 +82,7 @@ class DashboardFragment : Fragment() {
             val bundle = Bundle().apply {
                 product.id?.let { putInt("id", it) }
             }
-            findNavController().navigate(R.id.productDetails, bundle)
+            findNavController().navigateSafely(R.id.productDetails, bundle)
         }
 
         locationViewModel.startUpdates()
@@ -98,7 +99,7 @@ class DashboardFragment : Fragment() {
 
         binding.txtAddress.setOnClickListener {
             Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_dashboard_to_mapFragment)
+            findNavController().navigateSafely(R.id.action_dashboard_to_mapFragment)
         }
 
 
@@ -217,7 +218,7 @@ class DashboardFragment : Fragment() {
         dashBoardVm.loadCuratedProducts()
 
         binding.profilePic.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboard_to_profile)
+            findNavController().navigateSafely(R.id.action_dashboard_to_profile)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -236,10 +237,10 @@ class DashboardFragment : Fragment() {
         }
         binding.tvWelcome.text = "Freshly"
         binding.ivNotification.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboard_to_notificationFragment)
+            findNavController().navigateSafely(R.id.action_dashboard_to_notificationFragment)
         }
         binding.searchContainer.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboard_to_product)
+            findNavController().navigateSafely(R.id.action_dashboard_to_product)
         }
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

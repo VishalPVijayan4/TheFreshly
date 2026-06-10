@@ -20,8 +20,11 @@ import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.SingleCategoryProductVM
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
 import com.vishalpvijayan.thefreshly.utils.SearchHelper
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -33,7 +36,7 @@ class SingleCategoryProductFragment : Fragment() {
     private val cartViewModel: CartViewModel by activityViewModels()
 
     private lateinit var adapter: SingleCategoryProductsAdapter
-    private var currentSearchQuery = ""
+    private val searchQuery = MutableStateFlow("")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,11 +55,11 @@ class SingleCategoryProductFragment : Fragment() {
         observeCartCount()
 
         binding.tvCartBadge.setOnClickListener {
-            findNavController().navigate(R.id.action_single_product_from_Category_to_cartFragment)
+            findNavController().navigateSafely(R.id.action_single_product_from_Category_to_cartFragment)
         }
 
         binding.btnPay.setOnClickListener {
-            findNavController().navigate(R.id.action_single_product_from_Category_to_cartFragment)
+            findNavController().navigateSafely(R.id.action_single_product_from_Category_to_cartFragment)
         }
 
         return binding.root
@@ -69,7 +72,7 @@ class SingleCategoryProductFragment : Fragment() {
                     putString("categoryName", product.title)
                     product.id?.let { putInt("id", it) }
                 }
-                findNavController().navigate(
+                findNavController().navigateSafely(
                     R.id.action_single_product_from_Category_to_productDetails,
                     bundle
                 )
@@ -101,54 +104,43 @@ class SingleCategoryProductFragment : Fragment() {
         binding.etSearch?.let { searchEditText ->
             SearchHelper(
                 searchEditText = searchEditText,
-                lifecycleScope = lifecycleScope,
+                lifecycleScope = viewLifecycleOwner.lifecycleScope,
                 debounceTime = 300L
             ) { query ->
-                currentSearchQuery = query
-                applySearch(query)
+                searchQuery.value = query
             }
         }
     }
 
     private fun loadCategoryProducts(categoryName: String?) {
-        categoryName?.let { category ->
-            singleCategoryProductVM.setCategory(category)
-            lifecycleScope.launch {
-                singleCategoryProductVM.products.collectLatest { pagingData ->
-                    if (currentSearchQuery.isEmpty()) {
-                        adapter.submitData(pagingData)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun applySearch(query: String) {
-        lifecycleScope.launch {
-            singleCategoryProductVM.products.collectLatest { pagingData ->
-                if (query.isEmpty()) {
-                    adapter.submitData(pagingData)
+        val category = categoryName ?: return
+        singleCategoryProductVM.setCategory(category)
+        viewLifecycleOwner.lifecycleScope.launch {
+            singleCategoryProductVM.products.combine(searchQuery) { pagingData, query ->
+                if (query.isBlank()) {
+                    pagingData
                 } else {
-                    val filtered = pagingData.filter { product ->
+                    pagingData.filter { product ->
                         product.title?.contains(query, ignoreCase = true) == true ||
-                                product.brand?.contains(query, ignoreCase = true) == true
+                            product.brand?.contains(query, ignoreCase = true) == true
                     }
-                    adapter.submitData(filtered)
                 }
-            }
+            }.collectLatest(adapter::submitData)
         }
     }
 
     private fun observeCart() {
-        lifecycleScope.launch {
-            cartViewModel.cartQuantities.collectLatest {
-                adapter.notifyDataSetChanged()
+        viewLifecycleOwner.lifecycleScope.launch {
+            var previousQuantities = emptyMap<Int, Int>()
+            cartViewModel.cartQuantities.collectLatest { quantities ->
+                adapter.updateCartQuantities(previousQuantities, quantities)
+                previousQuantities = quantities
             }
         }
     }
 
     private fun observeCartCount() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             cartViewModel.totalCartCount.collectLatest { count ->
                 binding.tvCartBadge.text = if (count > 0) count.toString() else ""
                 binding.tvCartBadge.isVisible = count > 0

@@ -15,6 +15,7 @@ import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentSettingBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.SettingsViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +41,6 @@ class SettingsFragment : Fragment() {
 
         toolbarViewModel.setToolbarTitle("Settings", "Manage your account")
 
-        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         setupClickListeners()
     }
 
@@ -54,7 +54,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.cardSupport.setOnClickListener {
-            findNavController().navigate(R.id.action_SettingsFragment_to_SupportChatFragment)
+            findNavController().navigateSafely(R.id.action_SettingsFragment_to_SupportChatFragment)
         }
 
         binding.cardLogout.setOnClickListener {
@@ -226,8 +226,12 @@ class SettingsFragment : Fragment() {
     }
 
     private fun performLogout() {
-        settingsViewModel.logout()
-        findNavController().navigate(R.id.action_SettingsFragment_to_login)
+        binding.cardLogout.isEnabled = false
+        settingsViewModel.logout {
+            if (_binding != null && findNavController().currentDestination?.id == R.id.SettingsFragment) {
+                findNavController().navigateSafely(R.id.action_SettingsFragment_to_login)
+            }
+        }
     }
 
     override fun onDestroyView() {

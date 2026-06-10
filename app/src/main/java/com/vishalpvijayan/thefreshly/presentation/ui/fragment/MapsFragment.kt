@@ -35,6 +35,7 @@ import com.vishalpvijayan.thefreshly.helper.LocationViewModel
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.SavedLocationAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.CheckoutViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.SavedLocationViewModel
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -150,7 +151,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                                 Toast.LENGTH_SHORT
                             ).show()
                             savedLocationViewModel.resetSaveState()
-                            findNavController().navigate(R.id.action_mapFragment_to_payment)
+                            findNavController().navigateSafely(R.id.action_mapFragment_to_payment)
 
                         }*/
                         is SavedLocationViewModel.SaveState.Success -> {
@@ -166,7 +167,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
                             Toast.makeText(context, "Location saved successfully!", Toast.LENGTH_SHORT).show()
                             savedLocationViewModel.resetSaveState()
-                            findNavController().navigate(R.id.action_mapFragment_to_payment)
+                            findNavController().navigateSafely(R.id.action_mapFragment_to_payment)
                         }
 
 

@@ -110,6 +110,15 @@ class AllProductsAdapter(
         getItem(position)?.let { holder.bind(it, position) }
     }
 
+    fun updateCartQuantities(previous: Map<Int, Int>, current: Map<Int, Int>) {
+        val changedProductIds = (previous.keys + current.keys).filter { previous[it] != current[it] }.toSet()
+        if (changedProductIds.isEmpty()) return
+
+        snapshot().items.forEachIndexed { position, product ->
+            if (product.id in changedProductIds) notifyItemChanged(position)
+        }
+    }
+
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Products>() {
             override fun areItemsTheSame(oldItem: Products, newItem: Products): Boolean {

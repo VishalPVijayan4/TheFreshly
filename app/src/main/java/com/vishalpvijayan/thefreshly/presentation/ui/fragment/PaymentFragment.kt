@@ -27,6 +27,7 @@ import com.vishalpvijayan.thefreshly.databinding.FragmentPaymentBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.CheckoutViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -110,7 +111,7 @@ class PaymentFragment : Fragment(), PaymentResultListener {
 
         // Change address button
         binding.btnAddAddress.setOnClickListener {
-            findNavController().navigate(R.id.action_payment_to_mapFragment)
+            findNavController().navigateSafely(R.id.action_payment_to_mapFragment)
         }
     }
 
@@ -157,7 +158,7 @@ class PaymentFragment : Fragment(), PaymentResultListener {
         viewLifecycleOwner.lifecycleScope.launch {
             Toast.makeText(context, "Payment Successful!", Toast.LENGTH_SHORT).show()
             // Navigate to order success screen
-            findNavController().navigate(R.id.action_payment_to_orderSuccessFragment)
+            findNavController().navigateSafely(R.id.action_payment_to_orderSuccessFragment)
         }
     }
 
@@ -269,7 +270,7 @@ class PaymentFragment : Fragment(), PaymentResultListener {
 
         Toast.makeText(context, "Payment Success: $razorpayPaymentID", Toast.LENGTH_LONG).show()
         Log.d("PaymentFragment", "🎉 Success toast shown")
-        // findNavController().navigate(R.id.action_payment_to_success)
+        // findNavController().navigateSafely(R.id.action_payment_to_success)
     }
 
     override fun onPaymentError(code: Int, response: String?) {

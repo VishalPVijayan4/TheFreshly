@@ -34,9 +34,7 @@ class SupportChatViewModel @Inject constructor(
 
     private fun initializePredefinedMessages() {
         viewModelScope.launch {
-            if (_messages.value.isEmpty()) {
-                repository.initializePredefinedMessages()
-            }
+            repository.initializePredefinedMessages()
         }
     }
 

@@ -361,25 +361,48 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvArrivesLabel" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCheckout"
+            <FrameLayout
+                android:id="@+id/swipeCheckout"
                 android:layout_width="0dp"
                 android:layout_height="64dp"
                 android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:text="Swipe to Order  ›"
-                android:textAllCaps="false"
-                android:textColor="#8C9290"
-                android:textSize="20sp"
-                app:backgroundTint="#ECEEED"
-                app:cornerRadius="32dp"
-                app:icon="@drawable/ic_arrow_forward_fresh"
-                app:iconGravity="start"
-                app:iconPadding="88dp"
-                app:iconTint="#075D3B"
+                android:background="@drawable/bg_swipe_track"
+                android:contentDescription="Swipe to proceed to checkout"
+                android:padding="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ivBasketIcon" />
+                app:layout_constraintTop_toBottomOf="@id/ivBasketIcon">
+
+                <TextView
+                    android:id="@+id/tvSwipeLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="58dp"
+                    android:paddingEnd="18dp"
+                    android:text="Swipe to proceed  ››"
+                    android:textColor="#66706A"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/swipeThumb"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_gravity="start|center_vertical"
+                    app:cardBackgroundColor="#075D3B"
+                    app:cardCornerRadius="27dp"
+                    app:cardElevation="3dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="Swipe handle"
+                        android:src="@drawable/ic_arrow_forward_fresh"
+                        app:tint="@android:color/white" />
+                </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnClearCart"

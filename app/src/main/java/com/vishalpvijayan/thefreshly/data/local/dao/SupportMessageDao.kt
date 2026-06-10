@@ -14,6 +14,9 @@ interface SupportMessageDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMessage(message: SupportMessageEntity)
 
+    @Query("SELECT COUNT(*) FROM support_messages")
+    suspend fun getMessageCount(): Int
+
     @Query("DELETE FROM support_messages")
     suspend fun clearAllMessages()
 

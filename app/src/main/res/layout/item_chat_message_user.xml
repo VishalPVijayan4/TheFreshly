@@ -6,44 +6,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="6dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/messageCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="72dp"
-            app:cardBackgroundColor="#F1C40F"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="56dp"
+            app:cardBackgroundColor="#075D3B"
+            app:cardCornerRadius="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="14dp">
 
                 <TextView
                     android:id="@+id/tvMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
                     android:fontFamily="@font/open_sans_medium"
-                    tools:text="This is a support message" />
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    tools:text="I need help with my order." />
 
                 <TextView
                     android:id="@+id/tvTimestamp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#B3A78F"
+                    android:layout_marginTop="5dp"
+                    android:textColor="#C7F4DD"
                     android:textSize="11sp"
-                    android:fontFamily="@font/open_sans_light"
-                    tools:text="10:30 AM" />
+                    tools:text="10:31 AM" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

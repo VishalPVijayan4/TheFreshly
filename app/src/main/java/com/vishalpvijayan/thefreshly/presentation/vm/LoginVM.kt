@@ -1,6 +1,5 @@
 package com.vishalpvijayan.thefreshly.presentation.vm
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,7 +15,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class LoginVM @Inject constructor(
     private val loginUseCase: UserLoginUsecase,
@@ -26,32 +24,31 @@ class LoginVM @Inject constructor(
     private val _loginState = MutableLiveData<Resource<UserResponse>>()
     val loginState: LiveData<Resource<UserResponse>> = _loginState
 
-
-    fun saveUserToken(isLoggedIn: Boolean, userId: Int, username: String, token: String) {
-        viewModelScope.launch {
-            dataStoreManager.savePreference(ConstantStrings.isLoggedIn, isLoggedIn)
-            dataStoreManager.savePreference(ConstantStrings.user_token, token)
-            dataStoreManager.savePreference(ConstantStrings.username, username)
-            dataStoreManager.savePreference(ConstantStrings.userId, userId)
-        }
-    }
-
-
-    val isLoggedIn: Flow<Boolean> =
-        dataStoreManager.getPreference(ConstantStrings.isLoggedIn, Boolean::class.java, false)
+    val isLoggedIn: Flow<Boolean> = dataStoreManager.getPreference(
+        ConstantStrings.isLoggedIn,
+        Boolean::class.java,
+        false
+    )
 
     fun login(username: String, password: String) {
+        if (_loginState.value is Resource.Loading) return
+
         viewModelScope.launch {
             _loginState.value = Resource.Loading
-            /* val result = loginUseCase(UserRequest(username, password))
-             _loginState.value = result*/
-
-            try {
-                val result = loginUseCase(UserRequest(username, password))
-                _loginState.value = result
-                Log.e("API_CALL", "Login Success: $result")
-            } catch (e: Exception) {
-                Log.e("API_CALL", "Login Failed: ${e.localizedMessage}")
+            when (val result = loginUseCase(UserRequest(username, password))) {
+                is Resource.Success -> {
+                    val user = result.data
+                    // Persist the complete session before exposing success to the UI. This avoids
+                    // losing authentication if the process is stopped immediately after navigation.
+                    dataStoreManager.saveUserSession(
+                        userId = user.id?.toInt() ?: 1,
+                        username = user.username.orEmpty(),
+                        token = user.accessToken.orEmpty()
+                    )
+                    _loginState.value = result
+                }
+                is Resource.Error -> _loginState.value = result
+                Resource.Loading -> Unit
             }
         }
     }

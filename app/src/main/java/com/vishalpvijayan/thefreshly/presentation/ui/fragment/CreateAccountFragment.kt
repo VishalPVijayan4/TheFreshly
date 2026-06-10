@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentCreateAccountBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.CreateAccountVM
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 
@@ -27,7 +28,7 @@ class CreateAccountFragment : Fragment() {
 
 //            viewModel.addUser(binding.inputUsername.text.toString(),binding.inputPassword.text.toString(),binding.inputEmail.text.toString(),binding.inputPhoneNumber.text.toString().toInt())
 
-            findNavController().navigate(R.id.action_createccount_to_login)
+            findNavController().navigateSafely(R.id.action_createccount_to_login)
         }
 
         return binding.root

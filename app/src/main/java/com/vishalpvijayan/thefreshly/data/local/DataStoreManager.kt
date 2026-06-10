@@ -1,7 +1,6 @@
 package com.vishalpvijayan.thefreshly.data.local
 
 import android.content.Context
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
@@ -33,6 +32,24 @@ class DataStoreManager @Inject constructor(@ApplicationContext val context : Con
             }
         }
     }
+    suspend fun saveUserSession(userId: Int, username: String, token: String) {
+        context.dataStore.edit { preferences ->
+            preferences[booleanPreferencesKey(ConstantStrings.isLoggedIn)] = true
+            preferences[intPreferencesKey(ConstantStrings.userId)] = userId
+            preferences[stringPreferencesKey(ConstantStrings.username)] = username
+            preferences[stringPreferencesKey(ConstantStrings.user_token)] = token
+        }
+    }
+
+    suspend fun clearUserSession() {
+        context.dataStore.edit { preferences ->
+            preferences.remove(booleanPreferencesKey(ConstantStrings.isLoggedIn))
+            preferences.remove(intPreferencesKey(ConstantStrings.userId))
+            preferences.remove(stringPreferencesKey(ConstantStrings.username))
+            preferences.remove(stringPreferencesKey(ConstantStrings.user_token))
+        }
+    }
+
 
     fun <T> getPreference(key: String, clazz: Class<T>, defaultValue: T): Flow<T> {
         return context.dataStore.data.map { preferences ->

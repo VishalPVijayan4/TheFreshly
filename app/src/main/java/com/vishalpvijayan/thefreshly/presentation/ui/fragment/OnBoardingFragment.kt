@@ -17,6 +17,7 @@ import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentOnBoardingBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 
 class OnBoardingFragment : Fragment() {
 
@@ -46,7 +47,7 @@ class OnBoardingFragment : Fragment() {
     private fun setupClickListeners() {
         binding.btnGetStarted.setOnClickListener {
             val action = OnBoardingFragmentDirections.actionOnboardingToLogin()
-            findNavController().navigate(action)
+            findNavController().navigateSafely(action)
         }
     }
 

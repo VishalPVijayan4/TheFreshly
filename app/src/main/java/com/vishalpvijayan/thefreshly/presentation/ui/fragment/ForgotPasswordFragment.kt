@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentForgotPasswordBinding
 import com.vishalpvijayan.thefreshly.databinding.FragmentLoginBinding
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 
 
 class ForgotPasswordFragment : Fragment() {
@@ -20,7 +21,7 @@ class ForgotPasswordFragment : Fragment() {
     ): View {
         binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
         binding.btnReset.setOnClickListener {
-            findNavController().navigate(R.id.action_forgotpassword_to_login)
+            findNavController().navigateSafely(R.id.action_forgotpassword_to_login)
         }
 
         return binding.root

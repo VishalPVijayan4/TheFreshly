@@ -15,6 +15,7 @@ import com.vishalpvijayan.thefreshly.databinding.FragmentCartBinding
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CartAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -42,7 +43,7 @@ class CartFragment : Fragment() {
 
         binding.btnCheckout.setOnClickListener {
             // Navigate to checkout/payment
-            findNavController().navigate(R.id.action_cartFragment_to_mapFragment)
+            findNavController().navigateSafely(R.id.action_cartFragment_to_mapFragment)
         }
 
         binding.btnClearCart.setOnClickListener {
@@ -61,7 +62,7 @@ class CartFragment : Fragment() {
                 val bundle = Bundle().apply {
                     putInt("id", item.productId)
                 }
-                findNavController().navigate(R.id.action_cartFragment_to_productDetails, bundle)
+                findNavController().navigateSafely(R.id.action_cartFragment_to_productDetails, bundle)
             }
         )
     }

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentOrderSuccessBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +33,7 @@ class OrderSuccessFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         toolbarViewModel.setToolbarTitle("Order confirmed", "Your fresh picks are on the way")
         binding.btnBackHome.setOnClickListener {
-            findNavController().navigate(R.id.action_orderSuccessFragment_to_dashboard)
+            findNavController().navigateSafely(R.id.action_orderSuccessFragment_to_dashboard)
         }
     }
 

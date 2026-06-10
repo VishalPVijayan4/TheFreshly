@@ -1,6 +1,5 @@
 package com.vishalpvijayan.thefreshly.presentation.vm
 
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vishalpvijayan.thefreshly.data.local.DataStoreManager
@@ -13,9 +12,10 @@ class SettingsViewModel @Inject constructor(
     private val dataStoreManager: DataStoreManager
 ) : ViewModel() {
 
-    fun logout() {
+    fun logout(onComplete: () -> Unit) {
         viewModelScope.launch {
-//            dataStoreManager.clearUserData()
+            dataStoreManager.clearUserSession()
+            onComplete()
         }
     }
 }

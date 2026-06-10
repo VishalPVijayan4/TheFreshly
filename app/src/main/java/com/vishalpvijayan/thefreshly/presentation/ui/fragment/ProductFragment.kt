@@ -20,6 +20,7 @@ import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ProductVM
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
 import com.vishalpvijayan.thefreshly.utils.SearchHelper
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,7 +53,7 @@ class ProductFragment : Fragment() {
 
 
         binding.tvCartBadge.setOnClickListener {
-            findNavController().navigate(R.id.action_product_to_cartFragment)
+            findNavController().navigateSafely(R.id.action_product_to_cartFragment)
         }
 
         return binding.root
@@ -65,7 +66,7 @@ class ProductFragment : Fragment() {
                     putString("categoryName", product.title)
                     product.id?.let { putInt("id", it) }
                 }
-                findNavController().navigate(R.id.action_product_to_productDetails3, bundle)
+                findNavController().navigateSafely(R.id.action_product_to_productDetails3, bundle)
             },
             onAddToCart = { product -> cartViewModel.addToCart(product) },
             onIncrement = { product -> product.id?.let { cartViewModel.incrementQuantity(it) } },
@@ -95,7 +96,7 @@ class ProductFragment : Fragment() {
         binding.etSearch.let { searchEditText ->
             SearchHelper(
                 searchEditText = searchEditText,
-                lifecycleScope = lifecycleScope,
+                lifecycleScope = viewLifecycleOwner.lifecycleScope,
                 debounceTime = 300L
             ) { query ->
                 searchQuery.value = query
@@ -105,7 +106,7 @@ class ProductFragment : Fragment() {
     }
 
     private fun observeProducts() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             productVM.products.collectLatest { pagingData ->
                 val query = searchQuery.value
                 val displayData = if (query.isBlank()) {
@@ -124,15 +125,17 @@ class ProductFragment : Fragment() {
     }
 
     private fun observeCart() {
-        lifecycleScope.launch {
-            cartViewModel.cartQuantities.collectLatest {
-                adapter.notifyDataSetChanged() // Trigger UI update when cart changes
+        viewLifecycleOwner.lifecycleScope.launch {
+            var previousQuantities = emptyMap<Int, Int>()
+            cartViewModel.cartQuantities.collectLatest { quantities ->
+                adapter.updateCartQuantities(previousQuantities, quantities)
+                previousQuantities = quantities
             }
         }
     }
 
     private fun observeCartCount() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             cartViewModel.totalCartCount.collectLatest { count ->
                 binding.tvCartBadge.text = if (count > 0) count.toString() else ""
                 binding.tvCartBadge.isVisible = count > 0

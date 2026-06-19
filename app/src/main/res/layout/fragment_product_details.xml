@@ -9,8 +9,53 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg_fresh_app">
 
+        <LinearLayout
+            android:id="@+id/layoutLoading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="@drawable/bg_fresh_state_icon"
+                android:elevation="6dp">
+
+                <ProgressBar
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="#075D3B" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Loading product details"
+                android:textColor="#101612"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text="Fetching fresh product information."
+                android:textColor="#6F7772"
+                android:textSize="14sp" />
+        </LinearLayout>
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollContent"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clipToPadding="false"
@@ -311,6 +356,7 @@
 
         <LinearLayout
             android:id="@+id/bottomBar"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="88dp"
             android:background="@android:color/white"

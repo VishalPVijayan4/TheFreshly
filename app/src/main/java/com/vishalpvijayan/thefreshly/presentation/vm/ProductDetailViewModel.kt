@@ -23,19 +23,29 @@ class ProductDetailViewModel @Inject constructor(
     private val _product = MutableStateFlow<ProductDetail?>(null)
     val product: StateFlow<ProductDetail?> = _product
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
     private val _cartItem = MutableStateFlow<CartItemEntity?>(null)
     val cartItem: StateFlow<CartItemEntity?> = _cartItem
 
     fun loadProductDetail(id: Int) {
         viewModelScope.launch {
             try {
-                _product.value = getProductDetailUseCase(id)
+                _isLoading.value = true
+                _product.value = null
+                _cartItem.value = null
+
+                val productDetail = getProductDetailUseCase(id)
+                _product.value = productDetail
+                _isLoading.value = false
 
                 // Observe cart item for this product
                 cartRepository.getCartItem(id).collectLatest { item ->
                     _cartItem.value = item
                 }
             } catch (e: Exception) {
+                _isLoading.value = false
                 Log.e("ProductDetailVM", "Failed to load product detail", e)
             }
         }

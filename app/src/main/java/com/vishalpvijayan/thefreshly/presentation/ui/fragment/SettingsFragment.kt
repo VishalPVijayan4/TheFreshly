@@ -1,12 +1,15 @@
 package com.vishalpvijayan.thefreshly.presentation.ui.fragment
 
 
+import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -26,6 +29,7 @@ class SettingsFragment : Fragment() {
 
     private val settingsViewModel: SettingsViewModel by viewModels()
     private val toolbarViewModel: ToolbarViewModel by activityViewModels()
+    private var logoutSwipeAnimator: ObjectAnimator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +46,7 @@ class SettingsFragment : Fragment() {
         toolbarViewModel.setToolbarTitle("Settings", "Manage your account")
 
         setupClickListeners()
+        setupSwipeToLogout()
     }
 
     private fun setupClickListeners() {
@@ -57,8 +62,74 @@ class SettingsFragment : Fragment() {
             findNavController().navigateSafely(R.id.action_SettingsFragment_to_SupportChatFragment)
         }
 
-        binding.cardLogout.setOnClickListener {
-            showLogoutConfirmation()
+    }
+
+    private fun setupSwipeToLogout() {
+        var dragStartX = 0f
+        var thumbStartTranslation = 0f
+
+        binding.swipeLogout.setOnTouchListener { _, event ->
+            if (!binding.swipeLogout.isEnabled) return@setOnTouchListener false
+            val maxTranslation = (binding.swipeLogout.width - binding.logoutSwipeThumb.width -
+                binding.swipeLogout.paddingStart - binding.swipeLogout.paddingEnd).toFloat()
+
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    logoutSwipeAnimator?.cancel()
+                    dragStartX = event.x
+                    thumbStartTranslation = binding.logoutSwipeThumb.translationX
+                    true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val translation = (thumbStartTranslation + event.x - dragStartX)
+                        .coerceIn(0f, maxTranslation)
+                    binding.logoutSwipeThumb.translationX = translation
+                    binding.tvLogoutSwipeLabel.alpha = 1f - (translation / maxTranslation) * 0.65f
+                    true
+                }
+                MotionEvent.ACTION_UP -> {
+                    if (binding.logoutSwipeThumb.translationX >= maxTranslation * SWIPE_COMPLETE_THRESHOLD) {
+                        binding.logoutSwipeThumb.animate()
+                            .translationX(maxTranslation)
+                            .setDuration(120L)
+                            .withEndAction { showLogoutConfirmation() }
+                            .start()
+                    } else {
+                        resetLogoutSwipeThumb()
+                    }
+                    binding.swipeLogout.performClick()
+                    true
+                }
+                MotionEvent.ACTION_CANCEL -> {
+                    resetLogoutSwipeThumb()
+                    true
+                }
+                else -> false
+            }
+        }
+        binding.swipeLogout.setOnClickListener { }
+        binding.swipeLogout.post { startLogoutSwipeHintAnimation() }
+    }
+
+    private fun resetLogoutSwipeThumb() {
+        binding.logoutSwipeThumb.animate()
+            .translationX(0f)
+            .setDuration(220L)
+            .setInterpolator(DecelerateInterpolator())
+            .withEndAction { startLogoutSwipeHintAnimation() }
+            .start()
+        binding.tvLogoutSwipeLabel.animate().alpha(1f).setDuration(180L).start()
+    }
+
+    private fun startLogoutSwipeHintAnimation() {
+        if (!isAdded || !binding.swipeLogout.isShown) return
+        logoutSwipeAnimator?.cancel()
+        logoutSwipeAnimator = ObjectAnimator.ofFloat(binding.logoutSwipeThumb, View.TRANSLATION_X, 0f, 30f, 0f).apply {
+            duration = 1400L
+            startDelay = 500L
+            repeatCount = ObjectAnimator.INFINITE
+            interpolator = DecelerateInterpolator()
+            start()
         }
     }
 
@@ -226,7 +297,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun performLogout() {
-        binding.cardLogout.isEnabled = false
+        binding.swipeLogout.isEnabled = false
         settingsViewModel.logout {
             if (_binding != null && findNavController().currentDestination?.id == R.id.SettingsFragment) {
                 findNavController().navigateSafely(R.id.action_SettingsFragment_to_login)
@@ -235,7 +306,12 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        logoutSwipeAnimator?.cancel()
+        logoutSwipeAnimator = null
         super.onDestroyView()
         _binding = null
+    }
+    companion object {
+        private const val SWIPE_COMPLETE_THRESHOLD = 0.75f
     }
 }

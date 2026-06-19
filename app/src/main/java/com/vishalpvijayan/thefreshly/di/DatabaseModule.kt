@@ -7,6 +7,7 @@ import androidx.room.Room
 import com.vishalpvijayan.thefreshly.data.local.AppDatabase
 import com.vishalpvijayan.thefreshly.data.local.dao.CartDao
 import com.vishalpvijayan.thefreshly.data.local.dao.SavedLocationDao
+import com.vishalpvijayan.thefreshly.data.local.dao.QuickOrderDao
 import com.vishalpvijayan.thefreshly.data.repository.SavedLocationRepositoryImpl
 import com.vishalpvijayan.thefreshly.domain.repository.location.SavedLocationRepository
 
@@ -47,6 +48,12 @@ object DatabaseModule {
     @Singleton
     fun provideCartDao(database: AppDatabase): CartDao {
         return database.cartDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuickOrderDao(database: AppDatabase): QuickOrderDao {
+        return database.quickOrderDao()
     }
 
 }

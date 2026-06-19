@@ -2,6 +2,8 @@ package com.vishalpvijayan.thefreshly.domain.repository.cart
 
 
 import com.vishalpvijayan.thefreshly.data.local.dao.CartDao
+import com.vishalpvijayan.thefreshly.data.local.dao.QuickOrderDao
+import com.vishalpvijayan.thefreshly.data.local.entity.QuickOrderEntity
 import com.vishalpvijayan.thefreshly.data.local.entity.CartItemEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -9,7 +11,8 @@ import javax.inject.Singleton
 
 @Singleton
 class CartRepository @Inject constructor(
-    private val cartDao: CartDao
+    private val cartDao: CartDao,
+    private val quickOrderDao: QuickOrderDao
 ) {
 
     fun getCartItem(productId: Int): Flow<CartItemEntity?> {
@@ -66,5 +69,23 @@ class CartRepository @Inject constructor(
 
     fun getTotalCartPrice(): Flow<Double?> {
         return cartDao.getTotalCartPrice()
+    }
+
+    fun getQuickOrderItems(): Flow<List<QuickOrderEntity>> {
+        return quickOrderDao.getQuickOrderItems()
+    }
+
+    suspend fun completeSuccessfulPayment() {
+        val currentCart = cartDao.getAllCartItemsOnce()
+        if (currentCart.isNotEmpty()) {
+            quickOrderDao.replaceQuickOrderItems(currentCart)
+        }
+        cartDao.clearCart()
+    }
+
+    suspend fun addQuickOrderToCart(items: List<QuickOrderEntity>) {
+        items.forEach { quickOrderItem ->
+            cartDao.insertCartItem(quickOrderItem.toCartItem())
+        }
     }
 }

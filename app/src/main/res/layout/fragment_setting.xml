@@ -321,70 +321,45 @@
                     android:textColor="#101612"
                     android:textSize="18sp" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardLogout"
+                <FrameLayout
+                    android:id="@+id/swipeLogout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="64dp"
                     android:layout_marginBottom="24dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:cardBackgroundColor="#FFF7F7"
-                    app:cardCornerRadius="22dp"
-                    app:cardElevation="2dp"
-                    app:rippleColor="#22FF6B6B"
-                    app:strokeColor="#FFD6D6"
-                    app:strokeWidth="1dp">
+                    android:background="@drawable/bg_swipe_track"
+                    android:contentDescription="Swipe to logout"
+                    android:padding="5dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <TextView
+                        android:id="@+id/tvLogoutSwipeLabel"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="76dp"
-                        android:padding="18dp">
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingStart="58dp"
+                        android:paddingEnd="18dp"
+                        android:text="Swipe to logout  ››"
+                        android:textColor="#D94242"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                        <FrameLayout
-                            android:id="@+id/ivLogoutIconBg"
-                            android:layout_width="44dp"
-                            android:layout_height="44dp"
-                            android:background="@drawable/bg_logout_icon"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/ivLogoutIcon"
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_arrow_forward_fresh"
-                                app:tint="#D94242" />
-                        </FrameLayout>
-
-                        <TextView
-                            android:id="@+id/tvLogoutTitle"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="14dp"
-                            android:fontFamily="@font/open_sans_medium"
-                            android:text="Logout"
-                            android:textColor="#D94242"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/ivChevronLogout"
-                            app:layout_constraintStart_toEndOf="@id/ivLogoutIconBg"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/logoutSwipeThumb"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_gravity="start|center_vertical"
+                        app:cardBackgroundColor="#D94242"
+                        app:cardCornerRadius="27dp"
+                        app:cardElevation="3dp">
 
                         <ImageView
-                            android:id="@+id/ivChevronLogout"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Swipe handle"
                             android:src="@drawable/ic_arrow_forward_fresh"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="#D94242" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            app:tint="@android:color/white" />
+                    </com.google.android.material.card.MaterialCardView>
+                </FrameLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

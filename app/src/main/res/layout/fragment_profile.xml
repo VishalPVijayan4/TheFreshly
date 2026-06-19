@@ -8,7 +8,7 @@
         android:id="@+id/userProfileScroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_luxury_gradient"
+        android:background="@drawable/bg_fresh_app"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,9 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@android:color/transparent"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="24dp"
-                app:strokeColor="#33FFFFFF"
+                app:strokeColor="#E3EEE8"
                 app:strokeWidth="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@drawable/image_icon"
-                        app:civ_border_color="#E6FFFFFF"
+                        app:civ_border_color="#075D3B"
                         app:civ_border_width="3dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
                         android:layout_marginTop="20dp"
                         android:text="Emily Johnson"
                         android:textAlignment="center"
-                        android:textColor="@android:color/white"
+                        android:textColor="#101612"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="28 • Female"
-                        android:textColor="#E6FFFFFF"
+                        android:textColor="#6F7772"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -84,9 +84,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@android:color/transparent"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:strokeColor="#33FFFFFF"
+                app:strokeColor="#E3EEE8"
                 app:strokeWidth="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Email"
-                        android:textColor="@android:color/white"
+                        android:textColor="#101612"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp" />
@@ -112,21 +112,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="emily.johnson@x.dummyjson.com"
-                        android:textColor="#E6FFFFFF"
+                        android:textColor="#6F7772"
                         android:textSize="16sp"
                         android:layout_marginBottom="16dp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#33FFFFFF"
+                        android:background="#E3EEE8"
                         android:layout_marginBottom="16dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Phone"
-                        android:textColor="@android:color/white"
+                        android:textColor="#101612"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp" />
@@ -136,7 +136,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="+81 965-431-3024"
-                        android:textColor="#E6FFFFFF"
+                        android:textColor="#6F7772"
                         android:textSize="16sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -147,9 +147,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardBackgroundColor="@android:color/transparent"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:strokeColor="#33FFFFFF"
+                app:strokeColor="#E3EEE8"
                 app:strokeWidth="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +165,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Address"
-                        android:textColor="@android:color/white"
+                        android:textColor="#101612"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp" />
@@ -175,7 +175,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="626 Main Street, Phoenix, Mississippi, United States"
-                        android:textColor="#E6FFFFFF"
+                        android:textColor="#6F7772"
                         android:textSize="16sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -187,9 +187,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="32dp"
-                app:cardBackgroundColor="@android:color/transparent"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="20dp"
-                app:strokeColor="#33FFFFFF"
+                app:strokeColor="#E3EEE8"
                 app:strokeWidth="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -205,7 +205,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="University"
-                        android:textColor="@android:color/white"
+                        android:textColor="#101612"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp" />
@@ -215,21 +215,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="University of Wisconsin--Madison"
-                        android:textColor="#E6FFFFFF"
+                        android:textColor="#6F7772"
                         android:textSize="16sp"
                         android:layout_marginBottom="16dp" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="#33FFFFFF"
+                        android:background="#E3EEE8"
                         android:layout_marginBottom="16dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Company"
-                        android:textColor="@android:color/white"
+                        android:textColor="#101612"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:layout_marginBottom="4dp" />
@@ -239,7 +239,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Dooley, Kozey and Cronin - Sales Manager"
-                        android:textColor="#E6FFFFFF"
+                        android:textColor="#6F7772"
                         android:textSize="16sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -252,10 +252,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="Update Profile"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="14sp"
                 android:letterSpacing="0.05"
-                app:backgroundTint="#F1C40F"
+                app:backgroundTint="#075D3B"
                 app:cornerRadius="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

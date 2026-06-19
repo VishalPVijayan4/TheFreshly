@@ -16,6 +16,9 @@ interface CartDao {
     @Query("SELECT * FROM cart_items ORDER BY addedAt DESC")
     fun getAllCartItems(): Flow<List<CartItemEntity>>
 
+    @Query("SELECT * FROM cart_items ORDER BY addedAt DESC")
+    suspend fun getAllCartItemsOnce(): List<CartItemEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCartItem(cartItem: CartItemEntity)
 

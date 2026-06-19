@@ -28,6 +28,7 @@ import com.vishalpvijayan.thefreshly.helper.LocationViewModel
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CategoryListAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CuratedProductAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.ProductCategoryAdapter
+import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.UserDetailViewModel
@@ -52,6 +53,7 @@ class DashboardFragment : Fragment() {
     private val toolbarViewModel: ToolbarViewModel by activityViewModels()
     private val userDetailsVM: UserDetailViewModel by activityViewModels()
     private val dashBoardVm: DashboardViewModel by activityViewModels()
+    private val cartViewModel: CartViewModel by activityViewModels()
     private val locationViewModel: LocationViewModel by viewModels()
 
 
@@ -236,7 +238,7 @@ class DashboardFragment : Fragment() {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = curatedProductAdapter
         }
-        binding.tvHeroSubtitle.text = "Your ${getTodayName()} morning\nessentials"
+        binding.tvHeroSubtitle.text = "Your ${getTodayName()} usuals are ready"
         dashBoardVm.loadAllCategories()
         dashBoardVm.loadCuratedProducts()
 
@@ -262,12 +264,32 @@ class DashboardFragment : Fragment() {
         binding.ivNotification.setOnClickListener {
             findNavController().navigateSafely(R.id.action_dashboard_to_notificationFragment)
         }
+        binding.repeatCard.setOnClickListener {
+            cartViewModel.addQuickOrderToCart()
+            Toast.makeText(requireContext(), "Quick order added to cart", Toast.LENGTH_SHORT).show()
+            findNavController().navigateSafely(R.id.cartFragment)
+        }
         binding.searchContainer.setOnClickListener {
             findNavController().navigateSafely(R.id.action_dashboard_to_product)
         }
         binding.tvSeeAll.setOnClickListener {
             val categories = dashBoardVm.allCategories.value.ifEmpty { adapter.snapshot().items }
             showAllCategoriesDialog(categories)
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                cartViewModel.quickOrderItems.collect { quickOrderItems ->
+                    binding.repeatCard.visibility = if (quickOrderItems.isEmpty()) View.GONE else View.VISIBLE
+                    if (quickOrderItems.isNotEmpty()) {
+                        val itemNames = quickOrderItems.take(3).joinToString(" • ") { it.title }
+                        binding.tvHeroSubtitle.text = itemNames
+                        binding.tvHeroChip.text = "Add\n${quickOrderItems.sumOf { it.quantity }} items"
+                        binding.quickItemOne.text = quickOrderItems.getOrNull(0)?.title ?: "Usual item"
+                        binding.quickItemTwo.text = quickOrderItems.getOrNull(1)?.title ?: "Fresh pick"
+                        binding.quickItemThree.text = quickOrderItems.getOrNull(2)?.title ?: "Repeat"
+                    }
+                }
+            }
         }
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

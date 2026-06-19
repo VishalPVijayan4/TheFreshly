@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vishalpvijayan.thefreshly.Products
 import com.vishalpvijayan.thefreshly.data.local.entity.CartItemEntity
+import com.vishalpvijayan.thefreshly.data.local.entity.QuickOrderEntity
 import com.vishalpvijayan.thefreshly.domain.repository.cart.CartRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -45,6 +46,13 @@ class CartViewModel @Inject constructor(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = 0
+        )
+
+    val quickOrderItems: StateFlow<List<QuickOrderEntity>> = cartRepository.getQuickOrderItems()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
         )
 
     // Total price
@@ -99,5 +107,18 @@ class CartViewModel @Inject constructor(
 
     fun getQuantity(productId: Int): Int? {
         return cartQuantities.value[productId]
+    }
+
+    fun completeSuccessfulPayment(onComplete: () -> Unit = {}) {
+        viewModelScope.launch {
+            cartRepository.completeSuccessfulPayment()
+            onComplete()
+        }
+    }
+
+    fun addQuickOrderToCart() {
+        viewModelScope.launch {
+            cartRepository.addQuickOrderToCart(quickOrderItems.value)
+        }
     }
 }

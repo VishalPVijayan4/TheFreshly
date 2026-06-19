@@ -157,8 +157,11 @@ class PaymentFragment : Fragment(), PaymentResultListener {
     private fun handlePaymentSuccess() {
         viewLifecycleOwner.lifecycleScope.launch {
             Toast.makeText(context, "Payment Successful!", Toast.LENGTH_SHORT).show()
-            // Navigate to order success screen
-            findNavController().navigateSafely(R.id.action_payment_to_orderSuccessFragment)
+            cartViewModel.completeSuccessfulPayment {
+                if (_binding != null) {
+                    findNavController().navigateSafely(R.id.action_payment_to_orderSuccessFragment)
+                }
+            }
         }
     }
 
@@ -262,15 +265,12 @@ class PaymentFragment : Fragment(), PaymentResultListener {
             return
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            Log.d("PaymentFragment", "🧹 Clearing cart...")
-            cartViewModel.clearCart()
-            Log.d("PaymentFragment", "✅ Cart cleared")
+        cartViewModel.completeSuccessfulPayment {
+            if (_binding != null) {
+                Toast.makeText(context, "Payment Success: $razorpayPaymentID", Toast.LENGTH_LONG).show()
+                findNavController().navigateSafely(R.id.action_payment_to_orderSuccessFragment)
+            }
         }
-
-        Toast.makeText(context, "Payment Success: $razorpayPaymentID", Toast.LENGTH_LONG).show()
-        Log.d("PaymentFragment", "🎉 Success toast shown")
-        // findNavController().navigateSafely(R.id.action_payment_to_success)
     }
 
     override fun onPaymentError(code: Int, response: String?) {

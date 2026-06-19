@@ -9,25 +9,19 @@
         android:layout_height="match_parent"
         android:background="@drawable/bg_fresh_app">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/productScroll"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/productContent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clipToPadding="false"
-            android:fillViewport="true"
-            android:paddingBottom="24dp"
+            android:paddingStart="20dp"
+            android:paddingTop="18dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="20dp"
-                android:paddingTop="18dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="18dp">
 
                 <TextView
                     android:id="@+id/tvDeliverLabel"
@@ -198,18 +192,17 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvProduct"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_marginTop="14dp"
                     android:clipToPadding="false"
-                    android:nestedScrollingEnabled="false"
                     android:paddingBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvSectionTitle"
                     tools:itemCount="4"
                     tools:listitem="@layout/item_products" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
             android:id="@+id/progressbar"

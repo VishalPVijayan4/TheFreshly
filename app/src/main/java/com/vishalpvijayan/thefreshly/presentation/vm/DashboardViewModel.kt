@@ -40,6 +40,19 @@ class DashboardViewModel @Inject constructor(
     private val _curatedProducts = MutableStateFlow<List<Products>>(emptyList())
     val curatedProducts: StateFlow<List<Products>> = _curatedProducts
 
+    private val _allCategories = MutableStateFlow<List<ProductCategory>>(emptyList())
+    val allCategories: StateFlow<List<ProductCategory>> = _allCategories
+
+    fun loadAllCategories() {
+        viewModelScope.launch {
+            try {
+                _allCategories.value = apiServices.getProductCategory()
+            } catch (e: Exception) {
+                _allCategories.value = emptyList()
+            }
+        }
+    }
+
     fun loadCuratedProducts() {
         viewModelScope.launch {
             try {

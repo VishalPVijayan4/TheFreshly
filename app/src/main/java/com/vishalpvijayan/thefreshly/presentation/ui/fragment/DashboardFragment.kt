@@ -14,13 +14,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vishalpvijayan.thefreshly.R
+import com.vishalpvijayan.thefreshly.databinding.DialogCategoryListBinding
 import com.vishalpvijayan.thefreshly.databinding.FragmentDashboardBinding
+import com.vishalpvijayan.thefreshly.data.remote.model.productCategory.ProductCategory
 import com.vishalpvijayan.thefreshly.domain.repository.location.LocationRepository
 import com.vishalpvijayan.thefreshly.helper.LocationViewModel
+import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CategoryListAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CuratedProductAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.ProductCategoryAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
@@ -41,7 +46,8 @@ class DashboardFragment : Fragment() {
 
     @Inject
     lateinit var repo: LocationRepository
-    private lateinit var binding: FragmentDashboardBinding
+    private var _binding: FragmentDashboardBinding? = null
+    private val binding get() = _binding!!
 
     private val toolbarViewModel: ToolbarViewModel by activityViewModels()
     private val userDetailsVM: UserDetailViewModel by activityViewModels()
@@ -51,31 +57,27 @@ class DashboardFragment : Fragment() {
 
     private lateinit var adapter: ProductCategoryAdapter
     private lateinit var curatedProductAdapter: CuratedProductAdapter
+    private var categoryDialog: androidx.appcompat.app.AlertDialog? = null
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        categoryDialog?.dismiss()
+        categoryDialog = null
+        binding.rvCategory.adapter = null
+        binding.rvCuratedProducts.adapter = null
         locationViewModel.stopUpdates()
+        _binding = null
+        super.onDestroyView()
     }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentDashboardBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         toolbarViewModel.setToolbarTitle("Dashboard", "Manage & Explore various categories")
         adapter = ProductCategoryAdapter { category ->
-            val categoryName = category.name
-            val bundle = Bundle().apply {
-                putString("categoryName", categoryName)
-            }
-
-            findNavController().navigateSafely(
-                R.id.action_dashboard_to_single_product_from_Category,
-                bundle
-            )
-            Toast.makeText(requireContext(), "Clicked: ${category.name}", Toast.LENGTH_SHORT).show()
-
+            navigateToCategory(category)
         }
 
         curatedProductAdapter = CuratedProductAdapter { product ->
@@ -209,12 +211,25 @@ class DashboardFragment : Fragment() {
                 ).show()
             }
         }*/
-        binding.rvCategory.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvCategory.adapter = adapter
+        binding.rvCategory.apply {
+            setHasFixedSize(true)
+            itemAnimator = null
+            overScrollMode = View.OVER_SCROLL_NEVER
+            setItemViewCacheSize(8)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = this@DashboardFragment.adapter
+            recycledViewPool.setMaxRecycledViews(0, 12)
+        }
 
-        binding.rvCuratedProducts.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvCuratedProducts.adapter = curatedProductAdapter
+        binding.rvCuratedProducts.apply {
+            setHasFixedSize(true)
+            itemAnimator = null
+            overScrollMode = View.OVER_SCROLL_NEVER
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = curatedProductAdapter
+        }
         binding.tvHeroSubtitle.text = "Your ${getTodayName()} morning\nessentials"
+        dashBoardVm.loadAllCategories()
         dashBoardVm.loadCuratedProducts()
 
         binding.profilePic.setOnClickListener {
@@ -242,6 +257,10 @@ class DashboardFragment : Fragment() {
         binding.searchContainer.setOnClickListener {
             findNavController().navigateSafely(R.id.action_dashboard_to_product)
         }
+        binding.tvSeeAll.setOnClickListener {
+            val categories = dashBoardVm.allCategories.value.ifEmpty { adapter.snapshot().items }
+            showAllCategoriesDialog(categories)
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 userDetailsVM.userId.collect { userId ->
@@ -261,6 +280,52 @@ class DashboardFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    private fun showAllCategoriesDialog(categories: List<ProductCategory>) {
+        if (categories.isEmpty()) {
+            Toast.makeText(requireContext(), "Categories are still loading", Toast.LENGTH_SHORT).show()
+            dashBoardVm.loadAllCategories()
+            return
+        }
+
+        val dialogBinding = DialogCategoryListBinding.inflate(layoutInflater)
+        val dialogAdapter = CategoryListAdapter { category ->
+            categoryDialog?.dismiss()
+            categoryDialog = null
+            navigateToCategory(category)
+        }
+
+        dialogBinding.rvDialogCategories.apply {
+            setHasFixedSize(true)
+            itemAnimator = null
+            overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            adapter = dialogAdapter
+        }
+        dialogAdapter.submitList(categories)
+
+        categoryDialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogBinding.root)
+            .create()
+
+        dialogBinding.btnClose.setOnClickListener {
+            categoryDialog?.dismiss()
+            categoryDialog = null
+        }
+        categoryDialog?.setOnDismissListener { categoryDialog = null }
+        categoryDialog?.show()
+    }
+
+    private fun navigateToCategory(category: ProductCategory) {
+        val categoryName = category.name
+        val bundle = Bundle().apply {
+            putString("categoryName", categoryName)
+        }
+        findNavController().navigateSafely(
+            R.id.action_dashboard_to_single_product_from_Category,
+            bundle
+        )
+        Toast.makeText(requireContext(), "Clicked: ${category.name}", Toast.LENGTH_SHORT).show()
     }
 
     private fun getTodayName(): String {

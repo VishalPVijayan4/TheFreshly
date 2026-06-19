@@ -128,19 +128,25 @@ class DashboardFragment : Fragment() {
         dashBoardVm.loadState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is LoadState.Loading -> {
-                    binding.viewFlipper.displayedChild = ConstantStrings.STATE_LOADING
+                    if (binding.viewFlipper.displayedChild != ConstantStrings.STATE_LOADING) {
+                        binding.viewFlipper.displayedChild = ConstantStrings.STATE_LOADING
+                    }
                     binding.layoutLoading.visibility = View.VISIBLE
                     binding.layoutSuccess.visibility = View.GONE
                     binding.layoutError.visibility = View.GONE
                 }
                 is LoadState.NotLoading -> {
-                    binding.viewFlipper.displayedChild = ConstantStrings.STATE_SUCCESS
+                    if (binding.viewFlipper.displayedChild != ConstantStrings.STATE_SUCCESS) {
+                        binding.viewFlipper.displayedChild = ConstantStrings.STATE_SUCCESS
+                    }
                     binding.layoutLoading.visibility = View.GONE
                     binding.layoutSuccess.visibility = View.VISIBLE
                     binding.layoutError.visibility = View.GONE
                 }
                 is LoadState.Error -> {
-                    binding.viewFlipper.displayedChild = ConstantStrings.STATE_ERROR
+                    if (binding.viewFlipper.displayedChild != ConstantStrings.STATE_ERROR) {
+                        binding.viewFlipper.displayedChild = ConstantStrings.STATE_ERROR
+                    }
                     binding.layoutLoading.visibility = View.GONE
                     binding.layoutSuccess.visibility = View.GONE
                     binding.layoutError.visibility = View.VISIBLE
@@ -216,7 +222,9 @@ class DashboardFragment : Fragment() {
             itemAnimator = null
             overScrollMode = View.OVER_SCROLL_NEVER
             setItemViewCacheSize(8)
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false).apply {
+                initialPrefetchItemCount = 6
+            }
             adapter = this@DashboardFragment.adapter
             recycledViewPool.setMaxRecycledViews(0, 12)
         }

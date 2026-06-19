@@ -89,6 +89,7 @@ class DashboardViewModel @Inject constructor(
     )
 
     fun setLoadState(state: LoadState) {
+        if (_loadState.value?.let { it::class == state::class } == true) return
         _loadState.value = state
     }
 

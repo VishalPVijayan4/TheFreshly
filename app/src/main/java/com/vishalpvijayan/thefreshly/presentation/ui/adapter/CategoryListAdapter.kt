@@ -15,6 +15,10 @@ class CategoryListAdapter(
     private val onClick: (ProductCategory) -> Unit
 ) : ListAdapter<ProductCategory, CategoryListAdapter.ViewHolder>(DIFF_CALLBACK) {
 
+    init {
+        setHasStableIds(true)
+    }
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val title: TextView = view.findViewById(R.id.category_title)
         private val icon: ImageView = view.findViewById(R.id.category_image)
@@ -37,6 +41,10 @@ class CategoryListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    override fun getItemId(position: Int): Long {
+        return getItem(position).slug.hashCode().toLong()
     }
 
     companion object {

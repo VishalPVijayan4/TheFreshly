@@ -38,6 +38,7 @@ class ProductDetailsFragment : Fragment() {
         viewModel.loadProductDetail(productId)
 
         setupClickListeners()
+        observeLoadingState()
         observeProduct()
         observeCartItem()
 
@@ -58,10 +59,26 @@ class ProductDetailsFragment : Fragment() {
         }
     }
 
+    private fun observeLoadingState() {
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isLoading.collect { isLoading ->
+                    val showContent = !isLoading && viewModel.product.value != null
+                    binding.layoutLoading.isVisible = isLoading
+                    binding.scrollContent.isVisible = showContent
+                    binding.bottomBar.isVisible = showContent
+                }
+            }
+        }
+    }
+
     private fun observeProduct() {
         lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.product.collect { product ->
+                    val showContent = product != null && !viewModel.isLoading.value
+                    binding.scrollContent.isVisible = showContent
+                    binding.bottomBar.isVisible = showContent
                     product?.let { bindProduct(it) }
                 }
             }

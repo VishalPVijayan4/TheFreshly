@@ -1,10 +1,21 @@
 package com.vishalpvijayan.thefreshly.presentation.ui.fragment
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,6 +27,7 @@ import androidx.paging.LoadState
 import androidx.paging.filter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.vishalpvijayan.thefreshly.R
+import com.vishalpvijayan.thefreshly.databinding.DialogVoiceSearchBinding
 import com.vishalpvijayan.thefreshly.databinding.FragmentProductBinding
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.AllProductsAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
@@ -28,6 +40,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @AndroidEntryPoint
 class ProductFragment : Fragment() {
@@ -42,6 +55,20 @@ class ProductFragment : Fragment() {
     private lateinit var adapter: AllProductsAdapter
     private var searchHelper: SearchHelper? = null
     private val searchQuery = MutableStateFlow("")
+
+    private var speechRecognizer: SpeechRecognizer? = null
+    private var voiceDialog: AlertDialog? = null
+    private val mainHandler = Handler(Looper.getMainLooper())
+
+    private val audioPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            showFreshVoiceSearchDialog()
+        } else {
+            Toast.makeText(requireContext(), "Microphone permission is needed for voice search", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +85,7 @@ class ProductFragment : Fragment() {
         setupAdapter()
         setupRecyclerView()
         setupSearch()
+        setupVoiceSearch()
         observeProducts()
         observeCart()
         observeCartCount()
@@ -111,6 +139,105 @@ class ProductFragment : Fragment() {
         }
     }
 
+    private fun setupVoiceSearch() {
+        binding.ivVoiceSearch.setOnClickListener {
+            if (!SpeechRecognizer.isRecognitionAvailable(requireContext())) {
+                Toast.makeText(requireContext(), "Voice search is not available on this device", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
+                showFreshVoiceSearchDialog()
+            } else {
+                audioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+            }
+        }
+    }
+
+    private fun showFreshVoiceSearchDialog() {
+        val dialogBinding = DialogVoiceSearchBinding.inflate(layoutInflater)
+        voiceDialog = AlertDialog.Builder(requireContext())
+            .setView(dialogBinding.root)
+            .create()
+            .also { dialog ->
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                dialog.setOnDismissListener { stopVoiceSearch() }
+            }
+
+        dialogBinding.btnCancelVoice.setOnClickListener { voiceDialog?.dismiss() }
+        voiceDialog?.show()
+        startFreshVoiceRecognition(dialogBinding)
+    }
+
+    private fun startFreshVoiceRecognition(dialogBinding: DialogVoiceSearchBinding) {
+        stopVoiceSearch()
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(requireContext()).apply {
+            setRecognitionListener(object : RecognitionListener {
+                override fun onReadyForSpeech(params: Bundle?) {
+                    dialogBinding.tvVoiceStatus.text = "Listening for your Freshly search…"
+                }
+
+                override fun onBeginningOfSpeech() {
+                    dialogBinding.tvVoiceStatus.text = "Got it, keep speaking…"
+                }
+
+                override fun onRmsChanged(rmsdB: Float) = Unit
+                override fun onBufferReceived(buffer: ByteArray?) = Unit
+                override fun onEndOfSpeech() {
+                    dialogBinding.tvVoiceStatus.text = "Finding your fresh picks…"
+                }
+
+                override fun onError(error: Int) {
+                    dialogBinding.tvVoiceStatus.text = "We could not hear that. Tap mic and try again."
+                    mainHandler.postDelayed({ voiceDialog?.dismiss() }, VOICE_ERROR_DISMISS_DELAY_MS)
+                }
+
+                override fun onResults(results: Bundle?) {
+                    val spokenText = results
+                        ?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                        ?.firstOrNull()
+                        .orEmpty()
+                    applyVoiceSearchText(spokenText)
+                    voiceDialog?.dismiss()
+                }
+
+                override fun onPartialResults(partialResults: Bundle?) {
+                    val partialText = partialResults
+                        ?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                        ?.firstOrNull()
+                        .orEmpty()
+                    if (partialText.isNotBlank()) {
+                        dialogBinding.tvVoiceHint.text = partialText
+                    }
+                }
+
+                override fun onEvent(eventType: Int, params: Bundle?) = Unit
+            })
+            startListening(createVoiceSearchIntent())
+        }
+    }
+
+    private fun createVoiceSearchIntent(): Intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+        putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+        putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, true)
+    }
+
+    private fun applyVoiceSearchText(spokenText: String) {
+        if (spokenText.isNotBlank()) {
+            binding.etSearch.setText(spokenText)
+            binding.etSearch.setSelection(spokenText.length)
+            searchQuery.value = spokenText
+        }
+    }
+
+    private fun stopVoiceSearch() {
+        speechRecognizer?.stopListening()
+        speechRecognizer?.destroy()
+        speechRecognizer = null
+        mainHandler.removeCallbacksAndMessages(null)
+    }
+
     private fun observeProducts() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -156,9 +283,17 @@ class ProductFragment : Fragment() {
 
     override fun onDestroyView() {
         binding.rvProduct.adapter = null
+        voiceDialog?.dismiss()
+        voiceDialog = null
+        stopVoiceSearch()
         searchHelper?.dispose()
         searchHelper = null
         _binding = null
         super.onDestroyView()
     }
+
+    companion object {
+        private const val VOICE_ERROR_DISMISS_DELAY_MS = 1400L
+    }
+
 }

@@ -2,15 +2,15 @@ package com.vishalpvijayan.thefreshly
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.core.view.isVisible
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.razorpay.PaymentData
 import com.vishalpvijayan.thefreshly.databinding.ActivityMainBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.ToolbarViewModel
@@ -32,9 +32,19 @@ class MainActivity : AppCompatActivity(), com.razorpay.PaymentResultWithDataList
         val navController = (supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment)
             .navController
 
-        // NavigationUI provides singleTop navigation, state restoration, and correct back-stack
-        // handling for each top-level destination. Do not replace its item listener with direct navigate().
-        binding.bottomNavView.setupWithNavController(navController)
+        binding.bottomNavView.setOnItemReselectedListener { }
+        binding.bottomNavView.setOnItemSelectedListener { item ->
+            if (navController.currentDestination?.id == item.itemId) {
+                return@setOnItemSelectedListener true
+            }
+            val navOptions = NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .setRestoreState(true)
+                .setPopUpTo(R.id.dashboard, false, true)
+                .build()
+            navController.navigate(item.itemId, null, navOptions)
+            true
+        }
 
         setSupportActionBar(binding.customToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -54,6 +64,9 @@ class MainActivity : AppCompatActivity(), com.razorpay.PaymentResultWithDataList
                 controller.graph.setStartDestination(R.id.dashboard)
             }
             updateNavigationChrome(destination.id)
+            if (destination.id in TOP_LEVEL_DESTINATIONS && binding.bottomNavView.selectedItemId != destination.id) {
+                binding.bottomNavView.menu.findItem(destination.id)?.isChecked = true
+            }
         }
     }
 
@@ -75,7 +88,6 @@ class MainActivity : AppCompatActivity(), com.razorpay.PaymentResultWithDataList
     }
 
     private fun updateNavigationChrome(destinationId: Int) {
-        val topLevelDestinations = setOf(R.id.dashboard, R.id.product, R.id.SettingsFragment)
         val fullscreenDestinations = setOf(
             R.id.onboarding,
             R.id.splash,
@@ -87,19 +99,16 @@ class MainActivity : AppCompatActivity(), com.razorpay.PaymentResultWithDataList
         )
         val toolbarHiddenDestinations = fullscreenDestinations + setOf(R.id.dashboard, R.id.product)
 
-        binding.bottomNavView.visibility =
-            if (destinationId in topLevelDestinations) View.VISIBLE else View.GONE
-        binding.customToolbar.visibility =
-            if (destinationId in toolbarHiddenDestinations) View.GONE else View.VISIBLE
-        binding.ivBack.visibility = when {
-            destinationId == R.id.SettingsFragment -> View.GONE
-            destinationId in topLevelDestinations -> View.GONE
-            destinationId in fullscreenDestinations -> View.GONE
-            destinationId == R.id.orderSuccessFragment -> View.GONE
-            else -> View.VISIBLE
+        binding.bottomNavView.isVisible = destinationId in TOP_LEVEL_DESTINATIONS
+        binding.customToolbar.isVisible = destinationId !in toolbarHiddenDestinations
+        binding.ivBack.isVisible = when {
+            destinationId == R.id.SettingsFragment -> false
+            destinationId in TOP_LEVEL_DESTINATIONS -> false
+            destinationId in fullscreenDestinations -> false
+            destinationId == R.id.orderSuccessFragment -> false
+            else -> true
         }
-        binding.threeDotButton.visibility =
-            if (destinationId == R.id.dashboard) View.VISIBLE else View.GONE
+        binding.threeDotButton.isVisible = destinationId == R.id.dashboard
     }
 
     fun startRazorpayPayment(options: org.json.JSONObject) {
@@ -124,4 +133,9 @@ class MainActivity : AppCompatActivity(), com.razorpay.PaymentResultWithDataList
     override fun onExternalWalletSelected(p0: String?, p1: PaymentData?) {
         Log.d("MainActivity", "External wallet selected: $p0")
     }
+
+    companion object {
+        private val TOP_LEVEL_DESTINATIONS = setOf(R.id.dashboard, R.id.product, R.id.SettingsFragment)
+    }
+
 }

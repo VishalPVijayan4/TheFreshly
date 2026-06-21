@@ -1,6 +1,8 @@
 package com.vishalpvijayan.thefreshly.presentation.ui.fragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +29,8 @@ import com.vishalpvijayan.thefreshly.domain.repository.location.LocationReposito
 import com.vishalpvijayan.thefreshly.helper.LocationViewModel
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CategoryListAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CuratedProductAdapter
+import com.vishalpvijayan.thefreshly.presentation.ui.adapter.OfferCard
+import com.vishalpvijayan.thefreshly.presentation.ui.adapter.OfferCardAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.ProductCategoryAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
@@ -60,11 +64,25 @@ class DashboardFragment : Fragment() {
     private lateinit var adapter: ProductCategoryAdapter
     private lateinit var curatedProductAdapter: CuratedProductAdapter
     private var categoryDialog: androidx.appcompat.app.AlertDialog? = null
+    private val offerCarouselHandler = Handler(Looper.getMainLooper())
+    private var offerCarouselPosition = 0
+    private var offerCarouselItemCount = 0
+    private val offerCarouselRunnable = object : Runnable {
+        override fun run() {
+            if (_binding != null && offerCarouselItemCount > 1) {
+                offerCarouselPosition = (offerCarouselPosition + 1) % offerCarouselItemCount
+                binding.rvOffers.smoothScrollToPosition(offerCarouselPosition)
+                offerCarouselHandler.postDelayed(this, OFFER_CAROUSEL_INTERVAL_MS)
+            }
+        }
+    }
 
     override fun onDestroyView() {
         categoryDialog?.dismiss()
         categoryDialog = null
+        stopOfferCarousel()
         binding.rvCategory.adapter = null
+        binding.rvOffers.adapter = null
         binding.rvCuratedProducts.adapter = null
         locationViewModel.stopUpdates()
         _binding = null
@@ -219,6 +237,26 @@ class DashboardFragment : Fragment() {
                 ).show()
             }
         }*/
+        val offers = listOf(
+            OfferCard("🎉 Welcome Offer", "Get ₹150 OFF on your first order\nCode: FRESH150", "Shop Now"),
+            OfferCard("⚡ Flash Sale", "Up to 70% OFF\nEnds in 02:15:34", "Grab Deal"),
+            OfferCard("🚚 Free Delivery", "On orders above ₹499\nToday Only"),
+            OfferCard("🛒 Save More", "Buy 2 Get 10% OFF\nBuy 3 Get 20% OFF"),
+            OfferCard("💰 Cashback Offer", "Get ₹100 Cashback\non UPI Payments"),
+            OfferCard("🏆 Freshly Rewards", "You earned 250 Points\nRedeem Now")
+        )
+        offerCarouselItemCount = offers.size
+        binding.rvOffers.apply {
+            setHasFixedSize(true)
+            itemAnimator = null
+            overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = OfferCardAdapter(offers) {
+                findNavController().navigateSafely(R.id.action_dashboard_to_product)
+            }
+        }
+        startOfferCarousel()
+
         binding.rvCategory.apply {
             setHasFixedSize(true)
             itemAnimator = null
@@ -269,9 +307,6 @@ class DashboardFragment : Fragment() {
             Toast.makeText(requireContext(), "Quick order added to cart", Toast.LENGTH_SHORT).show()
             findNavController().navigateSafely(R.id.cartFragment)
         }
-        binding.searchContainer.setOnClickListener {
-            findNavController().navigateSafely(R.id.action_dashboard_to_product)
-        }
         binding.tvSeeAll.setOnClickListener {
             val categories = dashBoardVm.allCategories.value.ifEmpty { adapter.snapshot().items }
             showAllCategoriesDialog(categories)
@@ -310,6 +345,18 @@ class DashboardFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+
+    private fun startOfferCarousel() {
+        offerCarouselHandler.removeCallbacks(offerCarouselRunnable)
+        if (offerCarouselItemCount > 1) {
+            offerCarouselHandler.postDelayed(offerCarouselRunnable, OFFER_CAROUSEL_INTERVAL_MS)
+        }
+    }
+
+    private fun stopOfferCarousel() {
+        offerCarouselHandler.removeCallbacks(offerCarouselRunnable)
     }
 
     private fun showAllCategoriesDialog(categories: List<ProductCategory>) {
@@ -361,4 +408,9 @@ class DashboardFragment : Fragment() {
     private fun getTodayName(): String {
         return SimpleDateFormat("EEEE", Locale.getDefault()).format(Date())
     }
+
+    companion object {
+        private const val OFFER_CAROUSEL_INTERVAL_MS = 3000L
+    }
+
 }

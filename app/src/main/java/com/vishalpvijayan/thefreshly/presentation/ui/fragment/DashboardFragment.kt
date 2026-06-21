@@ -27,6 +27,8 @@ import com.vishalpvijayan.thefreshly.domain.repository.location.LocationReposito
 import com.vishalpvijayan.thefreshly.helper.LocationViewModel
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CategoryListAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.CuratedProductAdapter
+import com.vishalpvijayan.thefreshly.presentation.ui.adapter.OfferCard
+import com.vishalpvijayan.thefreshly.presentation.ui.adapter.OfferCardAdapter
 import com.vishalpvijayan.thefreshly.presentation.ui.adapter.ProductCategoryAdapter
 import com.vishalpvijayan.thefreshly.presentation.vm.CartViewModel
 import com.vishalpvijayan.thefreshly.presentation.vm.DashboardViewModel
@@ -65,6 +67,7 @@ class DashboardFragment : Fragment() {
         categoryDialog?.dismiss()
         categoryDialog = null
         binding.rvCategory.adapter = null
+        binding.rvOffers.adapter = null
         binding.rvCuratedProducts.adapter = null
         locationViewModel.stopUpdates()
         _binding = null
@@ -219,6 +222,25 @@ class DashboardFragment : Fragment() {
                 ).show()
             }
         }*/
+        binding.rvOffers.apply {
+            setHasFixedSize(true)
+            itemAnimator = null
+            overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = OfferCardAdapter(
+                listOf(
+                    OfferCard("🎉 Welcome Offer", "Get ₹150 OFF on your first order\nCode: FRESH150", "Shop Now"),
+                    OfferCard("⚡ Flash Sale", "Up to 70% OFF\nEnds in 02:15:34", "Grab Deal"),
+                    OfferCard("🚚 Free Delivery", "On orders above ₹499\nToday Only"),
+                    OfferCard("🛒 Save More", "Buy 2 Get 10% OFF\nBuy 3 Get 20% OFF"),
+                    OfferCard("💰 Cashback Offer", "Get ₹100 Cashback\non UPI Payments"),
+                    OfferCard("🏆 Freshly Rewards", "You earned 250 Points\nRedeem Now")
+                )
+            ) {
+                findNavController().navigateSafely(R.id.action_dashboard_to_product)
+            }
+        }
+
         binding.rvCategory.apply {
             setHasFixedSize(true)
             itemAnimator = null
@@ -268,9 +290,6 @@ class DashboardFragment : Fragment() {
             cartViewModel.addQuickOrderToCart()
             Toast.makeText(requireContext(), "Quick order added to cart", Toast.LENGTH_SHORT).show()
             findNavController().navigateSafely(R.id.cartFragment)
-        }
-        binding.searchContainer.setOnClickListener {
-            findNavController().navigateSafely(R.id.action_dashboard_to_product)
         }
         binding.tvSeeAll.setOnClickListener {
             val categories = dashBoardVm.allCategories.value.ifEmpty { adapter.snapshot().items }

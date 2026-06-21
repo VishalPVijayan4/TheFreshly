@@ -329,54 +329,32 @@
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/searchContainer"
-                    android:layout_width="0dp"
-                    android:layout_height="58dp"
+                <TextView
+                    android:id="@+id/tvOffersTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="26dp"
-                    android:background="@drawable/bg_fresh_search"
-                    android:elevation="5dp"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="22dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Fresh Offers"
+                    android:textColor="#101612"
+                    android:textSize="21sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/repeatCard" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOffers"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="14dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/repeatCard">
-
-                    <ImageView
-                        android:id="@+id/ivSearchIcon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:src="@android:drawable/ic_menu_search"
-                        app:tint="#101612"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvSearchHint"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="Search fresh produce, dairy"
-                        android:textColor="#9AA19D"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/ivMic"
-                        app:layout_constraintStart_toEndOf="@id/ivSearchIcon"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageView
-                        android:id="@+id/ivMic"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_mic"
-                        app:tint="#075D3B"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@id/tvOffersTitle"
+                    tools:listitem="@layout/item_offer_card" />
 
                 <TextView
                     android:id="@+id/txtShopBy"
@@ -388,7 +366,7 @@
                     android:textColor="#101612"
                     android:textSize="21sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/searchContainer" />
+                    app:layout_constraintTop_toBottomOf="@id/rvOffers" />
 
                 <TextView
                     android:id="@+id/tvSeeAll"

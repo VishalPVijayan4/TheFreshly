@@ -1,11 +1,15 @@
 package com.vishalpvijayan.thefreshly.presentation.ui.fragment
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -28,6 +32,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @AndroidEntryPoint
 class ProductFragment : Fragment() {
@@ -42,6 +47,22 @@ class ProductFragment : Fragment() {
     private lateinit var adapter: AllProductsAdapter
     private var searchHelper: SearchHelper? = null
     private val searchQuery = MutableStateFlow("")
+
+    private val voiceSearchLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == android.app.Activity.RESULT_OK) {
+            val spokenText = result.data
+                ?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                ?.firstOrNull()
+                .orEmpty()
+            if (spokenText.isNotBlank()) {
+                binding.etSearch.setText(spokenText)
+                binding.etSearch.setSelection(spokenText.length)
+                searchQuery.value = spokenText
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +79,7 @@ class ProductFragment : Fragment() {
         setupAdapter()
         setupRecyclerView()
         setupSearch()
+        setupVoiceSearch()
         observeProducts()
         observeCart()
         observeCartCount()
@@ -108,6 +130,21 @@ class ProductFragment : Fragment() {
             debounceTime = 300L
         ) { query ->
             searchQuery.value = query
+        }
+    }
+
+    private fun setupVoiceSearch() {
+        binding.ivVoiceSearch.setOnClickListener {
+            val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+                putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak product, brand, or category")
+            }
+            try {
+                voiceSearchLauncher.launch(intent)
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(requireContext(), "Voice search is not available on this device", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

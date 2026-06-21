@@ -114,6 +114,7 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -154,9 +155,21 @@
                         android:textColorHint="#8A938E"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/ivVoiceSearch"
                         app:layout_constraintStart_toEndOf="@id/ivSearchIcon"
                         app:layout_constraintTop_toTopOf="parent" />
+                    <ImageView
+                        android:id="@+id/ivVoiceSearch"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="12dp"
+                        android:contentDescription="Voice search"
+                        android:src="@drawable/ic_mic"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="#075D3B" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView

@@ -22,7 +22,7 @@ A modern grocery and fresh produce e-commerce application built using Android be
 ## 📱 Screenshots
 
 ### Home Screen
-![Home](./screenshotss/Home Dashboard.png)
+![Home](.screenshotss/Home%20Dashboard.png)
 
 ### Product Listing
 ![Products](./screenshotss/ProductListing.png)

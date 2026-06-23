@@ -21,22 +21,14 @@ A modern grocery and fresh produce e-commerce application built using Android be
 
 ## 📱 Screenshots
 
-### Home Screen
-![Home](.screenshotss/Home%20Dashboard.png)
+<p align="center">
+  <img src="screenshotss/Home%20Dashboard.png" width="180">
+  <img src="screenshotss/Live%20Tracking.png" width="180">
+  <img src="screenshotss/Onboarding%20-%20Fast%20Delivery.png" width="180">
+  <img src="screenshotss/Product%20Detail.png" width="180">
+  <img src="screenshotss/Your%20Cart.png" width="180">
+</p>
 
-### Product Listing
-![Products](./screenshotss/ProductListing.png)
-
-### Product Details
-![Details](./screenshotss/ProductDetails.png)
-
-### Cart
-![Cart](./screenshotss/Cart.png)
-
-### Profile
-![Profile](./screenshotss/Profile.png)
-
----
 
 ## 🏗️ Architecture
 

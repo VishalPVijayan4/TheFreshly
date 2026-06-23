@@ -64,7 +64,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         when {
-            permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true -> {
+            permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true -> {
                 enableMyLocation()
                 centerOnCurrentLocation()
                 locationViewModel.startUpdates()
@@ -104,13 +105,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
-        // Collect address updates
+        // Repository address updates are only used before the user picks a map/saved location.
+        // Manual selections resolve their own address, so background location updates cannot overwrite them.
         viewLifecycleOwner.lifecycleScope.launch {
             locationViewModel.addressFlow.collect { address ->
-                address?.let {
-                    selectedAddress = it
-                    binding.txtSelectedAddress.text = it
-                    Log.d("MapFragment", "Address: $it")
+                if (address != null && selectedLatitude == 0.0 && selectedLongitude == 0.0) {
+                    selectedAddress = address
+                    binding.txtSelectedAddress.text = address
+                    Log.d("MapFragment", "Address: $address")
                 }
             }
         }
@@ -298,7 +300,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         return ContextCompat.checkSelfPermission(
             requireContext(),
             Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
+        ) == PackageManager.PERMISSION_GRANTED ||
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun moveToLocation(latitude: Double, longitude: Double) {

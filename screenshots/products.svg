@@ -1,0 +1,26 @@
+<svg width="360" height="760" viewBox="0 0 360 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="360" height="760" rx="34" fill="#F4FBF7"/>
+  <text x="24" y="64" font-family="Arial" font-size="26" font-weight="700" fill="#075D3B">Products</text>
+  <rect x="24" y="90" width="312" height="52" rx="18" fill="white" stroke="#DDE7E2"/>
+  <text x="48" y="123" font-family="Arial" font-size="14" fill="#7A847E">Search products</text>
+  <g>
+    <rect x="20" y="170" width="150" height="238" rx="22" fill="white" stroke="#E3EEE8"/>
+    <rect x="190" y="170" width="150" height="238" rx="22" fill="white" stroke="#E3EEE8"/>
+    <rect x="20" y="430" width="150" height="238" rx="22" fill="white" stroke="#E3EEE8"/>
+    <rect x="190" y="430" width="150" height="238" rx="22" fill="white" stroke="#E3EEE8"/>
+  </g>
+  <g fill="#DDF9EA">
+    <rect x="38" y="188" width="114" height="96" rx="18"/>
+    <rect x="208" y="188" width="114" height="96" rx="18"/>
+    <rect x="38" y="448" width="114" height="96" rx="18"/>
+    <rect x="208" y="448" width="114" height="96" rx="18"/>
+  </g>
+  <g font-family="Arial">
+    <text x="38" y="314" font-size="14" font-weight="700" fill="#101612">Green Grapes</text><text x="38" y="354" font-size="16" font-weight="700" fill="#075D3B">$2.99</text>
+    <text x="208" y="314" font-size="14" font-weight="700" fill="#101612">Fresh Bread</text><text x="208" y="354" font-size="16" font-weight="700" fill="#075D3B">$5.49</text>
+    <text x="38" y="574" font-size="14" font-weight="700" fill="#101612">Tomatoes</text><text x="38" y="614" font-size="16" font-weight="700" fill="#075D3B">$1.99</text>
+    <text x="208" y="574" font-size="14" font-weight="700" fill="#101612">Milk Pack</text><text x="208" y="614" font-size="16" font-weight="700" fill="#075D3B">$3.25</text>
+  </g>
+  <g fill="#075D3B"><rect x="94" y="342" width="58" height="30" rx="15"/><rect x="264" y="342" width="58" height="30" rx="15"/><rect x="94" y="602" width="58" height="30" rx="15"/><rect x="264" y="602" width="58" height="30" rx="15"/></g>
+  <g font-family="Arial" font-size="12" font-weight="700" fill="white"><text x="111" y="362">ADD</text><text x="281" y="362">ADD</text><text x="111" y="622">ADD</text><text x="281" y="622">ADD</text></g>
+</svg>

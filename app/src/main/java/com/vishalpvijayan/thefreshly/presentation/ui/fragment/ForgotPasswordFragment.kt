@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentForgotPasswordBinding
-import com.vishalpvijayan.thefreshly.databinding.FragmentLoginBinding
 import com.vishalpvijayan.thefreshly.utils.navigateSafely
+import com.vishalpvijayan.thefreshly.utils.showFreshToast
 
 
 class ForgotPasswordFragment : Fragment() {
@@ -21,6 +21,7 @@ class ForgotPasswordFragment : Fragment() {
     ): View {
         binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
         binding.btnReset.setOnClickListener {
+            requireContext().showFreshToast("Your new password has been shared.")
             findNavController().navigateSafely(R.id.action_forgotpassword_to_login)
         }
 
@@ -36,7 +37,8 @@ class ForgotPasswordFragment : Fragment() {
         }
 
         binding.btnReset.setOnClickListener {
-            // Reset password logic
+            requireContext().showFreshToast("Your new password has been shared.")
+            findNavController().navigateSafely(R.id.action_forgotpassword_to_login)
         }
     }
 

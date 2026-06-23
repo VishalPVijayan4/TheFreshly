@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import com.vishalpvijayan.thefreshly.utils.showFreshToast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -55,6 +55,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private var selectedLatitude: Double = 0.0
     private var selectedLongitude: Double = 0.0
     private var selectedAddress: String = ""
+    private var selectedSavedLocation: SavedLocation? = null
 
     private lateinit var savedLocationAdapter: SavedLocationAdapter
     private var isDropdownVisible = false
@@ -65,10 +66,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         when {
             permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true -> {
                 enableMyLocation()
+                centerOnCurrentLocation()
                 locationViewModel.startUpdates()
             }
             else -> {
-                Toast.makeText(context, "Location permission required", Toast.LENGTH_SHORT).show()
+                requireContext().showFreshToast("Location permission required")
             }
         }
     }
@@ -144,16 +146,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                             binding.btnConfirmLocation.isEnabled = false
                             binding.btnConfirmLocation.text = "Saving..."
                         }
-                       /* is SavedLocationViewModel.SaveState.Success -> {
-                            Toast.makeText(
-                                context,
-                                "Location saved successfully!",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            savedLocationViewModel.resetSaveState()
-                            findNavController().navigateSafely(R.id.action_mapFragment_to_payment)
-
-                        }*/
                         is SavedLocationViewModel.SaveState.Success -> {
                             // Create SavedLocation object and set it
                             val location = SavedLocation(
@@ -165,18 +157,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
                             )
                             checkoutViewModel.setSelectedAddress(location)
 
-                            Toast.makeText(context, "Location saved successfully!", Toast.LENGTH_SHORT).show()
+                            requireContext().showFreshToast("Location saved successfully!")
                             savedLocationViewModel.resetSaveState()
                             findNavController().navigateSafely(R.id.action_mapFragment_to_payment)
                         }
 
 
                         is SavedLocationViewModel.SaveState.Error -> {
-                            Toast.makeText(
-                                context,
-                                "Error: ${state.message}",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            requireContext().showFreshToast("Error: ${state.message}")
                             savedLocationViewModel.resetSaveState()
                         }
                     }
@@ -192,13 +180,19 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         // Confirm button click
         binding.btnConfirmLocation.setOnClickListener {
             if (selectedAddress.isNotEmpty() && selectedLatitude != 0.0 && selectedLongitude != 0.0) {
+                selectedSavedLocation?.let { savedLocation ->
+                    checkoutViewModel.setSelectedAddress(savedLocation)
+                    findNavController().navigateSafely(R.id.action_mapFragment_to_payment)
+                    return@setOnClickListener
+                }
+
                 savedLocationViewModel.saveLocation(
                     address = selectedAddress,
                     latitude = selectedLatitude,
                     longitude = selectedLongitude
                 )
             } else {
-                Toast.makeText(context, "Please select a location", Toast.LENGTH_SHORT).show()
+                requireContext().showFreshToast("Please select a location")
             }
         }
     }
@@ -212,10 +206,12 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
             moveToLocation(location.latitude, location.longitude)
 
             // Update selected data
+            selectedSavedLocation = location
             selectedLatitude = location.latitude
             selectedLongitude = location.longitude
             selectedAddress = location.address
             binding.txtSelectedAddress.text = location.address
+            binding.btnConfirmLocation.text = "Use this Location"
         }
 
         binding.rvSavedLocations.apply {
@@ -267,6 +263,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         when {
             hasLocationPermission() -> {
                 enableMyLocation()
+                centerOnCurrentLocation()
                 locationViewModel.startUpdates()
             }
             else -> {
@@ -283,6 +280,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     private fun enableMyLocation() {
         googleMap?.isMyLocationEnabled = true
+        centerOnCurrentLocation()
+    }
+
+    private fun centerOnCurrentLocation() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            locationViewModel.getCurrentLocationOnce()?.let { location ->
+                if (!isInitialLocationSet) {
+                    moveToLocation(location.latitude, location.longitude)
+                    isInitialLocationSet = true
+                }
+            }
+        }
     }
 
     private fun hasLocationPermission(): Boolean {
@@ -295,12 +304,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     private fun moveToLocation(latitude: Double, longitude: Double) {
         val latLng = LatLng(latitude, longitude)
         googleMap?.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(latLng, 15f)
+            CameraUpdateFactory.newLatLngZoom(latLng, 16f)
         )
         placeMarkerAndGetAddress(latLng)
     }
 
     private fun placeMarkerAndGetAddress(latLng: LatLng) {
+        selectedSavedLocation = null
+        binding.btnConfirmLocation.text = "Confirm Location"
         currentMarker?.remove()
 
         currentMarker = googleMap?.addMarker(

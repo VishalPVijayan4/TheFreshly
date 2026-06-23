@@ -5,6 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.gms.google-services")
     id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -14,6 +15,8 @@ android {
     buildFeatures {
         //noinspection DataBindingWithoutKapt
         dataBinding = true
+        viewBinding = true
+        buildConfig = true
     }
 
     defaultConfig {
@@ -24,10 +27,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    buildFeatures {
-        //noinspection DataBindingWithoutKapt
-        dataBinding = true
+
+        buildConfigField("String", "RAZORPAY_KEY_ID", "\"rzp_test_RvYknb590BqzaM\"")
+
     }
 
     buildTypes {
@@ -38,10 +40,10 @@ android {
         release {
             // This makes the DEBUG field false for release builds
             isMinifyEnabled = false
-            proguardFiles(
+            /*proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
-            )
+            )*/
         }
     }
 
@@ -65,6 +67,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("androidx.compose.ui:ui-graphics-android:1.6.4")
     implementation("androidx.compose.foundation:foundation-android:1.6.4")
+    implementation(libs.play.services.location)
+    implementation(libs.play.services.maps)
     val coroutines = ("1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines")
 
@@ -72,6 +76,17 @@ dependencies {
 
     val coil = ("2.5.0")
     implementation("io.coil-kt:coil:$coil")
+
+    implementation("com.razorpay:checkout:1.6.41")
+
+//    implementation ("com.paypal.checkout:android-sdk:2.16.0")
+
+    /*val CURRENT_VERSION_SNAPSHOT = ("1.7.1")
+    implementation ("com.paypal.android:paypal-native-payments:1.7.1")
+    implementation ("com.paypal.android:card-payments:$CURRENT_VERSION_SNAPSHOT")
+
+    // PayPal Payment Buttons (for pre-built UI buttons)
+    implementation ("com.paypal.android:payment-buttons:1.7.1")*/
 
     val viewmodel = ("2.7.0")
     val activity = ("1.8.2")
@@ -88,7 +103,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.7")
 
 
-    val navigation = ("2.7.6")
+    val navigation = ("2.9.0")
     implementation("androidx.navigation:navigation-fragment-ktx:$navigation")
     implementation("androidx.navigation:navigation-ui-ktx:$navigation")
 
@@ -100,6 +115,7 @@ dependencies {
     ksp("androidx.room:room-compiler:$room")
 
     //glide
+    implementation("io.coil-kt:coil:2.4.0")
     implementation("com.github.bumptech.glide:glide:4.14.2")
     ksp("com.github.bumptech.glide:compiler:4.14.2")
 
@@ -119,6 +135,11 @@ dependencies {
     val splash = ("1.0.1")
     implementation("androidx.core:core-splashscreen:$splash")
 
+    //paging
+    implementation("androidx.paging:paging-runtime:3.3.0")
+
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 
     val corektx = ("1.12.0")
     val appcompat = ("1.6.1")
@@ -130,9 +151,9 @@ dependencies {
     implementation("com.google.android.material:material:$material")
     implementation("androidx.constraintlayout:constraintlayout:$constraintlayout")
 
-    implementation ("androidx.datastore:datastore:1.1.7")
+    implementation("androidx.datastore:datastore:1.1.7")
     implementation("androidx.datastore:datastore-preferences:1.1.0")
-    implementation ("androidx.datastore:datastore-core:1.1.7")
+    implementation("androidx.datastore:datastore-core:1.1.7")
 
 //    implementation("com.github.Romancha:android-material-play-pause-view-button:2.3")
 

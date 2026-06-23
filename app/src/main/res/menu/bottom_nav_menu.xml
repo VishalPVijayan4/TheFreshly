@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/itemHome"
+        android:id="@+id/dashboard"
         android:icon="@drawable/ic_home"
         app:showAsAction="ifRoom"
         android:title="Home"/>
 
     <item
-        android:id="@+id/itemProducts"
+        android:id="@+id/product"
         android:icon="@drawable/ic_category"
         app:showAsAction="ifRoom"
-        android:title="Products"
+        android:title="Product"
         />
 
 
     <item
-        android:id="@+id/itemCart"
-        android:icon="@drawable/ic_cart"
+        android:id="@+id/SettingsFragment"
+        android:icon="@drawable/ic_setting"
         app:showAsAction="ifRoom"
-        android:title="Cart"
+        android:title="Setting"
         />
 </menu>

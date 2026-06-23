@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_luxury_glass"
+    android:padding="16dp">
+
+    <!-- Location Icon -->
+    <ImageView
+        android:id="@+id/tvAppName1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_location"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#E6FFFFFF" />
+
+    <!-- Selection Indicator -->
+    <ImageView
+        android:id="@+id/iv_selected"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_luxury_icon"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_tick_mark"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@android:color/white" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/open_sans_medium"
+        android:text="Address Title"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAppName1"
+        app:layout_constraintEnd_toStartOf="@id/iv_selected"
+        app:layout_constraintStart_toEndOf="@+id/tvAppName1"
+        app:layout_constraintTop_toTopOf="@+id/tvAppName1" />
+
+    <!-- Address Details -->
+    <TextView
+        android:id="@+id/txtSubtxt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/open_sans_light"
+        android:lineSpacingExtra="2dp"
+        android:text="15547, GRB Apartment, Electronic City Near Karunya Hospital - Electronic City, Bengaluru 560068"
+        android:textColor="#E6FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_selected"
+        app:layout_constraintStart_toEndOf="@+id/tvAppName1"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <!-- Luxury Divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="#33FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSubtxt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

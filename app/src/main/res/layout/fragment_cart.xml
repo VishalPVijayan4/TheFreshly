@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_fresh_app">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/cartScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@id/checkoutDock"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="28dp"
+                android:paddingTop="22dp"
+                android:paddingEnd="28dp"
+                android:paddingBottom="28dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/deliveryCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="108dp"
+                    android:background="@drawable/bg_delivery_card"
+                    android:paddingStart="28dp"
+                    android:paddingEnd="24dp">
+
+                    <ImageView
+                        android:id="@+id/ivDeliveryBolt"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_bolt"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.08"
+                        android:text="ESTIMATED DELIVERY"
+                        android:textColor="#075D3B"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/tvDeliveryTime"
+                        app:layout_constraintStart_toEndOf="@id/ivDeliveryBolt"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="4dp"
+                        android:text="12 - 18 Minutes"
+                        android:textColor="#075D3B"
+                        android:textSize="28sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivDeliveryBolt"
+                        app:layout_constraintTop_toBottomOf="@id/tvDeliveryLabel" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvBasketTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Your Basket"
+                    android:textColor="#101612"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_cart" />
+
+                <TextView
+                    android:id="@+id/emptyCartView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_cart_item_fresh"
+                    android:gravity="center"
+                    android:padding="28dp"
+                    android:text="Your cart is empty"
+                    android:textColor="#2B322E"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="52dp"
+                            android:background="@drawable/bg_benefit_chip"
+                            android:drawableStart="@drawable/ic_shield_check"
+                            android:drawablePadding="12dp"
+                            android:gravity="center"
+                            android:minWidth="244dp"
+                            android:paddingStart="26dp"
+                            android:paddingEnd="26dp"
+                            android:text="Secure Checkout"
+                            android:textColor="#075D3B"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="52dp"
+                            android:layout_marginStart="22dp"
+                            android:background="@drawable/bg_benefit_chip"
+                            android:drawableStart="@drawable/ic_bolt"
+                            android:drawablePadding="12dp"
+                            android:gravity="center"
+                            android:minWidth="244dp"
+                            android:paddingStart="26dp"
+                            android:paddingEnd="26dp"
+                            android:text="Eco-Friendly Pack"
+                            android:textColor="#075D3B"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cartSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="68dp"
+                    android:background="@drawable/bg_cart_summary_fresh"
+                    android:paddingStart="34dp"
+                    android:paddingTop="34dp"
+                    android:paddingEnd="34dp"
+                    android:paddingBottom="34dp">
+
+                    <TextView
+                        android:id="@+id/tvItemsTotalLabel"
+                        style="@style/TextAppearance.AppCompat.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Items Total"
+                        android:textColor="#2B322E"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvItemsSubtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#101612"
+                        android:textSize="20sp"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvItemsTotalLabel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="$12.20" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryFeeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="Delivery Fee"
+                        android:textColor="#2B322E"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvItemsTotalLabel" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryFee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$2.00  FREE"
+                        android:textColor="#075D3B"
+                        android:textSize="20sp"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvDeliveryFeeLabel"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvPlatformFeeLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="Platform Fee"
+                        android:textColor="#2B322E"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvDeliveryFeeLabel" />
+
+                    <TextView
+                        android:id="@+id/tvPlatformFee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$0.50"
+                        android:textColor="#101612"
+                        android:textSize="20sp"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvPlatformFeeLabel"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvTaxesLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="Estimated Taxes"
+                        android:textColor="#2B322E"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvPlatformFeeLabel" />
+
+                    <TextView
+                        android:id="@+id/tvTaxes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#101612"
+                        android:textSize="20sp"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvTaxesLabel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="$0.85" />
+
+                    <View
+                        android:id="@+id/summaryDivider"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="24dp"
+                        android:background="#DDE4E0"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvTaxesLabel" />
+
+                    <TextView
+                        android:id="@+id/tvToPayLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:text="To Pay"
+                        android:textColor="#101612"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/summaryDivider" />
+
+                    <TextView
+                        android:id="@+id/tvTotalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#075D3B"
+                        android:textSize="20sp"
+                        app:layout_constraintBaseline_toBaselineOf="@id/tvToPayLabel"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="$13.55" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/checkoutDock"
+            android:layout_width="0dp"
+            android:layout_height="210dp"
+            android:background="@drawable/bg_checkout_dock"
+            android:elevation="12dp"
+            android:paddingStart="28dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="28dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBasketIcon"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:background="@drawable/bg_fresh_pill_dark"
+                android:padding="18dp"
+                android:src="@drawable/ic_cart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/tvItemCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.08"
+                android:textColor="#101612"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ivBasketIcon"
+                app:layout_constraintTop_toTopOf="@id/ivBasketIcon"
+                tools:text="3 ITEMS" />
+
+            <TextView
+                android:id="@+id/tvDockTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:textColor="#101612"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ivBasketIcon"
+                app:layout_constraintTop_toBottomOf="@id/tvItemCount"
+                tools:text="$13.55 Total" />
+
+            <TextView
+                android:id="@+id/tvArrivesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:letterSpacing="0.08"
+                android:text="ARRIVES IN"
+                android:textColor="#075D3B"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivBasketIcon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="14 mins"
+                android:textColor="#075D3B"
+                android:textSize="27sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvArrivesLabel" />
+
+            <FrameLayout
+                android:id="@+id/swipeCheckout"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_swipe_track"
+                android:contentDescription="Swipe to proceed to checkout"
+                android:padding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivBasketIcon">
+
+                <TextView
+                    android:id="@+id/tvSwipeLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="58dp"
+                    android:paddingEnd="18dp"
+                    android:text="Swipe to proceed  ››"
+                    android:textColor="#66706A"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/swipeThumb"
+                    android:layout_width="54dp"
+                    android:layout_height="54dp"
+                    android:layout_gravity="start|center_vertical"
+                    app:cardBackgroundColor="#075D3B"
+                    app:cardCornerRadius="27dp"
+                    app:cardElevation="3dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="Swipe handle"
+                        android:src="@drawable/ic_arrow_forward_fresh"
+                        app:tint="@android:color/white" />
+                </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnClearCart"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clear Cart"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

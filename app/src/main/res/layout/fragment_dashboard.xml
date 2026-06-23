@@ -1,181 +1,503 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.ui.fragment.DashboardFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@drawable/bg_fresh_app"
+        android:inAnimation="@android:anim/fade_in"
+        android:outAnimation="@android:anim/fade_out">
 
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+        <LinearLayout
+            android:id="@+id/layoutLoading"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_fresh_app"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <FrameLayout
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:background="@drawable/bg_fresh_state_icon"
+                android:elevation="6dp">
+
+                <ProgressBar
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="#075D3B" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Picking fresh items"
+                android:textColor="#101612"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text="Preparing your neighborhood grocery dashboard."
+                android:textColor="#6F7772"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutError"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_fresh_app"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="32dp">
+
+            <FrameLayout
+                android:layout_width="104dp"
+                android:layout_height="104dp"
+                android:background="@drawable/bg_fresh_state_icon">
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_badge_check"
+                    app:tint="#075D3B" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="Couldn’t refresh Freshly"
+                android:textColor="#101612"
+                android:textSize="20sp" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Check your connection and retry to load categories."
+                android:textColor="#6F7772"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRetry"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:layout_marginTop="24dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="148dp"
+                android:text="Retry"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="#075D3B"
+                app:cornerRadius="26dp" />
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_fresh_app"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingBottom="92dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutSuccess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="22dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="28dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profilePic"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="#DDF9EA"
+                    android:padding="4dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_user"
+                    app:shapeAppearanceOverlay="@style/CircleImage"
+                    app:strokeColor="#075D3B"
+                    app:strokeWidth="1dp"
+                    app:tint="#075D3B"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/ivLogo"
+                    android:id="@+id/txtGreeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/bubblegum_sans_regular"
-                    android:gravity="start"
-                    android:text="@string/welcome_msg"
-                    android:textColor="@color/black"
-                    android:textSize="26sp"
+                    android:layout_marginStart="12dp"
+                    android:text="Deliver to"
+                    android:textColor="#101612"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.08"
+                    app:layout_constraintStart_toEndOf="@id/profilePic"
+                    app:layout_constraintTop_toTopOf="@id/profilePic" />
+
+                <TextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="8dp"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:drawablePadding="4dp"
+                    android:drawableTint="#075D3B"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:maxLines="1"
+                    android:text="Urban Heights, Apt 4B"
+                    android:textColor="#063D27"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvWelcome"
+                    app:layout_constraintStart_toEndOf="@id/profilePic"
+                    app:layout_constraintTop_toBottomOf="@id/txtGreeting" />
+
+                <TextView
+                    android:id="@+id/tvWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Freshly"
+                    android:textColor="#075D3B"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toStartOf="@id/ivNotification"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvDeliveryTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/bg_fresh_chip"
+                    android:drawableStart="@drawable/ic_clock"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="9 MINS"
+                    android:textColor="#075D3B"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/tvWelcome"
+                    app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+
+                <ImageView
+                    android:id="@+id/ivNotification"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_notification"
+                    app:tint="#101612"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/repeatCard"
                     android:layout_width="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_height="0.9dp"
-                    android:background="@color/gray"
+                    android:layout_height="264dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/bg_fresh_dark_card"
+                    android:elevation="8dp"
+                    android:padding="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/category_image"
-                    app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
-
-                <ImageView
-                    android:id="@+id/category_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/bg_rounded_image"
-                    android:backgroundTintMode="src_in"
-                    android:clipToOutline="true"
-                    android:contentDescription="@string/category_image_desc"
-                    android:elevation="4dp"
-                    android:layoutDirection="ltr"
-                    android:scaleType="centerCrop"
-                    android:shape="ring"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+                    app:layout_constraintTop_toBottomOf="@id/profilePic">
+
+                    <TextView
+                        android:id="@+id/tvHeroTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="Repeat usual?"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp"
+                        app:layout_constraintEnd_toStartOf="@id/tvHeroChip"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvHeroSubtitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:lineSpacingExtra="5dp"
+                        android:text="Your Monday morning\nessentials"
+                        android:textColor="#BDE5D0"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@id/tvHeroChip"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvHeroTitle" />
+
+                    <TextView
+                        android:id="@+id/tvHeroChip"
+                        android:layout_width="102dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/bg_fresh_search"
+                        android:gravity="center"
+                        android:text="Quick\nOrder"
+                        android:textColor="#063D27"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/heroSamples"
+                        android:layout_width="0dp"
+                        android:layout_height="102dp"
+                        android:layout_marginTop="28dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvHeroSubtitle">
+
+                        <TextView
+                            android:id="@+id/quickItemOne"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_fresh_hero_sample"
+                            android:drawableTop="@drawable/ic_grocery"
+                            android:drawableTint="@android:color/white"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Whole Milk"
+                            android:textColor="@android:color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/quickItemTwo"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="7dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_fresh_hero_sample"
+                            android:drawableTop="@drawable/ic_kitchen"
+                            android:drawableTint="@android:color/white"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Sourdough"
+                            android:textColor="@android:color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/quickItemThree"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_fresh_hero_sample"
+                            android:drawableTop="@drawable/ic_leaf"
+                            android:drawableTint="@android:color/white"
+                            android:drawablePadding="8dp"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:text="Blueberries"
+                            android:textColor="@android:color/white"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/tvUserName"
+                    android:id="@+id/tvOffersTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:fontFamily="@font/open_sans_light"
-                    android:gravity="start"
-                    android:text="@string/address"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/category_image"
-                    app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+                    android:layout_marginTop="26dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Fresh Offers"
+                    android:textColor="#101612"
+                    android:textSize="21sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/repeatCard" />
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/rounded_bg_sienna"
-                    android:src="@drawable/ic_expand_right"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOffers"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="14dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvOffersTitle"
+                    tools:listitem="@layout/item_offer_card" />
 
+                <TextView
+                    android:id="@+id/txtShopBy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Shop Categories"
+                    android:textColor="#101612"
+                    android:textSize="21sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvOffers" />
 
+                <TextView
+                    android:id="@+id/tvSeeAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See All"
+                    android:textColor="#075D3B"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/txtShopBy"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCategory"
+                    android:layout_width="0dp"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="16dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtShopBy"
+                    tools:listitem="@layout/item_raw_category" />
+
+                <TextView
+                    android:id="@+id/tvCuratedTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Curated for You"
+                    android:textColor="#101612"
+                    android:textSize="21sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvCategory" />
+
+                <TextView
+                    android:id="@+id/tvCuratedBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_fresh_chip"
+                    android:paddingStart="10dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="4dp"
+                    android:text="NEW ARRIVALS"
+                    android:textColor="#075D3B"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tvCuratedTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvCuratedTitle" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCuratedProducts"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvCuratedTitle"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_curated_product" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/promiseCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/bg_fresh_promise"
+                    android:padding="22dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rvCuratedProducts">
+
+                    <FrameLayout
+                        android:id="@+id/promiseIconBg"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:background="@drawable/bg_fresh_search"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_badge_check"
+                            app:tint="#075D3B" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:id="@+id/tvPromiseTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/open_sans_bold"
+                        android:text="The Freshly Promise"
+                        android:textColor="#101612"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/promiseIconBg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="Refunded instantly if quality isn’t perfect. No questions asked."
+                        android:textColor="#343C37"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/promiseIconBg"
+                        app:layout_constraintTop_toBottomOf="@id/tvPromiseTitle" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="16dp"
+                    android:indeterminateTint="#075D3B"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/promiseCard" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/txtDelievry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:letterSpacing="0.17"
-            android:layout_margin="5dp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:text="Delivering in 10 Mins"
-            android:fontFamily="@font/bubblegum_sans_regular"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/inputSearchLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="25dp"
-            android:background="@drawable/rounded_bg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDelievry">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_bg_white"
-                android:fontFamily="@font/open_sans_medium"
-                android:hint="Search"
-                android:importantForAccessibility="yes"
-                android:inputType="text"
-                android:letterSpacing="0.17"
-                android:maxLines="1"
-                android:textSize="14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-
-        <TextView
-            android:id="@+id/txtShopByCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:letterSpacing="0.17"
-            android:layout_margin="5dp"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:text="@string/category"
-            android:fontFamily="@font/bubblegum_sans_regular"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inputSearchLayout" />
-
-        <View
-            android:id="@+id/view3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="120dp"
-            android:background="@color/gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtShopByCategory" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCategory"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
-            app:layout_constraintTop_toBottomOf="@id/view3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:itemCount="6"
-            tools:listitem="@layout/item_raw_category" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+        </androidx.core.widget.NestedScrollView>
+    </ViewFlipper>
 </layout>

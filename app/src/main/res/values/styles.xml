@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CircleImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="CircleImageOverlay">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="FreshBottomNavIndicator">
+        <item name="android:color">#EAF8F0</item>
+        <item name="android:width">64dp</item>
+        <item name="android:height">36dp</item>
+    </style>
+
+</resources>

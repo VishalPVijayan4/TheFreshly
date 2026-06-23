@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="18dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="28dp"
+    app:cardElevation="2dp"
+    app:strokeColor="#E4ECE8"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="132dp"
+        android:paddingStart="22dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="18dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgCartProduct"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:background="@drawable/bg_image_soft"
+            android:scaleType="centerCrop"
+            app:cornerRadius="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/image_icon" />
+
+        <TextView
+            android:id="@+id/tvCartProductTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/open_sans_bold"
+            android:maxLines="2"
+            android:textColor="#05090B"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/tvCartProductPrice"
+            app:layout_constraintStart_toEndOf="@id/imgCartProduct"
+            app:layout_constraintTop_toTopOf="@id/imgCartProduct"
+            tools:text="Organic Avocado" />
+
+        <TextView
+            android:id="@+id/tvCartProductBrand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="#2B322E"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@id/tvCartProductPrice"
+            app:layout_constraintStart_toEndOf="@id/imgCartProduct"
+            app:layout_constraintTop_toBottomOf="@id/tvCartProductTitle"
+            tools:text="2 units • $4.50" />
+
+        <TextView
+            android:id="@+id/tvCartProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
+            android:textColor="#05090B"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvCartProductTitle"
+            tools:text="$9.00" />
+
+        <LinearLayout
+            android:id="@+id/cartItemControls"
+            android:layout_width="154dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_qty_container"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="4dp"
+            app:layout_constraintStart_toEndOf="@id/imgCartProduct"
+            app:layout_constraintTop_toBottomOf="@id/tvCartProductBrand">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCartDecrease"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="−"
+                android:textColor="#101612"
+                android:textSize="22sp"
+                app:backgroundTint="#00000000"
+                app:cornerRadius="19dp"
+                app:icon="@null" />
+
+            <TextView
+                android:id="@+id/tvCartQuantity"
+                android:layout_width="68dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#101612"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="2 items" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCartIncrease"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="+"
+                android:textColor="@android:color/white"
+                android:textSize="22sp"
+                app:backgroundTint="#075D3B"
+                app:cornerRadius="20dp"
+                app:icon="@null" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCartRemove"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:padding="10dp"
+            app:backgroundTint="#00000000"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/ic_trash"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconTint="#D11A1A"
+            app:layout_constraintBottom_toBottomOf="@id/cartItemControls"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cartItemControls" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

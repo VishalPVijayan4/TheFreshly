@@ -5,6 +5,44 @@
     app:startDestination="@id/splash"
     android:id="@+id/nav_graph">
 
+
+
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_mapFragment_to_payment"
+            app:destination="@id/payment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" >
+
+        <action
+            android:id="@+id/action_cartFragment_to_productDetails"
+            app:destination="@id/productDetails" />
+        <action
+            android:id="@+id/action_cartFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/onboarding"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.OnBoardingFragment"
+        android:label="fragment_on_boarding"
+        tools:layout="@layout/fragment_on_boarding" >
+
+        <action
+            android:id="@+id/action_onboarding_to_login"
+            app:destination="@id/login" />
+    </fragment>
+
     <fragment
         android:id="@+id/splash"
         android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.SplashFragment"
@@ -12,10 +50,19 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splash_to_login"
-            app:destination="@id/login" />
+            app:destination="@id/login"
+            app:popUpTo="@id/splash"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splash_to_dashboard"
-            app:destination="@id/dashboard" />
+            app:destination="@id/dashboard"
+            app:popUpTo="@id/splash"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash_to_onboarding"
+            app:destination="@id/onboarding"
+            app:popUpTo="@id/splash"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -31,7 +78,9 @@
             app:destination="@id/forgotpassword" />
         <action
             android:id="@+id/action_login_to_dashboard"
-            app:destination="@id/dashboard" />
+            app:destination="@id/dashboard"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -45,6 +94,15 @@
     </fragment>
 
     <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" >
+
+    </fragment>
+
+
+    <fragment
         android:id="@+id/forgotpassword"
         android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
@@ -54,6 +112,30 @@
             app:destination="@id/login" />
     </fragment>
 
+
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.SettingsFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_SettingsFragment_to_SupportChatFragment"
+            app:destination="@id/SupportChatFragment" />
+        <action
+            android:id="@+id/action_SettingsFragment_to_login"
+            app:destination="@id/login"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/SupportChatFragment"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.SupportChatFragment"
+        android:label="fragment_support_chat"
+        tools:layout="@layout/fragment_support_chat" >
+    </fragment>
+
+
     <fragment
         android:id="@+id/dashboard"
         android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.DashboardFragment"
@@ -62,10 +144,52 @@
         <action
             android:id="@+id/action_dashboard_to_product"
             app:destination="@id/product" />
+
         <action
-            android:id="@+id/action_dashboard_to_user"
-            app:destination="@id/user" />
+            android:id="@+id/action_dashboard_to_single_product_from_Category"
+            app:destination="@id/single_product_from_Category" />
+        <action
+            android:id="@+id/action_dashboard_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_dashboard_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_dashboard_to_SettingsFragment"
+            app:destination="@id/SettingsFragment" />
+
+
     </fragment>
+
+    <fragment
+        android:id="@+id/single_product_from_Category"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.SingleCategoryProductFragment"
+        android:label="single_product_from_Category"
+        tools:layout="@layout/fragment_single_category_product" >
+
+
+        <action
+            android:id="@+id/action_single_product_from_Category_to_productDetails"
+            app:destination="@id/productDetails" />
+        <action
+            android:id="@+id/action_single_product_from_Category_to_payment"
+            app:destination="@id/payment" />
+        <action
+            android:id="@+id/action_single_product_from_Category_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+    </fragment>
+
+
 
     <fragment
         android:id="@+id/user"
@@ -76,17 +200,49 @@
 
     <fragment
         android:id="@+id/product"
-        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.DashboardFragment"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.ProductFragment"
         android:label="fragment_product"
         tools:layout="@layout/fragment_product" >
         <action
             android:id="@+id/action_product_to_payment"
             app:destination="@id/payment" />
+        <action
+            android:id="@+id/action_product_to_productDetails3"
+            app:destination="@id/productDetails" />
+        <action
+            android:id="@+id/action_product_to_cartFragment"
+            app:destination="@id/cartFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderSuccessFragment"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.OrderSuccessFragment"
+        android:label="fragment_order_success"
+        tools:layout="@layout/fragment_order_success" >
+        <action
+            android:id="@+id/action_orderSuccessFragment_to_dashboard"
+            app:destination="@id/dashboard" />
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/orderSuccessFragment"-->
+<!--        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.Bot"-->
+<!--        android:label="fragment_order_success"-->
+<!--        tools:layout="@layout/dialog_payment_failed" >-->
+<!--    </fragment>-->
+
+
+    <fragment
+        android:id="@+id/productDetails"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details" >
     </fragment>
 
     <fragment
         android:id="@+id/payment"
-        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.DashboardFragment"
+        android:name="com.vishalpvijayan.thefreshly.presentation.ui.fragment.PaymentFragment"
         android:label="fragment_payment"
         tools:layout="@layout/fragment_payment" >
         <action
@@ -95,6 +251,12 @@
         <action
             android:id="@+id/action_payment_to_fail"
             app:destination="@id/fail" />
+        <action
+            android:id="@+id/action_payment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_payment_to_orderSuccessFragment"
+            app:destination="@id/orderSuccessFragment" />
     </fragment>
 
     <fragment

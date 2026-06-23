@@ -1,67 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_splash_modern"
+    android:clipChildren="false"
     tools:context=".presentation.ui.fragment.SplashFragment">
+
+    <View
+        android:id="@+id/orbMint"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_marginStart="-96dp"
+        android:layout_marginTop="-72dp"
+        android:alpha="0.78"
+        android:background="@drawable/bg_splash_orb_mint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/orbBlue"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_marginEnd="-84dp"
+        android:layout_marginBottom="96dp"
+        android:alpha="0.7"
+        android:background="@drawable/bg_splash_orb_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/logoGlow"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:alpha="0.7"
+        android:background="@drawable/bg_splash_logo_glow"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLogo"
+        app:layout_constraintEnd_toEndOf="@+id/ivLogo"
+        app:layout_constraintStart_toStartOf="@+id/ivLogo"
+        app:layout_constraintTop_toTopOf="@+id/ivLogo" />
+
+    <TextView
+        android:id="@+id/tvAppName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="18dp"
+        android:fontFamily="@font/bubblegum_sans_regular"
+        android:gravity="center"
+        android:letterSpacing="0.01"
+        android:text="@string/applications_name"
+        android:textColor="@color/dark_slate_gray"
+        android:textSize="52sp"
+        android:translationY="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_margin="50dp"
-        android:src="@drawable/ic_launcher_foreground"
+        android:layout_width="138dp"
+        android:layout_height="138dp"
+        android:contentDescription="@string/logo"
+        android:elevation="8dp"
+        android:padding="2dp"
+        android:src="@drawable/new_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvAppName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/bubblegum_sans_regular"
-        android:gravity="center"
-        android:text="@string/applications_name"
-        android:textColor="@color/gray"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/ivLogo" />
-
-    <TextView
-        android:id="@+id/tvAppName1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/bubblegum_sans_regular"
-        android:gravity="center"
-        android:text="@string/applications_name"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toTopOf="@+id/ivLogo" />
-
-    <TextView
         android:id="@+id/tvQuote"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_light"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="18dp"
+        android:fontFamily="@font/open_sans_medium"
         android:gravity="center"
         android:text="@string/applications_quote"
-        android:textColor="@color/black"
+        android:textColor="@color/dark_slate_gray"
         android:textSize="18sp"
+        android:translationY="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+    <LinearLayout
+        android:id="@+id/loadingDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvQuote">
+
+        <View
+            android:id="@+id/dotOne"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_splash_loading_dot" />
+
+        <View
+            android:id="@+id/dotTwo"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_splash_loading_dot" />
+
+        <View
+            android:id="@+id/dotThree"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/bg_splash_loading_dot" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/progressTrack"
+        android:layout_width="150dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/bg_splash_progress_track"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadingDots">
+
+        <View
+            android:id="@+id/progressFill"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_splash_progress_fill"
+            android:scaleX="0" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tvCopyRight"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="12sp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="@font/open_sans_light"
-        android:textColor="@color/black"
+        android:gravity="center"
         android:text="@string/powered_by"
+        android:textColor="@color/dim_gray"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvQuote" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

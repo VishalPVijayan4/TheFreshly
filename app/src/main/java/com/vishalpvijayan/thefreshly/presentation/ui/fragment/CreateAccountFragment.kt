@@ -10,8 +10,9 @@ import androidx.navigation.fragment.findNavController
 import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentCreateAccountBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.CreateAccountVM
+import com.vishalpvijayan.thefreshly.utils.navigateSafely
+import com.vishalpvijayan.thefreshly.utils.showFreshToast
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class CreateAccountFragment : Fragment() {
@@ -25,12 +26,27 @@ class CreateAccountFragment : Fragment() {
         binding = FragmentCreateAccountBinding.inflate(inflater, container, false)
         binding.btnCreateAccount.setOnClickListener {
 
-            viewModel.addUser(binding.inputUsername.text.toString(),binding.inputPassword.text.toString(),binding.inputEmail.text.toString(),binding.inputPhoneNumber.text.toString().toInt())
+//            viewModel.addUser(binding.inputUsername.text.toString(),binding.inputPassword.text.toString(),binding.inputEmail.text.toString(),binding.inputPhoneNumber.text.toString().toInt())
 
-            findNavController().navigate(R.id.action_createccount_to_login)
+            requireContext().showFreshToast("Your username and password has been shared on your mail.")
+            findNavController().navigateSafely(R.id.action_createccount_to_login)
         }
 
         return binding.root
     }
+
+    // In your ForgotPasswordFragment
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+//        binding.btnReset.setOnClickListener {
+//            // Reset password logic
+//        }
+    }
+
 
 }

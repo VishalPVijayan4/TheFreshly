@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.ui.fragment.SettingsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_fresh_app">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/settingsScroll"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="104dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="18dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_fresh_card"
+                    android:elevation="4dp"
+                    android:orientation="vertical"
+                    android:padding="22dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Manage Freshly help, privacy and account actions in one place."
+                        android:textColor="#6F7772"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/bg_fresh_chip"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="14dp">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:src="@drawable/ic_badge_check"
+                            app:tint="#075D3B" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_weight="1"
+                            android:text="Fresh support and policy details are always available."
+                            android:textColor="#075D3B"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="General"
+                    android:textColor="#101612"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="3dp"
+                    app:rippleColor="#118AF3B8"
+                    app:strokeColor="#E3EEE8"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="76dp"
+                        android:padding="18dp">
+
+                        <FrameLayout
+                            android:id="@+id/ivAboutIconBg"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_fresh_state_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivAboutIcon"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_badge_check"
+                                app:tint="#075D3B" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvAboutTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:text="About Freshly"
+                            android:textColor="#101612"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronAbout"
+                            app:layout_constraintStart_toEndOf="@id/ivAboutIconBg"
+                            app:layout_constraintTop_toTopOf="@id/ivAboutIconBg" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Version, mission and contact details"
+                            android:textColor="#6F7772"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronAbout"
+                            app:layout_constraintStart_toEndOf="@id/ivAboutIconBg"
+                            app:layout_constraintTop_toBottomOf="@id/tvAboutTitle" />
+
+                        <ImageView
+                            android:id="@+id/ivChevronAbout"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_forward_fresh"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#075D3B" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardPrivacy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="3dp"
+                    app:rippleColor="#118AF3B8"
+                    app:strokeColor="#E3EEE8"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="76dp"
+                        android:padding="18dp">
+
+                        <FrameLayout
+                            android:id="@+id/ivPrivacyIconBg"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_fresh_state_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivPrivacyIcon"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_shield_check"
+                                app:tint="#075D3B" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvPrivacyTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:text="Privacy Policy"
+                            android:textColor="#101612"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronPrivacy"
+                            app:layout_constraintStart_toEndOf="@id/ivPrivacyIconBg"
+                            app:layout_constraintTop_toTopOf="@id/ivPrivacyIconBg" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Data usage, permissions and protection"
+                            android:textColor="#6F7772"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronPrivacy"
+                            app:layout_constraintStart_toEndOf="@id/ivPrivacyIconBg"
+                            app:layout_constraintTop_toBottomOf="@id/tvPrivacyTitle" />
+
+                        <ImageView
+                            android:id="@+id/ivChevronPrivacy"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_forward_fresh"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#075D3B" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardSupport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="22dp"
+                    app:cardElevation="3dp"
+                    app:rippleColor="#118AF3B8"
+                    app:strokeColor="#E3EEE8"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="76dp"
+                        android:padding="18dp">
+
+                        <FrameLayout
+                            android:id="@+id/ivSupportIconBg"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_fresh_state_icon"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivSupportIcon"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_receipt"
+                                app:tint="#075D3B" />
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvSupportTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:fontFamily="@font/open_sans_medium"
+                            android:text="Contact Support"
+                            android:textColor="#101612"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronSupport"
+                            app:layout_constraintStart_toEndOf="@id/ivSupportIconBg"
+                            app:layout_constraintTop_toTopOf="@id/ivSupportIconBg" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="3dp"
+                            android:text="Chat with Freshly care"
+                            android:textColor="#6F7772"
+                            android:textSize="13sp"
+                            app:layout_constraintEnd_toStartOf="@id/ivChevronSupport"
+                            app:layout_constraintStart_toEndOf="@id/ivSupportIconBg"
+                            app:layout_constraintTop_toBottomOf="@id/tvSupportTitle" />
+
+                        <ImageView
+                            android:id="@+id/ivChevronSupport"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_forward_fresh"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tint="#075D3B" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Account"
+                    android:textColor="#101612"
+                    android:textSize="18sp" />
+
+                <FrameLayout
+                    android:id="@+id/swipeLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_swipe_track"
+                    android:contentDescription="Swipe to logout"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/tvLogoutSwipeLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingStart="58dp"
+                        android:paddingEnd="18dp"
+                        android:text="Swipe to logout  ››"
+                        android:textColor="#D94242"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/logoutSwipeThumb"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:layout_gravity="start|center_vertical"
+                        app:cardBackgroundColor="#D94242"
+                        app:cardCornerRadius="27dp"
+                        app:cardElevation="3dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Swipe handle"
+                            android:src="@drawable/ic_arrow_forward_fresh"
+                            app:tint="@android:color/white" />
+                    </com.google.android.material.card.MaterialCardView>
+                </FrameLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

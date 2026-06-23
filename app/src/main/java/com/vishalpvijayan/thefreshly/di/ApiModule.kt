@@ -1,10 +1,12 @@
 package com.vishalpvijayan.thefreshly.di
 
+import android.content.Context
 import com.vishalpvijayan.thefreshly.data.remote.ApiServices
 import com.vishalpvijayan.thefreshly.utils.ConstantStrings
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,6 +15,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ApiModule {
+
+
 
     @Provides
     fun provideBaseUrl() = ConstantStrings.PROD_BASEURL

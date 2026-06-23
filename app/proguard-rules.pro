@@ -1,21 +1,18 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Keep all BuildConfig classes (matches com.vishalpvijayan.thefreshly.BuildConfig)
+-keep class **.BuildConfig { *; }
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Keep all Razorpay classes
+-keep class com.razorpay.** { *; }
+-dontwarn com.razorpay.**
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Keep payment callback methods
+-keepclasseswithmembers class * {
+    public void onPayment*(...);
+}
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Keep annotations and interfaces
+-keepattributes JavascriptInterface
+-keepattributes *Annotation*
+
+# General optimizations
+-optimizations !method/inlining/*

@@ -1,0 +1,24 @@
+<svg width="360" height="760" viewBox="0 0 360 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="360" height="760" rx="34" fill="#F4FBF7"/>
+  <text x="24" y="64" font-family="Arial" font-size="26" font-weight="700" fill="#075D3B">My Cart</text>
+  <g>
+    <rect x="24" y="96" width="312" height="138" rx="24" fill="white" stroke="#E3EEE8"/>
+    <rect x="24" y="258" width="312" height="138" rx="24" fill="white" stroke="#E3EEE8"/>
+    <rect x="44" y="120" width="82" height="82" rx="18" fill="#DDF9EA"/>
+    <rect x="44" y="282" width="82" height="82" rx="18" fill="#DDF9EA"/>
+    <text x="146" y="138" font-family="Arial" font-size="15" font-weight="700" fill="#101612">Organic Avocado</text>
+    <text x="146" y="300" font-family="Arial" font-size="15" font-weight="700" fill="#101612">Fresh Apples</text>
+    <text x="146" y="164" font-family="Arial" font-size="14" fill="#56615B">2 items • $3.50</text>
+    <text x="146" y="326" font-family="Arial" font-size="14" fill="#56615B">1 item • $4.20</text>
+    <rect x="146" y="182" width="132" height="34" rx="17" fill="#DDF9EA"/>
+    <rect x="146" y="344" width="132" height="34" rx="17" fill="#DDF9EA"/>
+    <text x="184" y="204" font-family="Arial" font-size="13" font-weight="700" fill="#075D3B">2 items</text>
+    <text x="184" y="366" font-family="Arial" font-size="13" font-weight="700" fill="#075D3B">1 item</text>
+  </g>
+  <rect x="24" y="472" width="312" height="188" rx="28" fill="#075D3B"/>
+  <text x="44" y="516" font-family="Arial" font-size="18" font-weight="700" fill="white">Order summary</text>
+  <text x="44" y="558" font-family="Arial" font-size="14" fill="#C7F4DD">Subtotal</text><text x="270" y="558" font-family="Arial" font-size="14" fill="white">$11.20</text>
+  <text x="44" y="592" font-family="Arial" font-size="14" fill="#C7F4DD">Delivery</text><text x="286" y="592" font-family="Arial" font-size="14" fill="white">$2</text>
+  <rect x="44" y="616" width="272" height="42" rx="21" fill="white"/>
+  <text x="132" y="643" font-family="Arial" font-size="14" font-weight="700" fill="#075D3B">Checkout</text>
+</svg>

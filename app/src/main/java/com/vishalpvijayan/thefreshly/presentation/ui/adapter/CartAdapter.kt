@@ -37,7 +37,7 @@ class CartAdapter(
             tvTitle.text = item.title
             tvBrand.text = "${item.quantity} units • $unitPrice"
             tvPrice.text = "$${"%.2f".format(lineTotal)}"
-            tvQuantity.text = item.quantity.toString()
+            tvQuantity.text = "${item.quantity} item${if (item.quantity == 1) "" else "s"}"
 
             imgProduct.load(item.thumbnail) {
                 crossfade(true)

@@ -100,6 +100,32 @@ class LocationRepository @Inject constructor(
         locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
             locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
 
+    @SuppressLint("MissingPermission")
+    suspend fun getCurrentLocationOnce(): Location? {
+        if (!hasLocationPermission() || !isLocationEnabled()) return null
+        return suspendCancellableCoroutine { continuation ->
+            fusedClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+                .addOnSuccessListener { freshLocation ->
+                    if (freshLocation != null && continuation.isActive) {
+                        continuation.resume(freshLocation)
+                    } else {
+                        fusedClient.lastLocation
+                            .addOnSuccessListener { lastLocation ->
+                                if (continuation.isActive) continuation.resume(lastLocation)
+                            }
+                            .addOnFailureListener { error ->
+                                Log.e("LocationRepository", "Failed to fetch last location", error)
+                                if (continuation.isActive) continuation.resume(null)
+                            }
+                    }
+                }
+                .addOnFailureListener { error ->
+                    Log.e("LocationRepository", "Failed to fetch current location", error)
+                    if (continuation.isActive) continuation.resume(null)
+                }
+        }
+    }
+
     suspend fun getAddressFromLocation(location: Location): String? {
         val geocoder = Geocoder(context, Locale.getDefault())
         return try {

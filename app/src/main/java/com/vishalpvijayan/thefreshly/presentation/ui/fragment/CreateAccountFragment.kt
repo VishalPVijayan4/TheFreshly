@@ -11,8 +11,8 @@ import com.vishalpvijayan.thefreshly.R
 import com.vishalpvijayan.thefreshly.databinding.FragmentCreateAccountBinding
 import com.vishalpvijayan.thefreshly.presentation.vm.CreateAccountVM
 import com.vishalpvijayan.thefreshly.utils.navigateSafely
+import com.vishalpvijayan.thefreshly.utils.showFreshToast
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 
 @AndroidEntryPoint
 class CreateAccountFragment : Fragment() {
@@ -28,6 +28,7 @@ class CreateAccountFragment : Fragment() {
 
 //            viewModel.addUser(binding.inputUsername.text.toString(),binding.inputPassword.text.toString(),binding.inputEmail.text.toString(),binding.inputPhoneNumber.text.toString().toInt())
 
+            requireContext().showFreshToast("Your username and password has been shared on your mail.")
             findNavController().navigateSafely(R.id.action_createccount_to_login)
         }
 

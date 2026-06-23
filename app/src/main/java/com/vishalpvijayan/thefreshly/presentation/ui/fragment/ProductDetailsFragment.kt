@@ -99,7 +99,7 @@ class ProductDetailsFragment : Fragment() {
         val isInCart = quantity != null && quantity > 0
         binding.llBtns.isVisible = isInCart
         binding.btnAdd.isVisible = !isInCart
-        binding.tvQuantity.text = quantity?.toString().orEmpty()
+        binding.tvQuantity.text = quantity?.let { "$it item${if (it == 1) "" else "s"}" }.orEmpty()
     }
 
     private fun bindProduct(product: ProductDetail) {

@@ -129,7 +129,7 @@
 
         <FrameLayout
             android:id="@+id/cartControlsContainer"
-            android:layout_width="92dp"
+            android:layout_width="116dp"
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="@id/productDiscountedprice"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +137,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddToCart"
-                android:layout_width="40dp"
+                android:layout_width="72dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end|center_vertical"
                 android:insetTop="0dp"
@@ -145,15 +145,17 @@
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:padding="0dp"
-                android:text="+"
+                android:text="ADD"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:textSize="20sp"
+                android:textSize="13sp"
+                android:textStyle="bold"
                 app:backgroundTint="#075D3B"
                 app:cornerRadius="20dp" />
 
             <LinearLayout
                 android:id="@+id/quantityControls"
-                android:layout_width="92dp"
+                android:layout_width="116dp"
                 android:layout_height="40dp"
                 android:background="@drawable/bg_fresh_pill_dark"
                 android:gravity="center"
@@ -178,7 +180,7 @@
 
                 <TextView
                     android:id="@+id/tvQuantityCount"
-                    android:layout_width="20dp"
+                    android:layout_width="44dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="1"
